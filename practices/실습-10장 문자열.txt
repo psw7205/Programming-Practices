@@ -1,0 +1,416 @@
+﻿문제 1
+#include <stdio.h>
+#include <string.h>
+#pragma warning (disable:4996)
+
+int main()
+{
+	char str[21];
+	int i;
+
+	scanf("%s", str);
+
+	for (i = 0; i < strlen(str); i++)
+	{
+		if (str[i] >= 'a' && str[i] <= 'z')
+			printf("%c", str[i]);
+	}
+
+	return 0;
+}
+========================================================
+문제 2
+#include <stdio.h>
+#include <string.h>
+#pragma warning (disable:4996)
+
+int main()
+{
+	char str[10] = { '\0' };
+	int num; 
+	int cnt = 0;
+
+	scanf("%d", &num);
+
+	while (num > 0)
+	{
+		str[cnt] = num % 10 + '0';
+		cnt++;
+		num /= 10;
+	}
+
+	printf("%s", str);
+
+	return 0;
+}
+========================================================
+문제 3
+#include <stdio.h>
+#include <string.h>
+#pragma warning (disable:4996)
+
+int main()
+{
+	char str[101] = { '\0' };
+	char tmp[2] = { '\0' };
+	int i;
+
+	scanf("%s", str);
+
+	for (i = 0; i < strlen(str); i++)
+	{
+		printf("%s\n", str);
+		tmp[0] = str[0];
+		strcpy(str, str + 1);
+		strcat(str, tmp);
+	}
+
+	return 0;
+}
+========================================================
+문제 4
+#include <stdio.h>
+#pragma warning (disable:4996)
+
+int main()
+{
+	char str[101] = { '\0' };
+	char str2[101] = { '\0' };
+	int i = 0, cnt = 0;
+
+	scanf("%s", str);
+	scanf("%s", str2);
+
+	while (str[cnt] != '\0')
+	{
+		cnt++;
+	}
+
+	for (i = 0; i < cnt; i++)
+	{
+		if (str[i] != str2[i])
+		{
+			break;
+		}
+	}
+
+	if (i != cnt)
+		i = 0;
+	else
+		i = 1;
+
+	printf("%d %d", cnt, i);
+
+	return 0;
+}
+========================================================
+문제 5
+#include <stdio.h>
+#include <string.h>
+#pragma warning (disable:4996)
+
+int main()
+{
+	char str[42] = { '\0' };
+	char str2[21] = { '\0' };
+	int i = 0, j = 0, cnt = 0, len = 0, tmp = 0;
+
+	scanf("%s", str);
+	scanf("%s", str2);
+	scanf("%d", &cnt);
+
+	tmp = strlen(str2);
+	len = strlen(str);
+
+	for (i = len; i >= cnt; i--)
+	{
+		str[i + tmp] = str[i];
+	}
+
+	for (i = 0; i < tmp; i++)
+	{
+		str[cnt + i] = str2[i];
+	}
+
+	printf("%s", str);
+	
+	/*
+	strcat(str2, str+cnt);
+	strcpy(str+cnt, s2);
+	printf("%s", str);
+	*/
+
+	return 0;
+}
+========================================================
+문제 6
+#include <stdio.h>
+#include <string.h>
+#pragma warning (disable:4996)
+
+int main()
+{
+	char str[42] = { '\0' };
+	char str2[21] = { '\0' };
+	int i = 0, j = 0, cnt = 0, len = 0, tmp = 0, flag = 0;
+
+	scanf("%s", str);
+	scanf("%s", str2);
+	scanf("%d", &cnt);
+	scanf("%d", &flag);
+
+	tmp = strlen(str2);
+	len = strlen(str);
+
+	for (i = len; i >= cnt; i--)
+	{
+		str[i + tmp] = str[i];
+	}
+
+	for (i = 0; i < tmp; i++)
+	{
+		if (flag == 0)
+			str[cnt + i] = str2[i];
+		else
+			str[cnt + i] = str2[tmp - i - 1];
+	}
+
+	printf("%s", str);
+
+	return 0;
+}
+========================================================
+문제 7
+#include <stdio.h>
+#include <string.h>
+#pragma warning (disable:4996)
+
+int main()
+{
+	char* num[9] = { "one ", "two ", "three ", "four ", "five ", "six ", "seven ", "eight ", "nine " };
+	char str[10000] = { '\0' };
+
+	int a, cnt = 0, i = 0; 
+	int tmp[5] = { 0 };
+
+	scanf("%d", &a);
+
+	while (a > 0)
+	{
+		tmp[cnt] = a % 10;
+		a /= 10;
+		cnt++;
+	}
+	
+	for (i = 0; i < cnt; i++)
+	{
+		if (tmp[cnt - i - 1] != 0)
+		{
+			strcat(str, num[tmp[cnt - i - 1] - 1]);
+
+			switch (cnt - i)
+			{
+			case 4:
+				strcat(str, "THO ");
+				break;
+			case 3:
+				strcat(str, "HUN ");
+				break;
+			case 2:
+				strcat(str, "TEN ");
+				break;
+			default:
+				break;
+			}
+		}
+	}
+
+	printf("%s", str);
+
+	return 0;
+}
+========================================================
+문제 8
+#include <stdio.h>
+#include <string.h>
+#pragma warning (disable:4996)
+
+int main()
+{
+	char str[2][102] = { '\0' };
+	int tmp;
+
+	scanf("%s", str[0]);
+	scanf("%s", str[1]);
+
+	tmp = strcmp(str[0], str[1]);
+
+	if (tmp > 0)
+	{
+		strcat(str[0], str[1]);
+		tmp = 0;
+	}
+	else
+	{
+		strcat(str[1], str[0]);
+		tmp = 1;
+	}
+
+	printf("%s", str[tmp]);
+
+
+	return 0;
+}
+========================================================
+문제 9
+#include <stdio.h>
+#include <string.h>
+#pragma warning (disable:4996)
+
+int check(char* str)
+{
+	char* p = &str[0];
+	char* q = &str[strlen(str) - 1];
+	int cnt = 0;
+
+	while (p <= q)
+	{
+		p++;
+		q--;
+		if (*p != *q)
+			return 0;
+	}
+
+	return 1;
+}
+
+int main()
+{
+	char str[40] = { '\0' };
+
+	scanf("%s", str);
+
+	printf("%d %d", strlen(str), check(str));
+
+	return 0;
+}
+========================================================
+문제 10
+#include <stdio.h>
+#include <string.h>
+#pragma warning (disable:4996)
+
+int main()
+{
+	char str[101] = { '\0' };
+	char small[101] = { '\0' };
+	int n, i;
+
+	scanf("%d", &n);
+	getchar();
+
+	gets(small);
+
+	for( i = 0 ; i < n - 1; i++)
+	{
+		gets(str);
+		if (strlen(small) > strlen(str))
+			strcpy(small, str);
+	}
+
+	printf("%s", small);
+
+	return 0;
+}
+========================================================
+문제 11
+
+#include <stdio.h>
+#include <string.h>
+#pragma warning (disable:4996)
+
+int main()
+{
+	char str1[81] = { '\0' };
+	char str2[11] = { '\0' };
+	int i, j, cnt = 0;
+
+	scanf("%s", str1);
+	scanf("%s", str2);
+
+	if (strlen(str1) == strlen(str2))
+	{
+		for (i = 0; i < strlen(str2); i++)
+		{
+			if (str1[i] != str2[i])
+				break;
+		}
+		if (i == strlen(str2))
+			cnt = 1;
+	}
+	else
+	{
+		for (i = 0; i <= strlen(str1) - strlen(str2); i++)
+		{
+			for (j = 0; j < strlen(str2); j++)
+			{
+				if (str1[i + j] != str2[j])
+					break;
+			}
+			if (j == strlen(str2))
+				cnt = 1;
+		}
+	}
+
+	printf("%d %d", strlen(str1), cnt);
+
+	return 0;
+}
+========================================================
+문제 12
+#include <stdio.h>
+#include <string.h>
+#pragma warning (disable:4996)
+
+int main()
+{
+	char str1[101] = { '\0' };
+	char str2[101] = { '\0' };
+	int i, j, cnt = 0;
+
+	gets(str1);
+	gets(str2);
+
+	if (strlen(str1) == strlen(str2))
+	{
+		for (i = 0; i < strlen(str2); i++)
+		{
+			if (str1[i] != str2[i])
+				break;
+		}
+		if (i == strlen(str2))
+			cnt++;
+	}
+	else
+	{
+		for (i = 0; i <= strlen(str1) - strlen(str2); i++)
+		{
+			for (j = 0; j < strlen(str2); j++)
+			{
+				if (str1[i + j] != str2[j])
+					break;
+			}
+
+			if (j == strlen(str2))
+			{
+				cnt++;
+				i += j - 1; 
+				continue;
+			}
+		}
+	}
+	
+	printf("%d", cnt);
+
+	return 0;
+}

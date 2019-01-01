@@ -1,0 +1,112 @@
+#include<stdio.h>
+#pragma warning(disable:4996)
+
+int main()
+{
+	char car[5] = { 'H','e','l','l','o' };
+	double dar[5] = { 1.1, 2.2, 3.3, 4.4, 5.5 };
+	
+	printf("%p %c %c\n", car, car[0], *car);
+	printf("%p %c %c\n", car+1, car[1], *(car+1));
+	printf("%p %c %c\n", car+2, car[2], *(car+2));
+
+	printf("%p %lf %lf\n", dar, dar[0], *dar);
+	printf("%p %lf %lf\n", dar+1, dar[1], *(dar + 1));
+	printf("%p %lf %lf\n", dar+2, dar[2], *(dar + 2));
+
+	return 0;
+}
+--------------------------------------------------------------------------------
+#include<stdio.h>
+#pragma warning(disable:4996)
+
+int main()
+{
+	char car[5] = { 'H','e','l','l','o' };
+	char* pc = car;
+
+	double dar[5] = { 1.1, 2.2, 3.3, 4.4, 5.5 };
+	double* pd = dar;
+
+	printf("%p %c %c\n", pc, pc[0], *pc);
+	printf("%p %c %c\n", pc+1, pc[1], *(pc+1));
+	printf("%p %c %c\n", pc+2, pc[2], *(pc+2));
+
+	printf("%p %lf %lf\n", pd, pd[0], *pd);
+	printf("%p %lf %lf\n", pd+1, pd[1], *(pd + 1));
+	printf("%p %lf %lf\n", pd+2, pd[2], *(pd + 2));
+
+	return 0;
+}
+--------------------------------------------------------------------------------
+#include<stdio.h>
+#pragma warning(disable:4996)
+
+int main()
+{
+
+	int dar[5] = { 1, 2, 3, 4, 5 };
+	char* pd = (char*)dar;
+	int i;
+
+	for (i = 0; i < sizeof(dar); i++)
+	{
+		printf("%p %d %d\n", pd+i, pd[i], *(pd+i));
+	}
+
+	return 0;
+}
+------------------------------------------------------------------------------
+#include<stdio.h>
+#pragma warning(disable:4996)
+
+int main()
+{
+
+	int ar[10] = { 2, 3, 5, 7, -1 };
+	int i;
+	int* p = ar;
+
+	for (i = 0; i < 10; i++)
+	{
+		printf(" %d", *p);
+		p++;
+	}
+
+
+	return 0;
+}
+------------------------------------------------------------------------------
+#include<stdio.h>
+#pragma warning(disable:4996)
+
+int main()
+{
+
+	int ar[10] = { 2, 3, 5, 7, -1 };
+	int i;
+	int* p = ar;
+
+	for (p = ar; p < ar + 10; p++) // 배열 10까지 전부 탐색
+		printf(" %d", *p);
+
+
+	return 0;
+}
+------------------------------------------------------------------------------
+#include<stdio.h>
+#pragma warning(disable:4996)
+
+int main()
+{
+
+	int ar[10] = { 2, 3, 5, 7, -1 };
+	int i;
+	int* p = ar;
+
+	for (p = ar; *p; p++) // 배열 값이 0이 나오면 반복문 중단
+		printf(" %d", *p);
+
+
+	return 0;
+}

@@ -1,0 +1,63 @@
+#include<stdio.h>
+
+int main()
+{
+	int a = 0, b = 0;
+	char c;
+
+	/*
+	// 2,3,5의 배수 판별
+	scanf_s("%d", &a);
+
+	if ((a % 2) == 0)
+		printf(" 2의 배수 입니다");
+
+	if ((a % 3) == 0)
+		printf("3의 배수 입니다");
+
+	if ((a % 5) == 0)
+		printf("5의 배수 입니다");
+	*/
+	/*
+	// 어느게 큰 수인지, 같은 수인지 판별
+	scanf_s("%d %d", &a, &b);
+
+	if (a != b)
+		printf("큰 수는 %d", a > b ? a : b);
+	else
+		printf("같다");
+	*/
+	/*
+	// 대소문자 판별
+	scanf_s("%c", &c);
+
+	if ('A' <= c && 'Z' >= c)
+		printf("대문자 \n");
+
+	if ('a' <= c && 'z' >= c)
+		printf("소문자 \n");
+	*/
+
+	return 0;
+}
+
+#include<stdio.h>
+
+int main()
+{
+	int a = 0;
+	
+	printf("정수를 입력하세요: ");
+	scanf_s("%d", &a);
+
+	if (a < 0)
+	{
+		a *= -1;
+	}
+	
+	printf("절대값 %d \n", a);
+	
+	//절대값 표시
+
+	return 0;
+}

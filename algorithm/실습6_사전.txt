@@ -1,0 +1,160 @@
+﻿문제 1
+#include <stdio.h>
+#include <stdlib.h>
+#pragma warning (disable:4996)
+
+int binarySearch(int *ar, int start, int end, int key)
+{	int mid = (start + end) / 2;
+	if (start > end)
+		return end;
+	if (ar[mid] < key)
+		binarySearch(ar, mid + 1, end, key);
+	else if (ar[mid] > key)
+		binarySearch(ar, start, mid - 1, key);
+	else
+		return mid;
+}
+
+int main()
+{	
+	int n, i, key, tmp;
+	int *ar;
+	scanf("%d %d", &n, &key);
+	ar = (int*)malloc(sizeof(int)*n);
+	
+	for (i = 0; i < n; i++)
+	{
+		scanf("%d", &ar[i]);
+	}
+	
+	tmp = binarySearch(ar, 0, n-1, key);
+	printf("%d", tmp);
+	
+	return 0;
+}
+=====================================================================
+문제 2
+#include <stdio.h>
+#include <stdlib.h>
+#pragma warning (disable:4996)
+
+int binarySearch(int *ar, int start, int end, int key)
+{
+	int mid = (start + end) / 2;
+
+	while (start <= end)
+	{
+		if (ar[mid] < key)
+		{
+			start = mid + 1;
+			mid = (mid + 1 + end) / 2;
+		}
+		else if (ar[mid] > key)
+		{
+			end = mid - 1;
+			mid = (start + mid - 1) / 2;
+		}
+		else
+			return mid;
+	}
+
+	return start;
+}
+
+int main()
+{
+	int n, i, key, tmp;
+	int *ar;
+
+	scanf("%d %d", &n, &key);
+
+	ar = (int*)malloc(sizeof(int)*n);
+
+	for (i = 0; i < n; i++)
+	{
+		scanf("%d", &ar[i]);
+	}
+
+	tmp = binarySearch(ar, 0, n-1, key);
+
+	printf("%d", tmp);
+
+	return 0;
+}
+=====================================================================
+문제 3
+#include <stdio.h>
+#include <stdlib.h>
+#pragma warning (disable:4996)
+
+int main()
+{
+	int a, b, m, n, i;
+	char tmp;
+
+	scanf("%d %d %d", &a, &b, &n);
+	getchar();
+
+	for(i = 0; i < n; i++)
+	{
+		m = (a + b) / 2;
+		scanf("%c", &tmp);
+
+		if (tmp == 'Y')
+		{
+			a = m + 1;
+		}
+		
+		if(tmp == 'N')
+		{
+			b = m;
+		}
+	}
+
+
+	printf("%d", a);
+
+	return 0;
+}
+문제 3 
+#include <stdio.h>
+#include <stdlib.h>
+#pragma warning (disable:4996)
+
+int search(int a, int b, int n, char* str)
+{
+	int m, i;
+	for (i = 0; i < n; i++)
+	{
+		m = (a + b) / 2;
+		
+		if (str[i] == 'Y')
+		{
+			a = m + 1;
+		}
+
+		if (str[i] == 'N')
+		{
+			b = m;
+		}
+	}
+
+	return a;
+}
+
+int main()
+{
+	int a, b, n;
+	char tmp[1000];
+
+	scanf("%d %d %d", &a, &b, &n);
+	getchar();
+
+	scanf("%s", tmp);
+
+	a = search(a, b, n, tmp);
+
+	printf("%d", a);
+
+	return 0;
+}

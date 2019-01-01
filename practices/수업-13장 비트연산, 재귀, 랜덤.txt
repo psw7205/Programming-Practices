@@ -1,0 +1,59 @@
+﻿비트연산 
+#include <stdio.h>
+#include <stdlib.h>
+#pragma warning (disable:4996)
+
+int main()
+{
+	int x = 0X2A; // x = 0000 0000 … 0010 1010
+	int y = 0XAD; // y = 0000 0000 … 1010 1101
+
+	printf("%#X\n", x & y); // AND
+
+	printf("%#X\n", x | y); // OR
+
+	printf("%#X\n", x ^ y); // XOR
+
+	printf("%#X\n", x << 2);
+
+	return 0;
+}
+===========================================================================
+팩토리얼
+#include <stdio.h>
+#include <stdlib.h>
+#pragma warning (disable:4996)
+
+int fact(int n)
+{
+	if (n == 1)
+		return 1;
+	else
+		return fact(n - 1) * n;
+}
+
+
+int main()
+{
+	int a = fact(5);
+
+	printf("%d", a);
+
+	return 0;
+}
+===========================================================================
+랜덤
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#pragma warning(disable:4996)
+
+
+int main()
+{
+	srand((unsigned int)time(NULL));
+	for (int i = 0; i < 10; i++)
+		printf("%d\n", rand() % 1000);
+
+	return 0;
+}

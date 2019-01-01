@@ -1,0 +1,172 @@
+﻿문제 1
+#include <stdio.h>
+#include <string.h>
+#pragma warning (disable:4996)
+
+int main()
+{
+	char ar[30];
+	char *p, *q;
+	scanf("%s", ar);
+
+	for (p = ar; p != '\0' ; p++)
+	{
+		if ((*p >= 'a' && *p <= 'z') || (*p >= 'A' && *p <= 'Z') || (*p >= '0' && *p <= '9'))
+			continue;
+		else
+		{
+			q = p;
+			while (*q != '\0')
+			{
+				*q = *(q + 1);
+				q++;
+			}
+			p--;
+
+			if (*(p + 1) == '\0')
+				break;
+		}
+	}
+
+	if (strlen(ar) == 0)
+		printf("-1");
+	else
+		printf("%s", ar);
+
+	return 0;
+}
+
+문제 2
+#include <stdio.h>
+#include <string.h>
+#pragma warning (disable:4996)
+
+int count_blank(char* str)
+{
+	char *p;
+	int cnt = 0;
+	for (p = str; *p != '\0'; p++)
+	{
+		if (*p == ' ')
+			cnt++;
+	}
+	return cnt;
+}
+
+int main()
+{
+	char ar[100];
+	int a;
+
+	gets(ar);
+
+	a = count_blank(ar);
+	printf("%d", a);
+
+	return 0;
+}
+
+문제 3
+#include <stdio.h>
+#include <string.h>
+#pragma warning (disable:4996)
+
+int main()
+{
+	char ar[100];
+	char tmp[100];
+	int n, i;
+
+	scanf("%d", &n);
+	getchar();
+
+	gets(ar);
+
+	strcpy(tmp, ar);
+
+	for(i = 0; i < n - 1; i++)
+	{
+		gets(ar);
+
+		if (strcmp(tmp, ar) > 0)
+		{
+			strcpy(tmp, ar);
+		}
+	}
+
+	printf("%s", tmp);
+
+	return 0;
+}
+문제 4
+#include <stdio.h>
+#include <string.h>
+#pragma warning (disable:4996)
+
+int main()
+{
+	int n, m, i;
+	char ar[7];
+	char* p;
+	int tmp, cnt = 0;
+
+	scanf("%d %d", &n, &m);
+	getchar();
+
+	for (i = 0; i < n; i++)
+	{
+		gets(ar);
+		p = ar;
+
+		tmp = atoi(ar + 2);
+
+		if (tmp / 100 == m)
+		{
+			printf("%s\n", ar + 2);
+			cnt++;
+		}
+	}
+
+	if (cnt == 0)
+		printf("-1");
+
+	return 0;
+}
+
+문제 5
+#include <stdio.h>
+#include <string.h>
+#pragma warning (disable:4996)
+
+int main()
+{
+	char ar[101];
+	char* p, *q;
+	char tmp;
+
+	gets(ar);
+	
+	p = ar;
+	
+	while (*p != '\0')
+	{
+		p++;
+	}
+
+	q = p - 1;
+	p = ar;
+
+	while (p <= q)
+	{
+		tmp = *p;
+		*p = *q;
+		*q = tmp;
+
+		p++;
+		q--;
+	}
+
+	printf("%s", ar);
+
+	return 0;
+}

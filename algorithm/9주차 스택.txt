@@ -1,0 +1,262 @@
+문제 1
+#include<stdio.h>
+#include<string.h>
+#pragma warning(disable:4996)
+
+typedef struct stack {
+	char stack[100];
+	int top, size;
+}stack;
+
+void init(stack *a, int n)
+{
+	a->top = -1;
+	a->size = n;
+}
+
+void push(stack *a, char c)
+{
+	if (a->top == a->size-1)
+		printf("Stack FULL\n");
+	else
+	{
+		a->top++;
+		a->stack[a->top] = c;
+	}
+}
+
+char pop(stack *a)
+{
+	int tmp;
+	if (a->top == -1)
+	{
+		printf("Stack Empty\n");
+		return;
+	}
+	else
+	{
+		tmp = a->top;
+		a->top--;
+		return a->stack[tmp];
+	}
+}
+
+void peek(stack *a)
+{
+	printf("%c\n", a->stack[a->top]);
+}
+
+void duplicate(stack *a)
+{
+	char c = a->stack[a->top];
+	int i;
+
+	pop(a);
+	for (i = 0; i < 2; i++)
+		push(a, c);
+}
+
+void upR(stack *a, int n)
+{
+	int i;
+	char tmp;
+
+	if (n > a->top+1)
+		return;
+	else
+	{
+		tmp = a->stack[a->top];
+		for(i = 0; i < n; i++)
+			a->stack[a->top-i] = a->stack[a->top -i -1];
+		a->stack[a->top - n + 1] = tmp;
+	}
+}
+
+void downR(stack *a, int n)
+{
+	int i;
+	char  tmp;
+
+	if (n > a->top+1)
+		return;
+	else
+	{
+		tmp = a->stack[a->top - n + 1];
+		for (i = n-1; i > 0; i--)
+		{
+			a->stack[a->top - i] = a->stack[a->top - i + 1];
+		}
+		a->stack[a->top] = tmp;
+	}
+}
+
+void print(stack *a)
+{
+	int i, cnt = 0;
+	if (a->top == -1)
+		return;
+	for (i = 0; i < a->size; i++)
+	{	
+		if (a->top != -1)
+		{
+			printf("%c", pop(a));
+			cnt++;
+		}
+	}
+	for (i = 0; i < cnt; i++)
+		a->top++;
+
+	printf("\n");
+}
+
+int main()
+{
+	stack a ;
+	char adt[50];
+	int size, n, i, ro;
+	char c;
+
+	scanf("%d", &size);
+	scanf("%d", &n);
+
+	init(&a, size);
+
+	for (i = 0; i < n; i++)
+	{
+		scanf("%s", adt);
+		getchar();
+
+		if (!strcmp(adt, "PUSH"))
+		{
+			scanf("%c", &c);
+			push(&a, c);
+
+		}
+		
+		if (!strcmp(adt, "POP"))
+		{
+			pop(&a);
+		}
+		
+		if (!strcmp(adt, "PEEK"))
+		{
+			peek(&a);
+		}
+		
+		if (!strcmp(adt, "DUP"))
+		{
+			duplicate(&a);
+		}
+		
+		if (!strcmp(adt, "UpR"))
+		{
+			scanf("%d", &ro);
+			upR(&a, ro);
+		}
+		
+		if (!strcmp(adt, "DownR"))
+		{
+			scanf("%d", &ro);
+			downR(&a, ro);
+		}
+		
+		if (!strcmp(adt, "PRINT"))
+			print(&a);
+	}
+
+	return 0;
+}
+문제 2
+#include<stdio.h>
+#include<string.h>
+#pragma warning(disable:4996)
+
+typedef struct stack {
+	char stack[600];
+	int top, cnt;
+	int a[2], b[2], c[2];
+}stack;
+
+void init(stack *a)
+{
+	int i;
+	a->top = -1;
+	a->cnt = 0;
+	for(i = 0; i < 2;i++)
+	{
+		a->a[i] = 0;
+		a->b[i] = 0;
+		a->c[i] = 0;
+	}
+}
+
+void push(stack *a, char c)
+{
+	a->top++;
+	a->stack[a->top] = c;
+	a->cnt++;
+
+	switch (c)
+	{
+	case '{':
+		a->a[0]++;
+		break;
+	case '[':
+		a->b[0]++;
+		break;
+	case '(':
+		a->c[0]++;
+		break;
+	default:
+		break;
+	}
+
+}
+
+void pop(stack *a)
+{
+	
+	char tmp = a->stack[a->top];
+	a->top--;
+	a->cnt++;
+}
+
+int main()
+{
+	stack a;
+	char txt[1001];
+	int  n = 0, i;
+
+	init(&a);
+
+	gets(txt);
+
+	for (i = 0; i < strlen(txt); i++)
+	{
+		if (txt[i] == '{' || txt[i] == '(' || txt[i] == '[')
+			push(&a, txt[i]);
+
+		if (txt[i] == '}')
+		{
+			pop(&a);
+			a.a[1]++;
+		}
+		if (txt[i] == ']')
+		{
+			pop(&a);
+			a.b[1]++;
+		}
+		if (txt[i] == ')')
+		{
+			pop(&a);
+			a.c[1]++;
+		}
+	}
+
+	if (a.a[0] == a.a[1] && a.b[0] == a.b[1] && a.c[0] == a.c[1] && a.top == -1)
+		printf("OK_%d", a.cnt);
+	else
+		printf("Wrong_%d", a.cnt);
+
+	return 0;
+}

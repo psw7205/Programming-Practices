@@ -1,0 +1,313 @@
+=======================================================================
+문제 1
+#include<stdio.h>
+int main()
+{	char c;
+	scanf("%c", &c);
+	if(c >= 'A' && c <= 'Z')
+		printf("upper");
+	else if(c >= 'a' && c <= 'z')
+		printf("lower");
+	else if(c >= '0' && c <= '9')
+		printf("number");
+	else
+		printf("etc");
+	return 0;
+}
+==========================================================================
+문제 2
+#include<stdio.h>
+#pragma warning(disable:4996)
+
+int main()
+{	int n, sum = 0, cnt = 0, flag = 0;
+	while (1)
+	{
+		scanf("%d", &n);
+		if (n <= 0)
+			break;
+		sum += n;
+		cnt++;
+		if (sum > 20 && flag == 0) // flag를 증가시켜 1번만 찍음 
+		{
+			flag = 1;
+			printf("%d %d\n", sum - n, cnt - 1);
+		}
+		else
+		{
+			if (sum > 30)
+			{
+				printf("%d %d\n", sum - n, cnt - 1);
+				break;
+			}
+		}
+	}
+	if (sum <= 20)
+		printf("0 0\0 0\n");
+	if( sum > 20 && sum < 30)
+		printf("0 0\n");
+	return 0;
+}
+=========================================================================
+문제 3
+#include<stdio.h>
+int main()
+{	int a, b, c, d, e,f,g,h,i,j;
+	int cut , pass = 0, fail = 0;
+	int top, low;
+	double avg = 0.0;
+	scanf("%d", &cut);
+	scanf("%d %d %d %d %d %d %d %d %d %d", &a, &b, &c, &d, &e,&f,&g,&h,&i,&j);
+	if(a > cut)
+	{	
+		if(a >= cut+35)
+			printf(" A");
+		else if( a >= cut+20)
+			printf(" B");	
+		else
+			printf(" C");
+		pass++;
+	}
+	if(b > cut)
+	{	
+		if(b >= cut+35)
+			printf(" A");
+		else if( b >= cut+20)
+			printf(" B");	
+		else
+			printf(" C");
+		pass++;	
+	}
+	if(c > cut)
+	{	
+		if(c >= cut+35)
+			printf(" A");
+		else if(c >= cut+20)
+			printf(" B");	
+		else
+			printf(" C");
+		pass++;
+	}
+	if(d > cut)
+	{	
+		if(d >= cut+35)
+			printf(" A");
+		else if(d >= cut+20)
+			printf(" B");	
+		else
+			printf(" C");
+		pass++;
+	}
+	if(e > cut)
+	{	
+		if(e>= cut+35)
+			printf(" A");
+		else if(e >=cut+20)
+			printf(" B");	
+		else
+			printf(" C");
+		pass++;
+	}
+	if(f > cut)
+	{	
+		if(f >= cut+35)
+			printf(" A");
+		else if(f >= cut+20)
+			printf(" B");	
+		else
+			printf(" C");
+		pass++;
+	}
+	if(g > cut)
+	{	
+		if(g >= cut+35)
+			printf(" A");
+		else if(g >= cut+20)
+			printf(" B");	
+		else
+			printf(" C");
+		pass++;
+	}
+	if(h > cut)
+	{	
+		if(h>= cut+35)
+			printf(" A");
+		else if(h >= cut+20)
+			printf(" B");	
+		else
+			printf(" C");
+		pass++;
+	}
+	if(i > cut)
+	{	
+		if(i >= cut+35)
+			printf(" A");
+		else if(i >= cut+20)
+			printf(" B");	
+		else
+			printf(" C");
+		pass++;
+	}
+	if(j > cut)
+	{	
+		if(j >= cut+35)
+			printf(" A");
+		else if(j >= cut+20)
+			printf(" B");	
+		else
+			printf(" C");
+		pass++;
+	}
+	if(pass == 0)
+		printf("none");
+		printf("\n");
+	fail = 10 - pass;
+	printf("%d %d", pass, fail);
+	printf("\n");
+	if(a > b)
+	{
+		top = a;
+		low = b;
+	}
+	else
+	{
+		top = b;
+		low = a;
+	}
+	if(top < c)
+		top = c;
+	if(top < d)
+		top = d;
+	if(top < e)
+		top = e;
+	if(top < f)
+		top = f;
+	if(top < g)
+		top = g;
+	if(top < h)
+		top = h;
+	if(top < i)
+		top = i;
+	if(top < j)
+		top = j;
+	if(low > c)
+		low = c;
+	if(low > d)
+		low = d;
+	if(low > e)
+		low = e;
+	if(low > f)
+		low = f;
+	if(low > g)
+		low = g;
+	if(low > h)
+		low = h;
+	if(low > i)
+		low = i;
+	if(low > j)
+		low = j;
+	avg = (a+b+c+d+e+f+g+h+i+j)/10.0;
+	printf("%d %d %.2lf", top, low, avg);
+			return 0;
+}
+=====================================================================
+문제 4-1
+#include<stdio.h>
+int main()
+{	int n, i , f = 0, a = 0, b = 1;
+	scanf("%d", &n);
+	for(i = 0; i< n; i++)
+	{
+		f = a + b;
+		b = a;
+		a = f; 
+	}
+	printf("F(%d)=%d+%d=%d", n, a-b, b, f);
+	return 0;
+}
+==========================================================================
+문제 4-2
+#include<stdio.h>
+int main()
+{	int n, m , i , j , f = 0, a = 0, b = 1;
+	scanf("%d %d", &m, &n);
+	for(j = m ; j <= n; j++)
+	{
+		f = 0;
+		a = 0;
+		b = 1;
+		for(i = 0; i< j; i++)
+		{
+			f = a + b;
+			b = a;
+			a = f; 
+		}
+		printf("F(%d)=%d+%d=%d\n", j, a-b, b, f);
+	}
+		return 0;
+}
+=======================================================================
+문제 5-1
+#include<stdio.h>
+int main()
+{	int n, sum = 0;
+	scanf("%d", &n);
+	while(n!= 0)
+	{
+		sum += n%10;
+		n/=10;
+	}
+	printf("%d", sum);
+	return 0;
+}
+======================================================================
+문제 5-2
+#include<stdio.h>
+int main()
+{	int n, low = 0;
+			scanf("%d", &n);
+	low = n;
+	while(1)
+	{
+		scanf("%d", &n);
+		
+		if(n < 0)
+			break;
+		
+		if(low > n)
+			low = n;
+	}
+	printf("%d", low);
+	return 0;
+}
+===========================================================================
+문제 5-3
+#include<stdio.h>
+int main()
+{	int n, low = 0, low2 = 0;
+			scanf("%d", &n);
+	while(n !=0)
+	{
+		low += n%10;
+		n/=10;
+	}
+	while(1)
+	{
+		low2 = 0;
+		scanf("%d", &n);
+		
+		if(n < 0)
+			break;
+		
+		while(n !=0)
+		{
+			low2 += n%10;
+			n/=10;
+		}	
+		if(low > low2)
+			low = low2;
+		
+	}
+	printf("%d", low);
+	return 0;
+}

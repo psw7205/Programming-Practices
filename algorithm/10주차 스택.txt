@@ -1,0 +1,277 @@
+문제 1
+#include <stdio.h>
+#include <string.h>
+#include <malloc.h>
+#pragma warning(disable:4996)
+typedef struct Node {
+	struct Node* next;
+	char data;
+}Node;
+Node* getNode()
+{	Node *a = (Node*)malloc(sizeof(Node));
+	a->next = NULL;
+	a->data = '\0';
+	return a;
+}int isEmty(int cnt)
+{	if (cnt == 0)
+		return 1;
+	return 0;
+}Node* PUSH(Node* head, char c, int* cnt)
+{	Node* newNode = getNode();
+	Node* temp = head->next;
+	newNode->data = c;
+	head->next = newNode;
+	newNode->next = temp;
+	(*cnt)++;
+	return newNode;
+}char POP(Node* head, int* cnt)
+{	if (isEmty(*cnt))
+	{
+		printf("empty");
+		return 0;
+	}
+	char temp = head->next->data;
+	Node* f = head->next;
+	head->next = head->next->next;
+	(*cnt)--;
+	free(f);
+	return temp;
+}char PEEK(Node* head, int* cnt)
+{	if (isEmty(*cnt))
+	{
+		printf("empty");
+		return 0;
+	}
+	return head->next->data;
+}int prec(char op)
+{	switch (op)
+	{
+	case '|': return 1;
+	case '&': return 2;
+	case '<': case '>': return 3;
+	case '+': case '-': return 4;
+	case '*': case '/': return 5;
+	case '!': case '@': case '~': return 6;
+	}
+	return 0;
+}void postfix(char list[])
+{	int i, len = strlen(list);
+	int cnt = 0;
+	char ch, ch2, tmp;
+	Node* head = getNode();
+	for (i = 0; i < len; i++)
+	{
+		ch = list[i];
+		if(i != 0)
+			ch2 = list[i - 1];
+		if(i != 0 && (prec(ch) && prec(ch2)))
+		{
+			if (ch == '+')
+				ch = '~';
+			if (ch == '-')
+				ch = '@';
+		}
+		if (i == 0 && (ch == '+' || ch == '-'))
+		{
+			if (ch == '+')
+				ch = '~';
+			if (ch == '-')
+				ch = '@';
+		}
+		if (prec(ch))
+		{
+			while (!isEmty(cnt) && (prec(ch) <= prec(PEEK(head, &cnt))))
+			{
+				tmp = POP(head, &cnt);
+				if (tmp == '|' || tmp == '&')
+				{
+					printf("%c%c", tmp, tmp);
+				}
+				else if (tmp == '~')
+					printf("%c", '+');
+				else if (tmp == '@')
+					printf("%c", '-');
+				else
+					printf("%c", tmp);
+			}
+			if (ch == '|' || ch == '&')
+			{
+				PUSH(head, ch, &cnt);
+				i++;
+			}
+			else
+				PUSH(head, ch, &cnt);
+		}
+		if (ch == '(')
+		{
+			PUSH(head, ch, &cnt);
+		}
+		if (ch == ')')
+		{
+			tmp = POP(head, &cnt);
+			while (tmp != '(')
+			{
+				if (tmp == '|' || tmp == '&')
+				{
+					printf("%c%c", tmp, tmp);
+				}
+				else if (tmp == '~')
+					printf("%c", '+');
+				else if (tmp == '@')
+					printf("%c", '-');
+				else
+					printf("%c", tmp);
+				tmp = POP(head, &cnt);
+			}
+		}
+		if (ch >= 'A' && ch <= 'Z')
+		{
+			printf("%c", ch);
+		}
+	}
+	while (!isEmty(cnt))
+	{
+		tmp = POP(head, &cnt);
+		if (tmp == '|' || tmp == '&')
+			printf("%c%c", tmp, tmp);
+		else if (tmp == '~')
+			printf("%c", '+');
+		else if (tmp == '@')
+			printf("%c", '-');
+		else
+			printf("%c", tmp);
+	}
+}
+int main()
+{	int n, i;
+	char list[100];
+	scanf("%d", &n);
+	for (i = 0; i < n; i++)
+	{
+		scanf("%s", list);
+		postfix(list);
+		printf("\n");
+	}
+	return 0;
+}
+
+=======================================================
+문제 2
+
+#include <stdio.h>
+#include <string.h>
+#include <malloc.h>
+#pragma warning(disable:4996)
+
+typedef struct Node{
+	struct Node* next;
+	int data;
+}Node;
+
+Node* getNode()
+{
+	Node *a = (Node*)malloc(sizeof(Node));
+	a->next = NULL;
+	a->data = '\0';
+	return a;
+}
+
+int isEmty(int cnt)
+{
+	if (cnt == 0)
+		return 1;
+	return 0;
+}
+
+Node* PUSH(Node* head, int c ,int* cnt)
+{
+	Node* newNode = getNode();
+	Node* temp = head->next;
+	newNode->data = c;
+
+	head->next = newNode;
+	newNode->next = temp;
+	(*cnt)++;
+	return newNode;
+}
+
+int POP(Node* head, int* cnt)
+{
+	if (isEmty(*cnt))
+	{
+		printf("empty");
+		return 0;
+	}
+	int temp = head->next->data;
+	Node* f = head->next;
+	head->next = head->next->next;
+	(*cnt)--;
+	free(f);
+	return temp;
+}
+
+int PEEK(Node* head, int* cnt)
+{
+	if (isEmty(*cnt))
+	{
+		printf("empty");
+		return 0;
+	}
+
+	return head->next->data;
+}
+
+int main()
+{
+	int n, i, j, len, sum, cnt = 0, tmp[2];
+	char list[100];
+	Node* head = getNode();
+
+	scanf("%d", &n);
+
+	for(i = 0; i < n; i++)
+	{
+		scanf("%s", list);
+
+		len = strlen(list);
+		
+		for (j = 0; j < len; j++)
+		{
+			if (list[j] >= '0' && list[j] <= '9')
+			{
+				PUSH(head, list[j] - '0', &cnt);
+			}
+
+			switch (list[j])
+			{
+			case '+':
+				sum = POP(head, &cnt) + POP(head, &cnt);
+				PUSH(head, sum, &cnt);
+				break;
+
+			case '-':
+				tmp[0] = POP(head, &cnt);
+				tmp[1] = POP(head, &cnt);
+				sum = tmp[1] - tmp[0];
+				PUSH(head, sum, &cnt);
+				break;
+			case '*':
+				sum = POP(head, &cnt) * POP(head, &cnt);
+				PUSH(head, sum, &cnt);
+				break;
+			case '/':
+				tmp[0] = POP(head, &cnt);
+				tmp[1] = POP(head, &cnt);
+				sum = tmp[1] / tmp[0];
+				PUSH(head, sum, &cnt);
+				break;
+			default:
+				break;
+			}
+		}
+
+		printf("%d\n", POP(head, &cnt));
+	}
+
+	return 0;
+}

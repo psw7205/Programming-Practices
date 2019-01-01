@@ -1,0 +1,177 @@
+巩力 10
+#include<stdio.h>
+#pragma warning(disable:4996)
+int main()
+{	int i, j, sum;
+	int n[3][3];
+	for (i = 0; i < 3; i++)
+	{
+		for (j = 0; j < 3; j++)
+			scanf("%d", &n[i][j]);
+	}
+	sum = n[0][0] + n[1][1] + n[2][2];
+	printf("%d", sum);
+	return 0;
+}
+===================================================
+巩力 11
+#include<stdio.h>
+#pragma warning(disable:4996)
+
+int main()
+{
+	int i, j, sum[3] = { 0 };
+	int n[3][2];
+
+	for (i = 0; i < 3; i++)
+	{
+		for (j = 0; j < 2; j++)
+			scanf("%d", &n[i][j]);
+	}
+
+	for (i = 0; i < 3; i++)
+	{
+		for (j = 0; j < 2; j++)
+			sum[i] += n[i][j];
+	}
+	
+	for (i = 0; i < 3; i++)
+		printf("%d\n", sum[i]);
+
+
+	return 0;
+}
+===================================================
+巩力 12
+#include<stdio.h>
+#pragma warning(disable:4996)
+
+int main()
+{
+	int i, tmp;
+	int n[3];
+
+	for (i = 0; i < 3; i++)
+	{
+		scanf("%d", &n[i]);
+	}
+	
+	for (i = 0; i < 3; i++)
+	{			
+		tmp = n[i];
+
+		switch(tmp)
+		{
+		case 0:
+			printf("ZERO-\n");
+			break;
+
+		case 1:
+			printf("ONE--\n");
+			break;
+
+		case 2:
+			printf("TWO--\n");
+			break;
+
+		case 3:
+			printf("THREE\n");
+			break;
+
+		case 4:
+			printf("FOUR-\n");
+			break;
+
+		case 5:
+			printf("FIVE-\n");
+			break;
+		default:
+			break;
+		}
+	
+	}
+
+	return 0;
+}
+#include<stdio.h>
+#pragma warning(disable:4996)
+
+int main()
+{
+	int i, j, n[3], tmp;
+
+	char ch[6][5] = { {'Z','E','R','O','-'}, 
+	{ 'O','N','E','-','-' }, 
+	{ 'T','W','O','-','-' }, 
+	{ 'T','H','R','E','E' }, 
+	{ 'F','O','U','R','-' }, 
+	{ 'F','I','V','E','-' } };
+
+	for (i = 0; i < 3; i++)
+	{
+		scanf("%d", &n[i]);
+	}
+
+	for (i = 0; i < 3; i++)
+	{
+		for (j = 0; j < 5; j++)
+		{
+			tmp = n[i];
+			printf("%c", ch[tmp] [j]);
+		}
+		printf("\n");
+	}
+
+	return 0;
+}
+
+===================================================
+巩力 13
+#include<stdio.h>
+#pragma warning(disable:4996)
+
+int main()
+{
+	int i, j, tmp = 0;
+	int x[3][3], y[2][2];
+
+	for (i = 0; i < 3; i++)
+		for (j = 0; j < 3; j++)
+			scanf("%d", &x[i][j]);	
+
+	for (i = 0; i < 2; i++)
+		for (j = 0; j < 2; j++)
+			scanf("%d", &y[i][j]);
+	
+	for (i = 0; i < 3; i++)
+	{
+		for (j = 0; j < 3; j++)
+			printf(" %d", x[i][j]);
+		printf("\n");
+	}
+
+	for (i = 0; i < 2; i++)
+	{
+		for (j = 0; j < 2; j++)
+			printf(" %d", y[i][j]);
+		printf("\n");
+	}
+
+	for (i = 0; i < 2; i++)
+	{
+		for (j = 0; j < 2; j++)
+		{
+			if (x[i][j] == y[0][0] && x[i][j + 1] == y[0][1] &&
+				x[i + 1][j] == y[1][0] && x[i + 1][j + 1] == y[1][1])
+			{
+				printf("%d %d", i, j);
+				tmp = 1;
+			}
+		}
+	}
+
+	if(!tmp)
+		printf("none");
+
+	return 0;
+}

@@ -1,0 +1,109 @@
+﻿문제 1
+#include <stdio.h>
+#pragma warning(disable:4996)
+int main()
+{	int n, sum = 0, cnt = 1, max = 0, min = 0;
+	double avg;
+	scanf("%d", &n);
+	sum = max = min = n;
+	while (1)
+	{
+		scanf("%d", &n);
+		if (n == -99)
+			break;
+		if (max <= n)
+			max = n;
+		if (min >= n)
+			min = n;
+		sum += n;
+		cnt++;
+	}
+	avg = (double)sum / cnt;
+	printf("%d %.2lf %d %d", sum, avg, max, min);
+		return 0;
+}
+==============================================================================
+문제 2
+#include <stdio.h>
+#pragma warning(disable:4996)
+
+void ABC(char* ar, int n)
+{	
+	char* p = ar;
+	for (p; p < ar + n; p++)
+	{
+		if (*p >= 'a' && *p <= 'z')
+			*p += ('A' - 'a');
+		else if (*p >= 'A' && *p <= 'Z')
+			*p -= ('A' - 'a');
+		else
+		{
+			printf("%c", *p);
+			continue;
+		}
+
+		printf("%c", *p);
+	}
+
+	printf("\n");
+
+	return;
+}
+
+int main()
+{	
+	int n = 0;
+	char a[10] = { '\0' };
+	char* p = a;
+
+	while(n < 10)
+	{
+		scanf("%c", p);
+
+		if (*p == '*')
+			break;
+		n++;
+		p++;
+	}
+
+	ABC(a, n);
+	return 0;
+}
+==============================================================================
+문제 3
+#include <stdio.h>
+#pragma warning(disable:4996)
+
+int main()
+{
+	int n = 0, i = 0;
+	char ar[100];
+	char* p = ar;
+
+	scanf("%d", &n);
+
+	for (i = 0; i < n; i++)
+	{
+		p = ar;
+		while (1)
+		{
+			scanf("%c", p);
+			if (*p == '#')
+			{
+				p--;
+				break;
+			}
+			p++;
+		}
+
+		while (1)
+		{
+			printf("%c", *p);
+			if (p == ar)
+				break;
+			p--;
+		}
+	}
+
+	return 0;
+}

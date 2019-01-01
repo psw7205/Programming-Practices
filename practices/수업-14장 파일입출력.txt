@@ -1,0 +1,76 @@
+﻿#include <stdio.h>
+#pragma warning(disable:4996)
+
+int main()
+{
+	FILE *fp1, *fp2;
+	char ch;
+
+	fp1 = fopen("main.c", "r");
+	fp2 = fopen("copy.txt", "w");
+
+	while ((ch = fgetc(fp1)) != EOF) // fgets, fscanf 등 가능
+	{
+		printf("%c",ch);
+		fputc(ch, fp2);
+	}
+
+	fclose(fp1);
+	fclose(fp2);
+
+	return 0;
+}
+==========================================
+실습 1
+#include <stdio.h>
+#pragma warning(disable:4996)
+
+struct person 
+{
+	char name[8];
+	int age;
+}
+
+data[10] = { {"Tom",46}, {"James",33}, {"Jane",21} };
+
+void main()
+{
+	FILE *fp;
+	struct person buf[10];
+	int i;
+	
+	fp = fopen("data.dat", "wb");
+	
+	fwrite(data, sizeof(struct person), 3, fp);
+	fclose(fp);
+	
+	fp = fopen("data.dat", "rb");
+	fread(buf, sizeof(struct person), 3, fp);
+	
+	for (i = 0; i < 3; i++) {
+		printf("i=%d %s %d\n", i, buf[i].name, buf[i].age);
+	}
+	
+	fclose(fp);
+}
+========================================================================
+실습 2
+#include <stdio.h>
+#pragma warning(disable:4996)
+
+int main()
+{
+	FILE *fp;
+	int size;
+	fp = fopen("data.txt", "rb");
+	if (fp == NULL)
+	{
+		printf("Couldn’t open file!");
+		return -1;
+	}
+	fseek(fp, 0, SEEK_END);
+	size = ftell(fp);
+	fclose(fp);
+	printf("Size of the file: %d bytes.\n", size);
+	return 0;
+}

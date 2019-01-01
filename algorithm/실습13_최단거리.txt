@@ -1,0 +1,257 @@
+﻿다익스트라
+#include <stdio.h>
+#include <stdlib.h>
+#define MAX 101
+#pragma warning(disable:4996)
+
+typedef struct node 
+{
+	int value;
+	int weight;
+	struct node* next;
+} node;
+
+struct priority_queue 
+{
+	int x, cost;
+} pq[MAX * 2];
+
+// 인접리스트에 추가
+void add(node** head, int value, int weight);
+
+// 배열힙을 사용한 우선순위 큐
+int pqIdx;
+void pq_pop();
+void pq_push(int x, int cost);
+
+int N, M, u, v, d, S;
+
+node *adjList[MAX]; // 그래프
+
+void Dijkstra(int start) 
+{
+	int *dist = (int*)malloc(sizeof(int)*(N + 1));
+
+	for (int i = 1; i <= N; i++)
+	{
+		dist[i] = -1;
+	}
+
+	// first : dist , second : vertex_pos
+	dist[start] = 0;
+	pq_push(start, dist[start]);
+
+	while (pq[1].x != 0)
+	{
+		int here = pq[1].x;
+		int heredist = pq[1].cost;
+
+		pq_pop();
+
+		if (heredist > dist[here])
+			continue;
+
+		node *current_node = adjList[here];
+
+		while (current_node)
+		{
+			int there = current_node->value;
+			int nextdist = heredist + current_node->weight;
+
+			if (dist[there] == -1 || dist[there] > nextdist)
+			{ //최단 거리 갱신
+				dist[there] = nextdist;
+				pq_push(there, nextdist);
+			}
+
+			current_node = current_node->next;
+		}
+	}
+
+	for (int i = 1; i <= N; i++) 
+	{
+		if (S == i || dist[i] < 0)
+			continue;
+		printf("%d %d\n", i, dist[i]);
+	}
+}
+
+int main() 
+{
+	scanf("%d %d %d", &N, &M, &S);
+
+	for (int i = 0; i < M; i++)
+	{
+		scanf("%d %d %d", &u, &v, &d);
+		add(&adjList[u], v, d);
+		add(&adjList[v], u, d);
+	}
+
+	Dijkstra(S);
+
+	return 0;
+}
+
+void add(node** head, int value, int weight)
+{
+	node* new_node = (node *)malloc(sizeof(node));
+	new_node->value = value;
+	new_node->weight = weight;
+
+	if (!(*head))
+	{
+		new_node->next = NULL;
+		(*head) = new_node;
+	}
+	else 
+	{
+		new_node->next = (*head);
+		(*head) = new_node;
+	}
+
+	return;
+}
+
+void pq_pop()
+{
+	int s = 1;
+	struct priority_queue tmp;
+
+	pq[1] = pq[pqIdx--];
+
+	while(1)
+	{
+		int e = s * 2;
+
+		if (e > pqIdx) 
+			return;
+
+		if (e + 1 <= pqIdx && pq[e].cost > pq[e + 1].cost)
+			e++;
+
+		
+		if (pq[s].cost > pq[e].cost) 
+		{
+			
+			tmp = pq[s];
+			pq[s] = pq[e];
+			pq[e] = tmp;
+			s = e;
+		}
+		else
+			break;
+	}
+}
+
+void pq_push(int x, int cost)
+{
+	pq[++pqIdx].cost = cost;
+	pq[pqIdx].x = x;
+
+	for (int i = pqIdx; i > 1; i /= 2)
+	{
+		if (cost < pq[i / 2].cost)
+			pq[i] = pq[i / 2];
+		else 
+		{
+			pq[i].x = x;
+			pq[i].cost = cost;
+			return;
+		}
+	}
+
+	pq[1].x = x;
+	pq[1].cost = cost;
+}
+=======================================================================
+벨만포드
+#include <stdio.h>
+#include <stdlib.h>
+#pragma warning(disable:4996)
+
+#define INF 1234567890
+
+typedef struct Edge
+{
+	int src, dest, weight;
+}Edge;
+
+typedef struct Graph
+{
+	int V, E;
+
+	struct Edge* edge;
+}Graph;
+
+struct Graph* createGraph(int V, int E)
+{
+	struct Graph* graph = (Graph*)malloc(sizeof(Graph));
+	graph->V = V;
+	graph->E = E;
+	graph->edge = (Edge*)malloc(sizeof(Edge)*E);
+	return graph;
+}
+
+void BellmanFord(struct Graph* graph, int src)
+{
+	int V = graph->V;
+	int E = graph->E;
+	int *dist = (int*)malloc(sizeof(int)*V);
+
+	for (int i = 0; i < V; i++)
+		dist[i] = INF;
+	dist[src] = 0;
+
+	for (int i = 1; i <= V - 1; i++)
+	{
+		for (int j = 0; j < E; j++)
+		{
+			int u = graph->edge[j].src;
+			int v = graph->edge[j].dest;
+			int weight = graph->edge[j].weight;
+			if (dist[u] != INF && dist[u] + weight < dist[v])
+				dist[v] = dist[u] + weight;
+		}
+	}
+	
+	// 음의 간선 확인 시 모든 간선을 한번 더 확인하며 
+	// 새로 갱신되는 곳이 음의 사이클이 존재하는 부분
+	for (int j = 0; j < E; j++)
+	{
+		int u = graph->edge[j].src;
+		int v = graph->edge[j].dest;
+		int weight = graph->edge[j].weight;
+		if (dist[u] != INF && dist[u] + weight < dist[v])
+			printf("음의 사이클 존재");
+		}
+	
+	for (int i = 0; i < V; ++i) {
+		if (i == src || dist[i] == INF)
+			continue;
+
+		printf("%d %d\n", i + 1, dist[i]);
+	}
+	return;
+}
+
+int main()
+{
+	int V, E, S;
+	int v1, v2, w;
+	scanf("%d %d %d", &V, &E, &S);
+
+	struct Graph* graph = createGraph(V, E);
+
+	for (int i = 0; i < E; i++)
+	{
+		scanf("%d %d %d", &v1, &v2, &w);
+		graph->edge[i].src = v1 - 1;
+		graph->edge[i].dest = v2 - 1;
+		graph->edge[i].weight = w;
+
+	}
+
+	BellmanFord(graph, S - 1);
+
+	return 0;
+}

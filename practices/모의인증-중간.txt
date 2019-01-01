@@ -1,0 +1,274 @@
+﻿문제 1
+#include <stdio.h>
+
+void input(int *p, int M)
+{
+	int *q; 
+	for(q = p; q < p + M; q++)
+	{
+		scanf("%d", q); 
+	}
+	return ;
+}
+
+int* sel_max(int *p, int M)
+{
+	int *q, *r, tmp = *p, cnt = 0, maxCnt = 0, *idx;
+
+	for(q = p; q < p + M; q++)
+	{
+		tmp = *q;
+
+		for(r = q; r < p + M; r++)
+		{
+			if(tmp == *r)
+				cnt++;
+		}
+
+		if(maxCnt < cnt)
+		{
+			maxCnt = cnt;
+			idx = q;
+		}
+		cnt = 0;
+	}
+
+	return idx;
+}
+
+void output(int *p, int N)
+{
+	int *q; 
+	for(q = p; q < p + N; q++)
+	{
+		printf(" %d", *q); 
+	}
+	return ;
+}
+
+int main(void)
+{
+	int in[100], out[100], *max, i, N, M;
+
+	scanf("%d %d", &N, &M);
+	for(i = 0; i< N; i++)
+	{
+		input(in, M);
+		max = sel_max(in, M);
+		out[i] = *max;
+	}
+	output(out, N);
+
+	return 0;
+}
+====================================================================
+문제 2
+#include <stdio.h>
+#include <string.h>
+
+int main(void)
+{
+	char str[101];
+	int i = 0, n, cnt = 0;
+	char *p = str, *q;
+
+	gets(str);
+
+	scanf("%d", &n);
+
+	while(cnt < n)
+	{
+		if(p[i] == ' ')
+		{
+			p[i] = '\0';
+			cnt++;
+			q = p;
+			p = p + strlen(p) + 1;
+			i = 0;
+		}
+
+		i++;
+	}
+
+	printf("%s", q);
+
+	return 0;
+}
+====================================================================
+문제 3
+#include <stdio.h>
+#include <string.h>
+
+void StringAdd(char arr[], char ch, int index)
+{
+	int len = strlen(arr) + 1;
+
+	while (index < len)
+	{
+		arr[len] = arr[len - 1];
+		len--;
+	}
+
+	arr[len + 1] = ch;
+}
+
+int Convertor(char x)
+{
+	return x - '0';
+}
+
+int main(void)
+{
+	char n[100];
+	int i;
+	int a, b;
+	scanf("%s", n);
+
+	for (i = 0; i < strlen(n) - 1; i++)
+	{
+
+		if (n[i] >= '0' && n[i] <= '9' && n[i + 1] >= '0' && n[i + 1] <= '9')
+		{
+			a = Convertor(n[i]);
+			b = Convertor(n[i + 1]);
+
+
+			if (a % 2 == 1 && b % 2 == 1)
+			{
+				StringAdd(n, '+', i);
+			}
+
+			if (a % 2 == 0 && b % 2 == 0)
+			{
+				StringAdd(n, '*', i);
+			}
+		}
+	}
+
+	printf("%s", n);
+
+	return 0;
+}
+
+====================================================================
+문제 4
+#include <stdio.h>
+#include <string.h>
+#pragma warning(disable:4996)
+
+struct st {
+	char name[10];
+	char book[5][20];
+	int score[5];
+	int cnt, pcnt;
+};
+
+typedef struct st ST;
+
+int main()
+{
+	ST a[100];
+	int n, i, j;
+	char tmp[20];
+
+	scanf("%d", &n);
+
+	for (i = 0; i < n; i++)
+	{
+		scanf("%s", a[i].name);
+		getchar();
+
+		j = 0;
+		a[i].cnt = 0;
+		a[i].pcnt = 0;
+		while (1)
+		{
+			scanf("%s", tmp);
+			getchar();
+
+			if (!strcmp(tmp, "0"))
+			{
+				break;
+			}
+			else
+			{
+				strcpy(a[i].book[j], tmp);
+				scanf("%d", &a[i].score[j]);
+				a[i].cnt++;
+				if (a[i].score[j] >= 50)
+					a[i].pcnt++;
+			}
+
+			j++;
+		}
+	}
+
+	for (i = 0; i < n; i++)
+	{
+		printf("%s %d%%\n", a[i].name, a[i].pcnt*20);
+	}
+
+	return 0;
+}
+====================================================================
+문제 5
+#include <stdio.h>
+#include <string.h>
+#pragma warning(disable:4996)
+
+struct st {
+	char name[51];
+	int num;
+};
+
+typedef struct st ST;
+
+int main()
+{
+	ST a[100];
+	ST temp;
+	int n, i, j;
+
+	scanf("%d", &n);
+	getchar();
+
+	for (i = 0; i < n; i++)
+	{
+		gets(a[i].name);
+		scanf("%d", &a[i].num);
+		getchar();
+	}
+
+	for (i = 0; i < n - 1; i++)
+	{
+		for (j = 0; j < n - i - 1; j++)
+		{
+			if (a[j].num > a[j + 1].num)
+			{
+				temp = a[j];
+				a[j] = a[j + 1];
+				a[j + 1] = temp;
+			}
+		}
+	}
+
+	for (i = 0; i < n - 1; i++)
+	{
+		for (j = 0; j < n - i - 1; j++)
+		{
+			if (strcmp(a[j].name, a[j+1].name) > 0)
+			{
+				temp = a[j];
+				a[j] = a[j + 1];
+				a[j + 1] = temp;
+			}
+		}
+	}
+
+	for (i = 0; i < n; i++)
+	{
+		printf("%s %d\n", a[i].name, a[i].num);
+	}
+
+	return 0;
+}

@@ -1,0 +1,188 @@
+문제 1 이중연결리스트 ADT구현
+#include <stdio.h>
+#include <stdlib.h>
+#pragma warning(disable:4996)
+typedef struct node {
+	struct node *llink;
+	char data;
+	struct node *rlink;
+}node;
+node *head;
+node *tail;
+node * getnode()
+{	node * DL = (node*)malloc(sizeof(node));
+	return DL;
+}void initList()
+{	head = getnode();
+	tail = getnode();
+	head->rlink = tail;
+	tail->llink = head;
+	return;
+}node * Curser(int index)
+{	node *Cur = head;
+	for (int i = 0; i < index; i++)
+	{
+		Cur = Cur->rlink;
+		if (Cur == tail)
+		{
+			printf("invalid position\n");
+			Cur = NULL;
+			return Cur;
+		}
+	}
+	return Cur;
+}void printList()
+{	node *DL = head->rlink;
+	while (DL != tail)
+	{
+		printf("%c", DL->data);
+		DL = DL->rlink;
+	}
+	printf("\n");
+	return;
+}node * Add(int index, char c)
+{	node *New = getnode();
+	node *Cur = Curser(index);
+	if (Cur == NULL)
+	{
+		return Cur;
+	}
+	New->data = c;
+	New->llink = Cur;
+	New->rlink = Cur->rlink;
+	Cur->rlink->llink = New;
+	Cur->rlink = New;
+	return New;
+}node* del(int index)
+{	node * Cur = Curser(index);
+	if (Cur == NULL)
+	{
+		return '\0';
+	}
+	Cur->rlink->llink = Cur->llink;
+	Cur->llink->rlink = Cur->rlink;
+	free(Cur);
+}int main()
+{	initList();
+	node * temp;
+	int n, pos;
+	char a, c;
+	scanf("%d", &n);
+	for (int i = 0; i < n; i++)
+	{
+		scanf(" %c", &a);
+		if (a == 'A')
+		{
+			scanf("%d %c", &pos, &c);
+			Add(pos - 1, c);
+		}
+		else if (a == 'D')
+		{
+			scanf("%d", &pos);
+			del(pos);
+		}
+		else if (a == 'G')
+		{
+			scanf("%d", &pos);
+			temp = Curser(pos);
+			if (temp != NULL)
+				printf("%c\n", temp->data);
+		}
+		else if (a == 'P')
+		{
+			printList();
+		}
+		else
+		{
+			break;
+		}
+	}
+	return 0;
+}
+==============================================================
+문제 2 트리 생성 및 노드 찾아가기
+#include <stdio.h>
+#include <malloc.h>
+#include <string.h>
+#pragma warning(disable:4996)
+typedef struct Node {
+	struct Node* right;
+	struct Node* left;
+	int data;
+}Node;
+Node* tmp;
+Node* getNode()
+{	Node* a = (Node*)malloc(sizeof(Node));
+	a->right = NULL;
+	a->left = NULL;
+	a->data = 0;
+	return a;
+}void searchNode(Node* p, int n)
+{	if (p != NULL)
+	{
+		if (n == p->data)
+			tmp = p;
+		searchNode(p->left, n);
+		searchNode(p->right, n);
+	}
+}void insertNode(int n, int leftData, int rightData, Node* root)
+{	searchNode(root, n);
+	Node* r = getNode();
+	Node* l = getNode();
+	r->data = rightData;
+	l->data = leftData;
+	if (tmp == NULL)
+	{
+		root->data = n;
+		root->left = l;
+		root->right = r;
+		return;
+	}
+	if (leftData == 0)
+		tmp->left = NULL;
+	else
+		tmp->left = l;
+	if (rightData == 0)
+		tmp->right = NULL;
+	else
+		tmp->right = r;
+}void SearchPrint(char a[], Node* root)
+{	int len = strlen(a);
+	int i;
+	char ch;
+	Node* p = root;
+	printf(" %d", root->data);
+	for (i = 0; i < len; i++)
+	{
+		ch = a[i];
+		if (ch == 'R')
+		{
+			p = p->right;
+			printf(" %d", p->data);
+		}
+		if (ch == 'L')
+		{
+			p = p->left;
+			printf(" %d", p->data);
+		}
+	}
+	printf("\n");
+}int main()
+{	int n, a, b, c, i;
+	char ch[100] = { '\0' };
+	Node* root = getNode();
+	scanf("%d", &n);
+	for (i = 0; i < n; i++)
+	{
+		scanf("%d %d %d", &a, &b, &c);
+		insertNode(a, b, c, root);
+	}
+	scanf("%d", &n);
+	getchar();
+	for (i = 0; i < n; i++)
+	{
+		scanf("%s", ch);
+		SearchPrint(ch, root);
+	}
+	return 0;
+}

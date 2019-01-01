@@ -1,0 +1,474 @@
+﻿문제 1
+#include <stdio.h>
+#pragma warning(disable:4996)
+
+int add(int x, int y)
+{
+	return x+y;
+}
+
+int main()
+{
+	int a, sum = 0, i;
+
+	scanf("%d", &a);
+
+	for (i = 0; i <= a; i++)
+	{
+		sum = add(sum, i);
+	}
+
+	printf("%d", sum);
+
+	return 0;
+}
+====================================================================
+문제 2
+#include <stdio.h>
+#pragma warning(disable:4996)
+
+int sum(int x)
+{
+	x = x * (x + 1) / 2;
+
+	return x;
+}
+
+int main()
+{
+	int a, b;
+
+	scanf("%d %d", &a, &b);
+
+	printf("%d", sum(b) - sum(a) + a);
+
+	return 0;
+}
+====================================================================
+문제 3
+#include <stdio.h>
+#pragma warning(disable:4996)
+
+int sum(int x)
+{
+	x = x * (x + 1) / 2;
+
+	return x;
+}
+
+int main()
+{
+	int a, i, s = 0;
+
+	scanf("%d", &a);
+
+	for (i = 1; i <= a; i++)
+	{
+		s += sum(i);
+	}
+
+	printf("%d", s);
+
+	return 0;
+}
+====================================================================
+문제 4
+#include <stdio.h>
+#pragma warning(disable:4996)
+
+void print_row1(int x)
+{
+	int i; 
+	for (i = 0; i < x; i++)
+		printf("%d", x);
+	printf("\n");
+}
+
+void print_row2(int x)
+{
+	int i;
+	for (i = 0; i < x; i++)
+	{
+		if (i == 0 || i == x - 1)
+			printf("%d", x);
+		else
+			printf(" ");
+	}
+	printf("\n");
+}
+
+int main()
+{
+	int a, i;
+
+	scanf("%d", &a);
+
+	print_row1(a);
+	for(i = 0; i < a - 2; i++)
+		print_row2(a);
+	print_row1(a);
+
+	return 0;
+}
+====================================================================
+문제 5
+#include <stdio.h>
+#pragma warning(disable:4996)
+
+void print_triangle(int x)
+{
+	int i, j;
+
+	for (i = 0; i < x; i++)
+	{
+		for(j = 0 ; j <= i ; j++)
+			printf("*");
+
+		printf("\n");
+	}
+}
+
+int main()
+{
+	int a;
+
+	while(1)
+	{
+		scanf("%d", &a);
+		if (a < 1)
+			break;
+
+		print_triangle(a);
+	}
+
+	return 0;
+}
+====================================================================
+문제 6
+#include <stdio.h>
+#pragma warning(disable:4996)
+
+int func1(int x)
+{
+	return x * x * 2 - 5 * x + 1;
+}
+
+int main()
+{
+	int a;
+
+	scanf("%d", &a);
+
+	printf("%d", func1(a));
+
+	return 0;
+}
+====================================================================
+문제 7
+#include <stdio.h>
+#pragma warning(disable:4996)
+
+int func2(int x, int a, int b, int c)
+{
+	return a * x*x + b * x + c;
+}
+
+int main()
+{
+	int x, a, b, c;
+
+	scanf("%d", &x);
+	scanf("%d %d %d", &a, &b, &c);
+	
+	printf("%d", func2(x, a, b, c));
+
+	return 0;
+}
+====================================================================
+문제 8
+#include <stdio.h>
+#pragma warning(disable:4996)
+
+int func2(int x, int a, int b, int c)
+{
+	return a * x*x + b * x + c;
+}
+
+int main()
+{
+	int x, result,  a[2], b[2], c[2];
+
+	scanf("%d", &x);
+	scanf("%d %d %d", &a[0], &b[0], &c[0]);
+	scanf("%d %d %d", &a[1], &b[1], &c[1]);
+
+	result = func2(x, a[0], b[0], c[0]);
+
+	printf("%d", func2(result, a[1], b[1], c[1]));
+
+	return 0;
+}
+====================================================================
+문제 9
+#include <stdio.h>
+#pragma warning(disable:4996)
+
+int max1, max2;
+
+void update_max(int x)
+{
+	if (max2 <= x && max1 >= x)
+		max2 = x;
+
+	if (max1 <= x)
+	{
+		max2 = max1;
+		max1 = x;
+	}
+
+}
+
+int main()
+{
+	int n, tmp;
+
+	scanf("%d", &n);
+	max1 = n;
+	scanf("%d", &n);
+	max2 = n;
+	
+	if (max1 < max2)
+	{
+		tmp = max1;
+		max1 = max2;
+		max2 = tmp;
+	}
+	
+	while (1)
+	{
+		scanf("%d", &n);
+
+		if (n == 0)
+			break;
+
+		update_max(n);
+	}
+
+	printf("%d %d", max1, max2);
+
+	return 0;
+}
+====================================================================
+문제 10
+#include <stdio.h>
+#pragma warning(disable:4996)
+
+int n;
+
+void die1(int x);
+void die2(int x, int y);
+void die3(int x, int y, int z);
+
+
+int main()
+{
+	int i;
+
+	scanf("%d", &n);
+
+	for (i = 1; i < 7; i++)
+		die1(i);
+
+	return 0;
+}
+
+void die1(int x)
+{
+	int i;
+	for (i = 1; i < 7; i++)
+	{
+		die2(x, i);
+	}
+}
+void die2(int x, int y)
+{
+	int i;
+	for (i = 1; i < 7; i++)
+	{
+		die3(x, y, i);
+	}
+}
+void die3(int x, int y, int z)
+{
+	if (x + y + z == n)
+		printf("%d %d %d\n", x, y, z);
+}
+====================================================================
+문제 11
+#include <stdio.h>
+#pragma warning(disable:4996)
+
+int a, b, c;
+
+int count_strike(int in_a, int in_b, int in_c)
+{
+	int cnt = 0;
+
+	if (in_a == a)
+		cnt++;
+
+	if (in_b == b)
+		cnt++;
+
+	if (in_c == c)
+		cnt++;
+	
+	return cnt;
+}
+
+int count_ball(int in_a, int in_b, int in_c)
+{
+	int cnt = 0;
+
+	if (a == in_b || a == in_c)
+		cnt++;
+	if (b == in_a || b == in_c)
+		cnt++;
+	if (c == in_b || c == in_a)
+		cnt++;
+
+	return cnt;
+}
+
+int main()
+{
+	int a1, b1, c1;
+
+	scanf("%d %d %d", &a, &b, &c);
+
+	while(1)
+	{
+		scanf("%d %d %d", &a1, &b1, &c1);
+		printf("%dS%dB\n", count_strike(a1, b1, c1), count_ball(a1, b1, c1));
+		if (count_strike(a1, b1, c1) == 3)
+			break;
+	}
+
+	return 0;
+}
+====================================================================
+문제 12
+#include <stdio.h>
+#pragma warning(disable:4996)
+
+void print_line(int x, int y, int z)
+{
+	int i, j, k = 0;
+
+	for (i = 0; i < x + y; i++)
+	{
+		for (j = 0; j < x-i; j++)
+			printf(" ");
+
+		for (j = 0; j < y+k; j++)
+			printf("*");
+
+		for (j = 0; j < z-i; j++)
+			printf(" ");
+		k += 2;
+		printf("\n");
+	}
+}
+
+int main()
+{
+	int n;
+
+	scanf("%d", &n);
+
+	print_line(n - 1, 1, n - 1);
+
+	return 0;
+}
+====================================================================
+문제 13
+#include <stdio.h>
+#pragma warning(disable:4996)
+
+int count_3(int x)
+{
+	int i, cnt = 0, tmp;
+
+	for (i = 1; i <= x; i++)
+	{
+		tmp = i;
+		while (tmp)
+		{
+			if ((tmp % 10) == 3)
+				cnt++;
+			tmp /= 10;
+		}
+	}
+
+	return cnt;
+}
+
+int main()
+{
+	int n;
+
+	scanf("%d", &n);
+
+	printf("%d", count_3(n));
+
+	return 0;
+}
+====================================================================
+문제 14
+#include <stdio.h>
+#pragma warning(disable:4996)
+
+int is_prime(int x)
+{
+	int i;
+
+	for (i = 2; i <= x; i++)
+	{
+		if (x%i == 0)
+			break;
+	}
+
+	if (i == x)
+		return 1;
+	else
+		return 0;
+}
+
+int next_prime(int x)
+{
+	int tmp = x;
+
+	while (1)
+	{
+		tmp++;
+		if (is_prime(tmp))
+			break;
+	}
+
+	return tmp;
+}
+
+int main()
+{
+	int n, m, i, j;
+
+	scanf("%d %d", &n, &m);
+
+	for (i = 0; i < m; i++)
+	{
+		printf(" %d", next_prime(n));
+		n = next_prime(n);
+	}
+
+	return 0;
+}

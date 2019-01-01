@@ -1,0 +1,156 @@
+﻿#include <stdio.h>
+#pragma warning (disable:4996)
+
+struct box {
+	int maindish;
+	int sidedish[3];
+	int beverage;
+};
+
+int main()
+{
+	struct box a;
+	int total;
+
+	scanf("%d", &a.maindish);
+	for (int i = 0; i < 3; i++)
+	{
+		scanf("%d", &a.sidedish[i]);
+	}
+
+	scanf("%d", &a.beverage);
+
+	total = a.maindish + a.sidedish[0] + a.sidedish[1] + a.sidedish[2] + a.beverage;
+	printf("%d", total);
+
+	return 0;
+}
+==========================================================================================
+#include <stdio.h>
+#pragma warning (disable:4996)
+
+struct box {
+	int maindish;
+	int sidedish[3];
+	int beverage;
+};
+
+int main()
+{
+	struct box a;
+	struct box b;
+	int total;
+
+	scanf("%d", &a.maindish);
+	for (int i = 0; i < 3; i++)
+	{
+		scanf("%d", &a.sidedish[i]);
+	}
+
+	scanf("%d", &a.beverage);
+
+	b = a;
+
+	scanf("%d", &b.maindish);
+
+	total = a.maindish + a.sidedish[0] + a.sidedish[1] + a.sidedish[2] + a.beverage;
+	
+	printf("%d\n", total);
+
+	total = total - a.maindish + b.maindish;
+	printf("%d\n", total);
+
+	return 0;
+}
+===============================================================================
+#include <stdio.h>
+#pragma warning (disable:4996)
+
+struct student {
+	int id;
+	char name[8];
+	double grade;
+};
+int main()
+{
+	struct student s[3];
+	double sum = 0;
+
+	for (int i = 0; i < 3; i++)
+	{
+		scanf("%d %s %lf", &s[i].id, s[i].name, &s[i].grade);
+		sum += s[i].grade;
+	}
+
+	printf("%lf", sum/3);
+	
+	return 0;
+}
+===============================================================================
+#include <stdio.h>
+#pragma warning (disable:4996)
+
+typedef struct stu {
+	char name[11];
+	int num;
+	double avg;
+
+}ST;
+
+void input(ST* a)
+{
+	scanf("%s %d %lf", a->name, &a->num, &a->avg);
+	getchar();
+}
+
+ST input_2()
+{
+	ST a;
+	scanf("%s %d %lf", a.name, &a.num, &a.avg);
+	getchar();
+
+	return a;
+}
+
+void print(ST st)
+{
+	printf("%s %d %lf\n", st.name, st.num, st.avg);
+}
+
+int main()
+{
+	ST a, b;
+
+	input(&a);
+	b = input_2();
+
+	print(a);
+	print(b);
+
+	return 0;
+}
+=======================================================================
+#include <stdio.h>
+#pragma warning (disable:4996)
+
+typedef struct stu {
+	int id;
+	char name[8];
+	double grade;
+	struct stu *roommate;
+	struct stu *friends[10];
+}stu;
+
+int main()
+{
+	stu st1 = { 10, "Tom", 3.2 };
+	stu st2 = { 11, "Jerry", 4.3 };
+	stu st3 = { 12, "David", 2.1 };
+
+	st1.friends[0] = &st2;
+	st1.friends[1] = &st3;
+
+	printf("%s %s", st1.friends[0]->name, st1.friends[1]->name);
+
+	return 0;
+}

@@ -1,0 +1,131 @@
+﻿문제 6
+#include<stdio.h>
+#pragma warning(disable:4996)
+
+int main()
+{
+	char ch[10] = { '\0' };
+	char* p = ch;
+	char* q = ch;
+	int cnt[10] = { 0 }, max = 0;
+	int* r = cnt, idx = 0;
+
+	for (p; p < ch+10; p++)
+	{
+		scanf("%c", p);
+	}
+
+	for (p = ch; p < ch + 10; p++)
+	{
+		for (q = ch; q < ch + 10; q++)
+		{
+			if(*p == *q)
+				(*r)++;
+		}
+		r++;
+	}
+	
+	r = cnt;
+	max = *r;
+
+	for (r; r < cnt + 10; r++)
+	{
+		if (max < *r)
+		{
+			max = *r;
+			idx = r - cnt;
+		}
+	}
+
+	printf("%c %d", *(ch + idx), max);
+
+	return 0;
+}
+================================================================
+문제 9
+#include<stdio.h>
+#pragma warning(disable:4996)
+
+int* mid(int a[])
+{
+	int* p = a,* q = a,* r = a;
+	int max, min, cnt = 0;
+
+	max = *p > *(p + 1) ? (*p > *(p + 2) ? *p : *(p + 2)) : (*(p + 1) > *(p + 2) ? *(p + 1) : *(p + 2));
+	min = *p > *(p + 1) ? (*(p + 1) > *(p + 2) ? *(p + 2) : *(p + 1)) : (*p > *(p + 2) ? *(p + 2) : *p);
+
+	for (p = a; p < a + 3; p++)
+	{
+		if (*p < max && *p > min)
+		{
+			return p;
+		}
+
+		if (*p == max)
+		{
+			cnt++;
+			q = p;
+		}
+
+		if (*p == min)
+			r = p;
+	}	
+
+	if (cnt == 2 || cnt == 3)
+		return q;
+	else
+		return r;
+}
+
+int main()
+{
+	int x[3] = { 0 };
+	int* p = x;
+
+	for (p; p < x + 3; p++)
+		scanf("%d", p);
+
+	p = mid(x);
+
+	printf("%d", *p);
+
+	return 0;
+}
+
+================================================================
+문제 11
+#include<stdio.h>
+#pragma warning(disable:4996)
+
+void strcopy(char a[], char b[])
+{
+	char* p = a,*q = b;
+
+	for (p; p < a + 6; p++)
+	{
+		*p = *q;
+		q++;
+	}
+}
+
+int main()
+{
+	char a[6] = { '\0' }, b[6] = { '\0' };
+	char* p = b;
+
+	for (p; p < b + 6; p++)
+	{
+		scanf("%c", p);
+	}
+
+	strcopy(a, b);
+
+	p = a;
+	
+	for (p; p < a + 6; p++)
+	{
+		printf("%c", *p);
+	}
+
+	return 0;
+}

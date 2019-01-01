@@ -1,0 +1,233 @@
+﻿#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#pragma warning (disable:4996)
+
+int n, m;
+int **G;
+int *weight;
+int *parent;
+int *locator;
+
+int findMinWeight()
+{
+	int min = 1234567890;
+	int minIdx = 0;
+
+	for (int i = 0; i < n; i++)
+	{
+		if (locator[i] == 0 && weight[i] < min)
+		{
+			min = weight[i];
+			minIdx = i;
+		}
+	}
+
+	return minIdx;
+}
+
+void PrimMST()
+{
+	for(int i = 0; i < n; i++)
+	{
+		locator[i] = 0;
+		weight[i] = 1234567890;
+	}
+
+	weight[0] = 0;
+	parent[0] = -1;
+
+	for (int i = 0; i < n; i++)
+	{
+		int u = findMinWeight();
+		locator[u] = 1;
+		printf(" %d", u + 1);
+		for (int j = 0; j < n; j++)
+		{
+			if (G[u][j] != 0 && locator[j] == 0 && G[u][j] < weight[j])
+			{
+				parent[j] = u;
+				weight[j] = G[u][j];
+			}
+		}
+	}
+
+	int minWeight = 0;
+	for (int i = 0; i < n; i++)
+	{	
+		minWeight += weight[i];
+	}
+
+	printf("\n%d", minWeight);
+
+}
+
+int main()
+{
+	int v1, v2, w;
+	scanf("%d %d", &n, &m);
+	G = (int**)malloc(sizeof(int*)*n);
+
+	weight = (int*)malloc(sizeof(int)*n);
+	parent = (int*)malloc(sizeof(int)*n);
+	locator = (int*)malloc(sizeof(int)*n);
+
+	for (int i = 0; i < n; i++)
+		G[i] = (int*)malloc(sizeof(int)*n);
+	
+	for (int i = 0; i < n; i++)
+		for (int j = 0; j < n; j++)
+			G[i][j] = 0;
+
+	for(int i = 0; i < m; i++)
+	{
+		scanf("%d %d %d", &v1, &v2, &w);
+		G[v1-1][v2-1] = w;
+		G[v2-1][v1-1] = w;
+	}
+
+	PrimMST();
+
+	return 0;
+}
+===========================================================
+문제 2
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#pragma warning (disable:4996)
+
+int n, m;
+int **G;
+int *weight;
+int *parent;
+int *locator;
+
+int findMinWeight()
+{
+	int min = 1234567890;
+	int minIdx = 0;
+
+	for (int i = 0; i < n; i++)
+	{
+		if (locator[i] == 0 && weight[i] < min)
+		{
+			min = weight[i];
+			minIdx = i;
+		}
+	}
+
+	return minIdx;
+}
+
+void PrimMST()
+{
+	for (int i = 0; i < n; i++)
+	{
+		locator[i] = 0;
+		weight[i] = 1234567890;
+	}
+
+	weight[0] = 0;
+	parent[0] = -1;
+
+	for (int i = 0; i < n; i++)
+	{
+		int u = findMinWeight();
+		locator[u] = 1;
+		printf(" %d", u + 1);
+		for (int j = 0; j < n; j++)
+		{
+			if (G[u][j] != 0 && locator[j] == 0 && G[u][j] < weight[j])
+			{
+				parent[j] = u;
+				weight[j] = G[u][j];
+			}
+		}
+	}
+
+	int minWeight = 0;
+	for (int i = 0; i < n; i++)
+	{
+		minWeight += weight[i];
+	}
+
+	printf("\n%d", minWeight);
+
+}
+
+int find(int i)
+{
+	while (parent[i] != i)
+		i = parent[i];
+	return i;
+}
+
+void union1(int i, int j)
+{
+	int a = find(i);
+	int b = find(j);
+	parent[a] = b;
+}
+
+void kruscalMST()
+{
+	int mincost = 0;
+	int edgeIdx = 0;
+	for (int i = 0; i < n; i++)
+		parent[i] = i;
+
+	while (edgeIdx < n-1)
+	{
+		int min = 1234567890, a = -1, b = -1;
+		for (int i = 0; i < n; i++) 
+		{
+			for (int j = 0; j < n; j++)
+			{
+				if (find(i) != find(j) && G[i][j] < min) {
+					min = G[i][j];
+					a = i;
+					b = j;
+				}
+			}
+		}
+
+		union1(a, b);
+		edgeIdx++;
+		mincost += min;
+		printf(" %d", min);
+	}
+
+	printf("\n%d", mincost);
+
+}
+
+int main()
+{
+	int v1, v2, w;
+	scanf("%d %d", &n, &m);
+	G = (int**)malloc(sizeof(int*)*n);
+
+	weight = (int*)malloc(sizeof(int)*n);
+	parent = (int*)malloc(sizeof(int)*n);
+	locator = (int*)malloc(sizeof(int)*n);
+
+	for (int i = 0; i < n; i++)
+		G[i] = (int*)malloc(sizeof(int)*n);
+
+	for (int i = 0; i < n; i++)
+		for (int j = 0; j < n; j++)
+			G[i][j] = 1234567890;
+
+	for (int i = 0; i < m; i++)
+	{
+		scanf("%d %d %d", &v1, &v2, &w);
+		G[v1 - 1][v2 - 1] = w;
+		G[v2 - 1][v1 - 1] = w;
+	}
+
+	//PrimMST();
+	kruscalMST();
+
+	return 0;
+}

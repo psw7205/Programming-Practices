@@ -1,0 +1,170 @@
+﻿실습 1
+int max(int in_a, int in_b)
+{
+	int c;
+
+	c = (in_a > in_b) ? in_a : in_b;
+
+	return c;
+}
+================================================================
+실습 2
+void print_characters(char in_c, int in_n)
+{
+	int i;
+	for (i = 0; i < in_n; i++)
+		printf("%c", in_c);
+
+	printf("\n");
+}
+==========================================================
+실습 3
+double divide(int a, int b)
+{
+	double c;
+
+	c = a / (double)b;
+
+	return c;
+}
+==========================================================
+실습 4
+float add3(float a, float b, float c)
+{
+	float d;
+	
+	d = a+b+c;
+	
+	return d;
+}
+==========================================================
+실습 5
+char atoA(char ch)
+{
+	if(ch >='a' && ch <='z')
+		ch += ('A' - 'a');
+	return ch;
+}
+==========================================================
+실습 6
+#include<stdio.h>
+#pragma warning(disable:4996)
+
+void print_characters(char in_c, int in_n)
+{
+	int i;
+	for (i = 0; i < in_n; i++)
+		printf("%c", in_c);
+
+	printf("\n");
+}
+
+int main()
+{
+	int i;
+
+	for (i = 0; i <= ('z' - 'a'); i++)
+		print_characters( i+'a' , i+1);
+
+	return 0;
+}
+==========================================================
+실습 7
+#include<stdio.h>
+#pragma warning(disable:4996)
+
+int max(int in_a, int in_b)
+{
+	int c;
+
+	c = (in_a > in_b) ? in_a : in_b;
+
+	return c;
+}
+
+int main()
+{
+	int a, b, c, d;
+	int Max;
+
+	scanf("%d %d %d %d", &a, &b, &c, &d);
+
+	Max = max(a, b) > max(c, d) ? max(a, b) : max(c, d);
+
+	printf("%d\n", Max);
+
+	return 0;
+}
+==========================================================
+실습 8
+#include<stdio.h>
+#pragma warning(disable:4996)
+
+char atoA(char ch);
+
+int main()
+{
+	char str[10];
+	int i;
+
+	for (i = 0; i < 10; i++)
+		scanf("%c", &str[i]);
+
+	for (i = 0; i < 10; i++)
+		str[i] = atoA(str[i]);
+
+	for (i = 0; i < 10; i++)
+		printf("%c", str[i]);
+
+	return 0;
+}
+
+char atoA(char ch)
+{
+	if (ch >= 'a' && ch <= 'z')
+		ch = ch + ('A' - 'a');
+
+	return ch;
+}
+==========================================================
+실습 9
+#include<stdio.h>
+#pragma warning(disable:4996)
+
+double divide(int a, int b);
+float add3(float a, float b, float c);
+
+int main()
+{
+	int a[6];
+	int i;
+	double sum[3];
+
+	for (i = 0; i < 6; i++)
+		scanf("%d", &a[i]);
+
+	for(i = 0; i < 6; i+=2)
+		sum[i/2] = divide(a[i], a[i + 1]);
+
+	printf("%f", add3(sum[0], sum[1], sum[2]));
+
+	return 0;
+}
+
+double divide(int a, int b)
+{
+	double c;
+
+	c = a / (double)b;
+
+	return c;
+}
+
+float add3(float a, float b, float c)
+{
+	float d;
+
+	d = a + b + c;
+
+	return d;
+}

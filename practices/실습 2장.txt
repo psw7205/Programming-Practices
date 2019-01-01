@@ -1,0 +1,191 @@
+문제 1
+
+#include <stdio.h>
+
+int main()
+{
+	int a;
+	int b;
+
+	printf("첫 번째 정수: ");
+	scanf_s("%d", &a);
+
+	printf("두 번째 정수: ");
+	scanf_s("%d", &b);
+
+	a += b;
+
+	printf("합: %d\n", a);
+
+	return 0;
+}
+
+--------------------------------------------------------
+문제 2
+
+#include <stdio.h>
+
+int main()
+{
+	double a = 4.2 ;
+	double b = 5.1 ;
+
+	printf("첫 번째 수: %lf \n", a);
+	printf("두 번째 수: %lf \n", b);
+
+	a += b;
+
+	printf("합: %lf\n", a);
+
+	return 0;
+}
+
+--------------------------------------------------------
+문제 3
+
+#include <stdio.h>
+
+int main()
+{
+	int a = 0 ;
+	char b='\0';
+
+	printf("입력: ");
+	scanf_s("%d", &a);
+
+	b = a;
+
+	printf("출력(int)->%d \n", a);
+	printf("출력(char)->%d \n", b);
+
+	return 0;
+}
+
+--------------------------------------------------------
+문제 4 
+
+#include <stdio.h>
+
+int main()
+{
+	int a = 0 ;
+	unsigned char b;
+
+	printf("입력: ");
+	scanf_s("%d", &a);
+
+	b = a;
+
+	printf("출력(int)->%d \n", a);
+	printf("출력(int)->%d \n", b);
+
+	// 음수 입력시 이상한 값 출력
+
+	return 0;
+}
+
+--------------------------------------------------------
+문제 5
+
+#include <stdio.h>
+
+int main()
+{
+	
+	printf("큰 따옴표는 \"입니다.\n");
+	printf("작은 따옴표는 \'입니다.\n");
+	printf("문자 A는 'A'입니다. \n");
+	printf("큰 따옴표의 이스케이프 시퀀스는 \\\"입니다.\n");
+
+	return 0;
+}
+
+--------------------------------------------------------
+문제 6
+
+#include <stdio.h>
+
+int main()
+{
+	char a;
+
+	printf("문자형 입력 : ");
+	scanf_s("%c", &a);
+
+	printf("문자로 출력(%%c) : %c \n", a);
+	printf("정수로 출력(%%d) : %d \n", a-'0');
+
+
+	return 0;
+}
+
+--------------------------------------------------------
+문제 7-1
+
+#include <stdio.h>
+
+int main()
+{
+	char a;
+
+	printf("소문자 입력: ");
+	scanf_s("%c", &a);
+
+	printf("%c는 %d번째 영어 소문자 \n", a, a-'a');
+
+
+	return 0;
+}
+
+--------------------------------------------------------
+문제 7-2
+
+#include <stdio.h>
+
+int main()
+{
+	int a;
+
+	printf("정수 입력(0~25): ");
+	scanf_s("%d", &a);
+
+	printf("%d번째 영어 대문자는 %c \n", a, a+65);
+
+
+	return 0;
+}
+
+--------------------------------------------------------
+문제 7-3
+
+#include <stdio.h>
+
+int main()
+{
+	char a;
+
+	printf("소문자 입력: ");
+	scanf_s("%c", &a);
+	printf("대문자 출력: %c \n", a-('a'-'A'));
+
+
+	return 0;
+}
+
+--------------------------------------------------------
+문제 8
+
+#include <stdio.h>
+
+int main()
+{
+	char a;
+
+	printf("대문자 입력: ");
+	scanf_s("%c", &a);
+	printf("소문자 출력: %c \n", a+32);
+
+
+	return 0;
+}
+

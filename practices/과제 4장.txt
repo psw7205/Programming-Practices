@@ -1,0 +1,168 @@
+문제1
+
+#include<stdio.h>
+#pragma warning(disable: 4996)
+
+int main()
+{
+	char alphabet = '0'; // 문자형 변수 alphabet선언, 문자 0으로 초기화했습니다.
+
+	scanf("%c", &alphabet); 
+
+	if ('a' <= alphabet && 'z' >= alphabet)  // 변수 alphabet이 a와 z 사이면 실행합니다
+	{
+		alphabet = alphabet + ('A' - 'a'); // 65(A) - 97(a) 차이를 alphabet에서 더하는 방법으로 소문자를 대문자로 변환합니다.
+		printf("%c", alphabet);
+	}
+	else
+	{
+	printf("%c", alphabet); //아니라면 그대로 출력합니다, 
+	}
+
+	//문제에서 (알파벳)문자 한개를 입력받는다고 했으므로 숫자 및 특수문자는 제외했습니다. 
+
+	return 0;
+
+}
+
+#include<stdio.h>
+#pragma warning(disable: 4996)
+
+int main()
+{
+	char alphabet = '2'; // 문자형 변수 alphabet선언, 문자 0으로 초기화했습니다.
+
+	scanf("%c", &alphabet);
+
+	('a' <= alphabet && 'z' >= alphabet) ? printf("%c", alphabet + ('A' - 'a')) : printf("%c", alphabet);
+
+	//변수 alphabet이 a와 z 사이면 소문자로 인식하여 아스키코드 A와 a의 차이만큼 더해 대문자로 변환하여 출력합니다
+	//아니라면 그대로 대문자로 출력합니다.
+	//문제에서 (알파벳)문자 한개를 입력받는다고 했으므로 숫자 및 특수문자는 제외했습니다. 
+
+	return 0;
+
+}
+
+문제2
+#include<stdio.h>
+#pragma warning(disable: 4996)
+
+int main()
+{
+	int year = 0; // 년도를 입력받을 정수형 변수 year를 선언하고 0으로 초기화했습니다. 
+
+	scanf("%d", &year);
+
+	((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0)) ? printf("L") : printf("C");
+	/*
+	4로 나누어떨어지는 수중에서 100으로 나누어떨어지는 수는 평년입니다.
+	그러므로 4로 나누어 떨어지지만 100으로 나누어 떨어지지 않는 년도 또는 400으로 나누었을 때 떨어지는 년도가 윤년입니다.
+	*/
+	return 0;
+
+}
+
+문제3
+#include<stdio.h>
+#pragma warning(disable: 4996)
+
+int main()
+{
+
+	int c_degree = 0;  // 섭씨를 입력받을 변수 c_degree선언 후 0으로 초기화했습니다.
+	float f_degree = 0;// 화씨를 입력받을 변수 f_degree선언 후 0으로 초기화했습니다.
+
+	scanf("%d", &c_degree);
+
+	f_degree = c_degree * (9 / 5.0) + 32;
+	/*
+	문제에서 강제적 형변환이 아닌 식 수정을 통한 자동 형 변환을 사용하라고했기 때문에
+	나누기 분모부분을 5.0으로 변경하여 나누기시 실수형으로 자동 형 변환 되게 식을 수정하였습니다.
+	*/
+
+	printf("%.2f", f_degree); // 소숫점 둘째자리까지 출력하기 위해 %.2f로 형식지정자를 수정했습니다.
+
+	return 0;
+
+}
+
+
+#include<stdio.h>
+#pragma warning(disable: 4996)
+
+int main()
+{
+
+	int c_degree = 0;  // 섭씨를 입력받을 정수형 변수 c_degree선언 후 0으로 초기화했습니다.
+	double f_degree = 0;// 화씨를 입력받을 변수 f_degree선언 후 0으로 초기화했습니다.
+
+	scanf("%d", &c_degree);
+
+	f_degree = c_degree * (9 / (double)5) + 32;
+	/*
+	나누기의 분모를 더블형으로 강제 형변환하여 9/5를 실수가 되게끔 했습니다.
+	*/
+
+
+	printf("%.2lf", f_degree); // 소숫점 둘째자리까지 출력하기 위해 %.2f로 형식지정자를 수정했습니다.
+
+	return 0;
+
+}
+
+
+문제4
+#include<stdio.h>
+#pragma warning(disable: 4996)
+
+int main()
+{
+	int a = 0, a0 = 0, a1 = 0, a2 = 0, a3 = 0; // 입력받을 정수형 변수 a와 각 자리수를 저장할 변수를 선언합니다.
+	int b = 0;// a를 뒤집어 저장할 변수 b와 sum 을 선언합니다.
+
+	scanf("%d", &a);
+
+	a0 = a / 1000;			// 천의 자리 숫자를 a0에 저장합니다.
+	a1 = a % 1000 / 100;		// 백의 자리 숫자를 a1에 저장합니다.
+	a2 = a % 100 / 10;		// 십의 자리 숫자를 a2에 저장합니다.
+	a3 = a % 10;			// 일의 자리 숫자를 a3에 저장합니다.
+
+	b = 1000 * a3 + 100 * a2 + 10 * a1 + a0; // 역순으로 각 자리 수를 더하여 b에 저장합니다.
+
+	a > b ? printf("%d", a - b): printf("%d", b - a) ;  //	a가 b보다 더 크면 a에서 b를 뺴고 b가 더 크면 b에서 a를 뺸 값을 출력합니다.
+	// 뒤집은 숫자와의 차를 구할때 뒤집은 숫자인 b가 더 크면 음수가 나오므로 -1을 곱해 절대값을 구할 수 있습니다. 
+	// -1 * (a - b) = b - a 이므로 b가 더 큰 경우에는 b - a를 출력하게 했습니다.
+
+	return 0;
+
+}
+
+
+문제 5 
+#include<stdio.h>
+#pragma warning(disable: 4996)
+
+int main()
+{
+	int a = 0, a0 = 0, a1 = 0, a2 = 0; // 입력받을 정수형 변수 a와 각 자리수를 저장할 변수를 선언합니다.
+	int b0 = 0, b1 = 0, b2 = 0, sum = 0;// 각 자리 수가 짝수인지 아닐지 판별할 변수 b와 sum 을 선언합니다.
+
+	scanf("%d", &a);
+
+	a0 = a / 100;		// 백의 자리 숫자를 a0에 저장합니다.
+	a1 = a % 100 / 10;	// 십의 자리 숫자를 a1에 저장합니다.
+	a2 = a % 10;		// 일의 자리 숫자를 a2에 저장합니다.		
+
+	b0 = a0 % 2 == 0 ? a0 : 0;
+	b1 = a1 % 2 == 0 ? a1 : 0; // 모듈러 연산자를 사용하여 2로 나눈 나머지 값이 0이면 짝수입니다. 
+	b2 = a2 % 2 == 0 ? a2 : 0; // 각 자리 수가 짝수면 자기 자신을 반환하고 아니면 0을 반환합니다.
+
+	sum = b0 + b1 + b2; // 짝수가 아닌 자리는 0으로 반환했으므로 전부 더해도 짝수만 더한 값이 저장됩니다.
+
+	printf("%d", sum);
+
+	return 0;
+
+}
+

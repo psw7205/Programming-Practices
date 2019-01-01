@@ -1,0 +1,238 @@
+문제 1
+#include<stdio.h>
+#pragma warning(disable: 4996) // vs2017버전 scanf의 c4996 오류를 무시합니다.
+
+int main()
+{
+	int num = 0;
+	int i = 1;
+
+	scanf("%d", &num);
+
+	while (i <= num)
+	{
+		if(num % i == 0)
+		{
+			printf("%d ", i);
+		}
+		i++;
+	}
+
+	return 0;
+}
+
+------------------------------------------------------------------------------------
+문제 2
+#include<stdio.h>
+#pragma warning(disable: 4996) // vs2017버전 scanf의 c4996 오류를 무시합니다.
+
+int main()
+{
+	int num = 0;
+	int i = 0;
+
+	while (1)
+	{
+		scanf("%d", &num);
+
+		i += num;
+
+		if (num == 0)
+			break;
+	}
+
+	printf("%d", i);
+
+	return 0;
+}
+
+------------------------------------------------------------------------------------
+문제 3
+#include<stdio.h>
+#pragma warning(disable: 4996) // vs2017버전 scanf의 c4996 오류를 무시합니다.
+
+int main()
+{
+	int num = 0,ans = 0;
+	int i = 0;
+
+	scanf("%d", &num);
+
+	do
+	{
+		i++;
+		scanf("%d", &ans);
+
+		if (num < ans)
+			printf("%d>?\n", ans);
+		else if (num > ans)
+			printf("%d<?\n", ans);
+		else
+		{
+			printf("%d==?\n", ans);
+			break;
+		}
+		
+	} while (ans != num);
+
+	printf("%d", i);
+
+	return 0;
+}
+
+------------------------------------------------------------------------------------
+문제 4
+
+#include<stdio.h>
+#pragma warning(disable: 4996) // vs2017버전 scanf의 c4996 오류를 무시합니다.
+
+int main()
+{
+	int n = 0,m = 0, GCD = 0, i = 0;
+
+	scanf("%d %d", &n, &m);
+
+	GCD = (n > m) ? m : n;
+
+	for (i = GCD; i > 0; i--)
+	{
+		if (n % i == 0 && m % i == 0)
+		{
+			GCD = i;
+			break;
+		}
+	}
+
+	printf("%d", GCD);
+
+	return 0;
+}
+#include<stdio.h>
+#pragma warning(disable: 4996) // vs2017버전 scanf의 c4996 오류를 무시합니다.
+
+int main()
+{
+	int n = 0,m = 0, GCD = 0;
+	int i = 0;
+
+	scanf("%d %d", &n, &m);
+
+	GCD = (n > m) ? m : n;
+
+	i = GCD;
+
+	while(GCD > 0)
+	{
+
+		if (n % i == 0 && m % i == 0)
+		{
+			GCD = i;
+			break;
+		}
+		i--;
+	}
+
+	printf("%d", GCD);
+
+	return 0;
+}
+
+------------------------------------------------------------------------------------
+문제 9 - 1
+#include<stdio.h>
+#pragma warning(disable: 4996) // vs2017버전 scanf의 c4996 오류를 무시합니다.
+
+int main()
+{
+	int num = 0, count = 0;
+	
+	scanf("%d", &num);
+	
+	while(num > 0)
+	{
+		if(num % 10 == 3)
+			count++;
+		num /= 10;
+	}
+
+	printf("%d", count);
+
+	return 0;
+}
+
+------------------------------------------------------------------------------------
+문제 10-1
+
+#include<stdio.h>
+#pragma warning(disable: 4996) // vs2017버전 scanf의 c4996 오류를 무시합니다.
+
+int main()
+{
+	int num = 0, sum = 0;
+
+	scanf("%d", &num);
+
+	while (num > 0)
+	{
+		sum += num % 10;
+		num /= 10;
+	}
+
+	printf("%d", sum);
+
+	return 0;
+}
+
+------------------------------------------------------------------------------------
+문제 12
+
+#include<stdio.h>
+#pragma warning(disable: 4996) // vs2017버전 scanf의 c4996 오류를 무시합니다.
+
+int main()
+{
+	int num = 0, count = 0, sum = 0;
+	
+	scanf("%d", &num);
+	
+	for (;;)
+	{
+		count++;
+		sum += count;
+
+		if (count == num) break;
+	}
+
+	printf("%d", sum);
+
+	return 0;
+}
+------------------------------------------------------------------------------------
+문제 13
+
+#include<stdio.h>
+#pragma warning(disable: 4996) // vs2017버전 scanf의 c4996 오류를 무시합니다.
+
+int main()
+{
+	int num = 0, count = 0, sum = 0;
+	
+	while (1)
+	{
+		scanf("%d", &num);
+
+		if (num == 0 || num < 0)
+			break;
+		
+		if (num > 100)
+			continue;
+
+		sum += num;
+		count++;
+
+	}
+
+	printf("%d %.2lf %d", sum, sum/(double)count, count);
+
+	return 0;
+}

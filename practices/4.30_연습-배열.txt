@@ -1,0 +1,63 @@
+#include<stdio.h>
+#pragma warning(disable:4996)
+
+int main()
+{
+	int a[7];
+
+	for (int i = 0; i < 7; i++)
+	{
+		scanf("%d", &a[i]);
+	}
+
+	for (int i = 0; i < 7; i++)
+	{
+		if (a[i] >= 80)
+			printf("%d %d\n", i, a[i]);
+	}
+
+	return 0;
+}
+#include<stdio.h>
+#pragma warning(disable:4996)
+
+int main()
+{
+	int a[9];
+
+	for (int i = 0; i < 9; i++)
+	{
+		a[i]=3*(i+1);
+	}
+
+	for (int i = 0; i < 9; i++)
+	{
+		printf("%d\n", a[i]);
+	}
+
+	return 0;
+}
+#include<stdio.h>
+#pragma warning(disable:4996)
+
+int main()
+{
+	int a[10] = { 0 }, even=0, odd=0;
+
+	for (int i = 0; i < 10; i++)
+		scanf("%d", &a[i]);
+	
+
+	for (int i = 0; i < 10; i++)
+	{
+		if (a[i] % 2 == 0)
+			even += a[i];
+		else
+			odd += a[i];
+	}
+
+	printf("%d\n%d\n", even, odd);
+
+	return 0;
+}
+

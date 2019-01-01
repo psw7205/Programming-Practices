@@ -1,0 +1,173 @@
+문제 1
+
+#include<stdio.h>
+#pragma warning(disable: 4996)
+
+int main()
+{
+	int a0 = 0, a1 = 0, a2 = 0, a3 = 0, a4 = 0, a5 = 0;
+
+	scanf("%d", &a0);
+
+	a1 = a0 / 10000; // 10000의 자리 숫자를 저장합니다
+	a2 = (a0 % 10000) / 1000; // 1000의 자리 숫자를 저장합니다.
+	a3 = (a0 % 1000) / 100; // 100
+	a4 = a0 % 100 / 10; // 10 의 자리 숫자를 저장합니다.
+	a5 = a0 % 10; //1 의 자리 숫자 저장
+
+	printf("%dTTHO ", a1);
+	printf("%dTHO ", a2);
+	printf("%dHUN ", a3);
+	printf("%dTEN ", a4);
+	printf("%d", a5);
+
+	return 0;
+}
+
+문제 2
+
+#include<stdio.h>
+#pragma warning(disable: 4996)
+
+int main()
+{
+	int a0 = 0, a1 = 0, a2 = 0, a3 = 0, a4 = 0, a5 = 0;
+
+	scanf("%d", &a0);
+
+	a1 = a0 / 3600;
+	a2 = a0 % 3600 / 60;
+	a3 = (a0 % 3600) % 60;
+	
+	printf("%d:%d:%d", a1, a2, a3);
+
+	return 0;
+}
+
+문제 3
+#include<stdio.h>
+#pragma warning(disable: 4996)
+
+int main()
+{
+	int a0 = 0, a3 = 0;
+
+	scanf("%d", &a0);
+
+	a3 = (a0 % 1000) / 100; // 100
+
+	printf("%d", a3);
+
+
+	return 0;
+}
+문제 4
+
+#include<stdio.h>
+#pragma warning(disable: 4996)
+int main()
+{	int a0 = 0;
+	scanf("%d", &a0);
+	a0 = a0 + 500;
+	a0 = a0 / 1000;
+	a0 = a0 * 1000;
+	printf("%d", a0);
+	return 0;
+}
+
+
+
+문제 5
+#include<stdio.h>
+#pragma warning(disable: 4996)
+
+int main()
+{
+	double r = 0.0, l = 0.0, sum = 0.0;
+
+	scanf("%lf", &l);
+	
+	r = l / (3.14 * 2);
+	sum = r * r * 3.14;
+	sum = sum + 0.5;
+
+	printf("%d", (int)sum);
+
+	return 0;
+}
+
+
+문제 6
+
+#include<stdio.h>
+#pragma warning(disable: 4996)
+int main()
+{	int n = 0, a = 0;
+	scanf("%d", &n);
+	a = (n >= 20 && n <= 30);
+	printf("%d", a);
+		return 0;
+}
+
+문제 7
+#include<stdio.h>
+#pragma warning(disable: 4996)
+
+int main()
+{
+	int a = 0;
+	char n = 0;
+
+	scanf("%c", &n);
+
+	a = ((n >= 'A' && n <= 'Z') || (n >= 'a'&&n <= 'z'));
+
+	printf("%d", a);
+
+	return 0;
+}
+
+문제 8
+#include<stdio.h>
+#pragma warning(disable: 4996)
+
+int main()
+{
+	int a = 0;
+
+	scanf("%d", &a);
+
+	(a % 2 == 0) ? printf("even") : printf("odd");
+
+	return 0;
+}
+
+문제 9
+
+#include<stdio.h>
+#pragma warning(disable: 4996)
+int main()
+{	int a = 0, b = 0;
+	scanf("%d %d", &a, &b);
+	(a > b) ? printf("%d", a) : printf("%d", b);
+	return 0;
+}
+
+문제 10
+#include<stdio.h>
+#pragma warning(disable: 4996)
+
+int main()
+{
+	int a = 0, b = 0, c = 0, d = 0;
+
+	scanf("%d %d", &a, &b);
+
+	c = (a > b) ? a : b;
+	d = (a < b) ? a : b;
+
+	printf("%d\n", c / d);
+	printf("%d\n", c % d);
+
+	return 0;
+}

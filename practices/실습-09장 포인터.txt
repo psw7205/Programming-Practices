@@ -1,0 +1,545 @@
+﻿문제 1
+#include<stdio.h>
+#pragma warning(disable:4996)
+
+int main()
+{
+
+	int x, y, z;
+	int *px, *py, *pz, *tmp;
+
+	px = &x;
+	py = &y;
+	pz = &z;
+
+	scanf("%d %d %d", px, py, pz);
+
+	tmp = pz;
+	pz = py;
+	py = px;
+	px = tmp;
+
+	printf("%d %d %d", *px, *py, *pz);
+
+	return 0;
+}
+=====================================================================
+문제 2
+#include <stdio.h>
+#pragma warning(disable : 4996)
+
+int main()
+{
+	char ch[20] = { '\0' };
+	char* p = ch;
+
+	while (1)
+	{
+		scanf("%c", p);
+		p++;
+		if (*(p-1) == '#')
+		{
+			p -= 2;
+			break;
+		}
+	}
+
+	for (p; p != ch - 1; p--)
+		printf("%c", *p);
+
+	return 0;
+}
+
+=====================================================================
+문제 3
+#include<stdio.h>
+#pragma warning(disable:4996)
+
+int main()
+{
+
+	int n, cnt = 0,  arr[50] = { 0 };
+	int* p = arr;
+
+	scanf("%d", &n);
+
+	for (p = arr ; p < arr + n; p++)
+	{
+		scanf("%d", p);
+	}
+
+	p = arr;
+
+	while (*p != 0)
+	{
+		cnt++;
+		p++;
+	}
+
+	printf("%d", cnt);
+
+
+	return 0;
+}
+=====================================================================
+문제 4
+#include<stdio.h>
+#pragma warning(disable:4996)
+
+int main()
+{
+
+	int x[3] = { 0 };
+	int* p = x;
+	int max, min;
+
+	for (p; p < x + 3; p++)
+		scanf("%d", p);
+
+	p = x;
+	
+	max = *p > *(p + 1) ? (*p > *(p + 2) ? *p : *(p + 2)) : (*(p + 1) > *(p + 2) ? *(p + 1) : *(p + 2));
+	min = *p > *(p + 1) ? (*(p + 1) > *(p + 2) ? *(p + 2) : *(p + 1)) : (*p > *(p + 2) ? *(p + 2) : *p );
+
+	for (p; p < x + 3; p++)
+	{
+		if (*p != max && *p != min)
+			printf("%d", *p);
+	}
+
+	return 0;
+}
+=====================================================================
+문제 5
+#include<stdio.h>
+#pragma warning(disable:4996)
+
+int main()
+{
+
+	int a[5] = { 0 }, rank[5] = { 0 };
+	int* pa, *pb, *pc = rank;
+	int max = 0;
+
+	for (pa = a; pa < a + 5; pa++)
+		scanf("%d", pa);
+
+	for (pa = a; pa < a + 5; pa++)
+	{
+		for (pb = a; pb < a + 5; pb++)
+		{
+			if (*pa < *pb)
+				(*pc)++;
+		}
+		pc++;
+	}
+
+	pc = rank;
+
+	for (pa = a; pa <= a + 4; pa++)
+	{
+		printf("%d=r%d ", *pa, *pc + 1);
+		pc++;
+	}
+
+	return 0;
+}
+=======================================================
+문제 6
+#include<stdio.h>
+#pragma warning(disable:4996)
+
+int main()
+{
+	char ch[10] = { '\0' };
+	char* p = ch;
+	char* q = ch;
+	int cnt[10] = { 0 }, max = 0;
+	int* r = cnt, idx = 0;
+
+	for (p; p < ch+10; p++)
+	{
+		scanf("%c", p);
+	}
+
+	for (p = ch; p < ch + 10; p++)
+	{
+		for (q = ch; q < ch + 10; q++)
+		{
+			if(*p == *q)
+				(*r)++;
+		}
+		r++;
+	}
+	
+	r = cnt;
+	max = *r;
+
+	for (r; r < cnt + 10; r++)
+	{
+		if (max < *r)
+		{
+			max = *r;
+			idx = r - cnt;
+		}
+	}
+
+	printf("%c %d", *(ch + idx), max);
+
+	return 0;
+}
+=======================================================
+문제 7
+#include<stdio.h>
+#pragma warning(disable:4996)
+
+void input(int* x, int* y, int* z)
+{
+	scanf("%d %d %d", x, y, z);
+}
+
+void output(int* x, int* y, int* z)
+{
+	printf("%d %d %d", *x, *y, *z);
+}
+
+int main()
+{
+	int x, y, z;
+	input(&x, &y, &z);
+	output(&x, &y, &z);
+
+	return 0;
+}
+
+=======================================================
+문제 8
+#include<stdio.h>
+#pragma warning(disable:4996)
+
+void swap(int* a, int* b)
+{
+	int tmp = *a;
+	*a = *b;
+	*b = tmp;
+}
+
+int main()
+{
+	int ar[50] = { 0 };
+	int N, i, a, b;
+
+	scanf("%d", &N);
+
+	for (i = 0; i < N; i++)
+	{
+		scanf("%d", &ar[i]);
+	}
+
+	scanf("%d %d", &a, &b);
+
+	swap(&ar[a], &ar[b]);
+
+	for (i = 0; i < N; i++)
+	{
+		printf(" %d", ar[i]);
+	}
+
+	return 0;
+}
+================================================================
+문제 9
+#include<stdio.h>
+#pragma warning(disable:4996)
+
+int* mid(int a[])
+{
+	int* p = a,* q = a,* r = a;
+	int max, min, cnt = 0;
+
+	max = *p > *(p + 1) ? (*p > *(p + 2) ? *p : *(p + 2)) : (*(p + 1) > *(p + 2) ? *(p + 1) : *(p + 2));
+	min = *p > *(p + 1) ? (*(p + 1) > *(p + 2) ? *(p + 2) : *(p + 1)) : (*p > *(p + 2) ? *(p + 2) : *p);
+
+	for (p = a; p < a + 3; p++)
+	{
+		if (*p < max && *p > min)
+		{
+			return p;
+		}
+
+		if (*p == max)
+		{
+			cnt++;
+			q = p;
+		}
+
+		if (*p == min)
+			r = p;
+	}	
+
+	if (cnt == 2 || cnt == 3)
+		return q;
+	else
+		return r;
+}
+
+int main()
+{
+	int x[3] = { 0 };
+	int* p = x;
+
+	for (p; p < x + 3; p++)
+		scanf("%d", p);
+
+	p = mid(x);
+
+	printf("%d", *p);
+
+	return 0;
+}
+================================================================
+문제 10
+#include<stdio.h>
+#pragma warning(disable:4996)
+
+void gcdlcm(int a, int b, int* pa, int* pb)
+{
+	int i;
+	int small = a > b ? b : a;
+
+	for (i = small; i > 0; i--)
+	{
+		if (a%i == 0 && b%i == 0)
+		{
+			*pa = i;
+			break;
+		}
+	}
+
+	*pb = a * b / i;
+}
+
+int main()
+{
+	int a, b, x, y;
+	int* pa = &x, *pb = &y;
+
+	scanf("%d %d", &a, &b);
+	gcdlcm(a, b, pa, pb);
+
+	printf("%d %d", *pa, *pb);
+
+	return 0;
+}
+
+================================================================
+문제 11
+#include<stdio.h>
+#pragma warning(disable:4996)
+
+void strcopy(char a[], char b[])
+{
+	char* p = a,*q = b;
+
+	for (p; p < a + 6; p++)
+	{
+		*p = *q;
+		q++;
+	}
+}
+
+int main()
+{
+	char a[6] = { '\0' }, b[6] = { '\0' };
+	char* p = b;
+
+	for (p; p < b + 6; p++)
+	{
+		scanf("%c", p);
+	}
+
+	strcopy(a, b);
+
+	p = a;
+	
+	for (p; p < a + 6; p++)
+	{
+		printf("%c", *p);
+	}
+
+	return 0;
+}
+================================================================
+문제 12
+#include<stdio.h>
+#pragma warning(disable:4996)
+
+void addArray(int* a, int* b, int* c, int size)
+{
+	int* p = b + size - 1;
+	int* q = a;
+	int* r = c;
+
+	for (q = a; q < a + size; q++)
+	{
+		*r = *q + *p;
+		p--;
+		r++;
+	}
+}
+
+int main()
+{
+	int size;
+	int a[20], b[20], c[20];
+	int* p;
+
+	scanf("%d", &size);
+
+	for (p = a; p < a + size; p++)
+	{
+		scanf(" %d", p);
+	}
+
+	for (p = b; p < b + size; p++)
+	{
+		scanf(" %d", p);
+	}
+
+	addArray(a, b, c, size);
+
+	for (p = c; p < c + size; p++)
+	{
+		printf(" %d", *p);
+	}
+
+	return 0;
+}
+================================================================
+문제 13
+#include<stdio.h>
+#pragma warning(disable:4996)
+
+int arrsum(int* start, int* end)
+{
+	int sum = 0;
+
+	for (start; start <= end; start++)
+	{
+		sum += *start;
+	}
+
+	return sum;
+}
+
+int main()
+{
+	int a[100];
+	int N, S, E;
+	int* p;
+
+	scanf("%d %d %d", &N, &S, &E);
+
+	for (p = a; p < a + N; p++)
+	{
+		scanf(" %d", p);
+	}
+
+	printf("%d", arrsum(a + S, a + E));
+
+	return 0;
+}
+================================================================
+문제 14
+#include<stdio.h>
+#pragma warning(disable:4996)
+
+int add_to_k(int* start, int* end)
+{
+	int sum = 0;
+
+	for (start; start <= end; start++)
+	{
+		sum += *start;
+	}
+
+	return sum;
+}
+
+int main()
+{
+	int N, sum = 0, i;
+	int d[100];
+	
+
+	scanf("%d", &N);
+
+	for (i = 0; i < N; i++)
+	{
+		scanf("%d", &d[i]);
+	}
+
+	for (i = 0; i < N; i++)
+	{
+		sum += add_to_k(d, d + i);
+	}
+
+	printf("%d", sum);
+
+	return 0;
+}
+
+================================================================
+문제 15
+#include<stdio.h>
+#pragma warning(disable:4996)
+
+void ABC(int* s, int k)
+{
+	int* p = s;
+	int max = *s;
+	int tmp;
+
+	for (p = s; p < s + k; p++)
+	{
+		if (max < *p)
+		{
+			max = *p;
+		}
+	}
+
+	for (p = s; p < s + k; p++)
+	{
+		if (max == *p)
+		{
+			tmp = *s;
+			*s = *p;
+			*p = tmp;
+		}
+	}
+}
+
+
+int main()
+{
+	int ar[10], cnt = 10;
+	int* p = ar;
+
+	for (p; p < ar + 10; p++)
+	{
+		scanf("%d", p);
+	}
+
+	for (p = ar; p < ar + 10; p++)
+	{
+		ABC(p, cnt);
+		cnt--;
+	}
+
+	for (p = ar; p < ar + 10; p++)
+	{
+		printf(" %d", *p);
+	}
+
+	return 0;
+}

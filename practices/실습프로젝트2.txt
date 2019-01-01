@@ -1,0 +1,192 @@
+﻿#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#pragma warning(disable:4996)
+
+typedef struct MyAdress {
+	char *name; // 이름
+	char *phoneNumber; // 전화번호
+	char *birthDay; // 생일
+}INFO;
+
+void Registration(INFO **ar, int *n, int max) // 정보저장
+{
+	char tmp[3][101];
+	int i, j;
+	if (*n == max) // 이미 최대 max개가 저장되어있으면
+	{
+		printf("OVERFLOW\n"); // 오버플로 출력 후
+		return; // 조기리턴
+	}
+	printf("Name:");
+	gets(tmp[0]); // 이름입력
+	printf("Phone_number:");
+	gets(tmp[1]); // 전화번호 입력
+	printf("Birth:");
+	gets(tmp[2]); // 생일입력
+
+
+
+	if (*n == 0) // 처음 저장될 경우
+	{
+		ar[0] = (INFO*)malloc(sizeof(INFO));
+
+		ar[0]->name = (char*)malloc(sizeof(char)*(strlen(tmp[0]) + 1));
+		strcpy(ar[0]->name, tmp[0]);
+
+		ar[0]->phoneNumber = (char*)malloc(sizeof(char)*(strlen(tmp[1]) + 1));
+		strcpy(ar[0]->phoneNumber, tmp[1]);
+
+		ar[0]->birthDay = (char*)malloc(sizeof(char)*(strlen(tmp[2]) + 1));
+		strcpy(ar[0]->birthDay, tmp[2]); // 값 복사
+	}
+	else // 2번째 저장될 정보부터는
+	{
+		for (i = 0; i < *n; i++) // 정보를 확인하며
+		{
+			if (strcmp(tmp[0], ar[i]->name) < 0) // 더 큰 값이 나올때까지 i이동
+				break; // i가 저장될 위치
+		}
+
+		for (j = *n; j > i; j--) // 한칸씩 뒤로 이동
+			ar[j] = ar[j - 1];
+
+		ar[i] = (INFO*)malloc(sizeof(INFO));
+
+		ar[i]->name = (char*)malloc(sizeof(char)*(strlen(tmp[0]) + 1));
+		strcpy(ar[i]->name, tmp[0]);
+
+		ar[i]->phoneNumber = (char*)malloc(sizeof(char)*(strlen(tmp[1]) + 1));
+		strcpy(ar[i]->phoneNumber, tmp[1]);
+
+		ar[i]->birthDay = (char*)malloc(sizeof(char)*(strlen(tmp[2]) + 1));
+		strcpy(ar[i]->birthDay, tmp[2]); // 값 복사 // i자리에 값 복사
+	}
+
+	(*n)++; // 갯수 증가
+	printf("<<%d>>\n", *n); // 갯수 출력
+	return;
+}
+
+void ShowAll(INFO **ar, int *n)
+{
+	int i;
+
+	for (i = 0; i < *n; i++) // 배열을 순회하며 데이터 출력
+	{
+		printf("%s %s %s\n", ar[i]->name, ar[i]->phoneNumber, ar[i]->birthDay);
+	}
+}
+
+void MyDelete(INFO **ar, int *n)
+{
+	char tmp[101];
+	int i, j;
+
+	if (*n == 0) // 데이터가 없으면 종료
+	{
+		printf("NO MEMBER\n");
+		return;
+	}
+
+	printf("Name:");
+	gets(tmp); // 지울 이름 저장
+
+	for (i = 0; i < *n; i++)
+	{
+		if (!strcmp(tmp, ar[i]->name)) // 같은 이름을 찾으면
+			break; // 탈출
+	}
+
+	if (i == *n) // i가 n까지 증가했으면 같은 이름을 못찾은 것
+		return; // 리턴
+
+	free(ar[i]->birthDay);
+	free(ar[i]->name);
+	free(ar[i]->phoneNumber);
+	free(ar[i]);
+
+	for (j = i; j < *n; j++) // 찾은 자리를 한칸식 앞으로 이동시켜 삭제
+		ar[j] = ar[j + 1];
+
+	(*n)--; // 갯수 감소
+
+	return;
+}
+
+void FindByBirth(INFO **ar, int *n)
+{
+	int i, tmp, mon = 0;
+
+	printf("Birth:");
+	scanf("%d", &tmp); // 생일을 입력받으면
+	for (i = 0; i < *n; i++)
+	{
+		mon = ar[i]->birthDay[4] - '0'; // 10의 자리를 int형 변수에 저장 후
+		mon *= 10; // *10을 통해 10의 자리로 이동
+		mon += ar[i]->birthDay[5] - '0'; // 1의 자리 저장, 이 연산을 통해 생일을 정수로 저장
+
+		if (mon == tmp) // 찾는 생일이 나오면
+			printf("%s %s %s\n", ar[i]->name, ar[i]->phoneNumber, ar[i]->birthDay); // 해당 데이터 출력
+	}
+}
+
+int main()
+{
+	INFO **ar; // 총 max_num개의 구조체 배열
+	int size = 0; // 현재 갯수
+	int selectMenu;
+	int max_num; // 최대 갯수 
+
+	printf("Max_num:"); // 고정
+	scanf("%d", &max_num);
+	getchar();
+
+	ar = (INFO**)malloc(sizeof(INFO*)*max_num);
+
+	if (ar == NULL)
+		return -1;
+
+	while (1)
+	{
+		printf("*****Menu*****\n");
+		printf("<1.Registration><2.ShowAll><3.Delete><4.FindByBirth><5.Exit>\n");
+		printf("Enter_the_menu_number:");
+
+		scanf("%d", &selectMenu);
+		getchar();
+
+		if (selectMenu == 5) // 5면 반복문 탈출
+			break;
+
+		switch (selectMenu) // 메뉴에 맞는 함수 실행
+		{
+		case 1:
+			Registration(ar, &size, max_num);
+			break;
+		case 2:
+			ShowAll(ar, &size);
+			break;
+		case 3:
+			MyDelete(ar, &size);
+			break;
+		case 4:
+			FindByBirth(ar, &size);
+		default:
+			break;
+		}
+	}
+
+
+	for (int i = 0; i < size; i++)
+	{
+		free(ar[i]->birthDay);
+		free(ar[i]->name);
+		free(ar[i]->phoneNumber);
+		free(ar[i]);
+	}
+
+	free(ar);
+
+	return 0;
+}

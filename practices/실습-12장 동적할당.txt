@@ -1,0 +1,499 @@
+﻿문제 1
+#include <stdio.h>
+#include <stdlib.h>
+#pragma warning(disable:4996)
+
+int main()
+{
+	int n, i, sum = 0;
+	int *ar;
+
+	scanf("%d", &n);
+
+	ar = (int*)malloc(sizeof(int)*n);
+
+	for (i = 0; i < n; i++)
+		scanf("%d", &ar[i]);
+
+	for (i = 0; i < n; i++)
+		sum += ar[i];
+
+	printf("%d", sum);
+
+	free(ar);
+	return 0;
+}
+=================================================================
+문제 2
+#include <stdio.h>
+#include <stdlib.h>
+#pragma warning(disable:4996)
+
+int main()
+{
+	int n, i;
+	float max = 0.0;
+	float *ar;
+
+	scanf("%d", &n);
+
+	ar = (float*)malloc(sizeof(float)*n);
+
+	for (i = 0; i < n; i++)
+		scanf("%f", &ar[i]);
+
+	max = ar[0];
+	for (i = 1; i < n; i++)
+	{
+		if (max < ar[i])
+			max = ar[i];
+	}
+
+	printf("%.2f", max);
+
+	free(ar);
+	return 0;
+}
+=================================================================
+문제 3
+#include <stdio.h>
+#include <stdlib.h>
+#pragma warning(disable:4996)
+
+int main()
+{
+	int n, d, i;
+	int *ar;
+
+	scanf("%d", &n);
+
+	ar = (int*)malloc(sizeof(int)*n);
+
+	for (i = 0; i < n; i++)
+		scanf("%d", &ar[i]);
+
+	scanf("%d", &d);
+
+	ar = (int*)realloc(ar, (n - d + 1)*sizeof(int));
+
+	for (i = 0; i < n - d; i++)
+		printf("%d\n", ar[i]);
+
+	free(ar);
+	return 0;
+}
+=================================================================
+문제 4
+#include <stdio.h>
+#include <stdlib.h>
+#pragma warning(disable:4996)
+
+int main()
+{
+	int n, m, i, j, cnt = 0, flag = 0;
+	char **ar;
+
+	scanf("%d %d", &m, &n);
+
+	ar = (char**)malloc(sizeof(char*)*n);
+
+	for (i = 0; i < n; i++)
+		ar[i] = (char*)malloc(sizeof(char)*m);
+
+	for (i = 0; i < n; i++)
+	{
+		for (j = 0; j < m; j++)
+		{
+			if (cnt % ('z' - 'a' + 1) == 0)
+			{
+				if (flag == 1)
+					flag = 0;
+				else
+					flag = 1;
+			}
+
+			if (flag == 1)
+				ar[i][j] = cnt % ('z' - 'a' + 1) + 'a';
+
+			if (flag == 0)
+				ar[i][j] = cnt % ('z' - 'a' + 1) + 'A';
+
+			cnt++;
+		}
+	}
+
+	for (i = 0; i < n; i++)
+	{
+		for (j = 0; j < m; j++)
+		{
+			printf("%c ", ar[i][j]);
+		}
+		printf("\n");
+	}
+
+	for (i = 0; i < n; i++)
+		free(ar[i]);
+	free(ar);
+
+	return 0;
+}
+=================================================================
+문제 5
+#include <stdio.h>
+#include <stdlib.h>
+#pragma warning(disable:4996)
+
+int main()
+{
+	int n, i, cnt[2] = { 0 };
+	char *ar;
+	char a, b;
+
+	scanf("%d", &n);
+
+	ar = (char*)malloc(sizeof(char)*(n+1));
+
+	scanf("%s", ar);
+	getchar();
+
+	scanf("%c %c", &a, &b);
+
+	for (i = 0; i < n; i++)
+	{
+		if (ar[i] == a)
+			cnt[0]++;
+
+		if (ar[i] == b)
+			cnt[1]++;
+	}
+
+	printf("%d %d", cnt[0], cnt[1]);
+
+	free(ar);
+
+	return 0;
+}
+=================================================================
+문제 6
+#include <stdio.h>
+#include <stdlib.h>
+#pragma warning(disable:4996)
+
+typedef struct stu {
+	char name[8];
+	int result[3];
+	double avg;
+}stu;
+
+int main()
+{
+	int n, i;
+	stu *ar;
+
+	scanf("%d", &n);
+	
+	ar = (stu*)malloc(sizeof(stu)*n);
+
+	for (i = 0; i < n; i++)
+	{
+		scanf("%s %d %d %d", ar[i].name, &ar[i].result[0], &ar[i].result[1], &ar[i].result[2]);
+		ar[i].avg = (ar[i].result[0] + ar[i].result[1] + ar[i].result[2])/3.0;
+	}
+
+	for (i = 0; i < n; i++)
+	{
+		printf("%s %.1lf", ar[i].name, ar[i].avg);
+
+		if (ar[i].result[0] >= 90 || ar[i].result[1] >= 90 || ar[i].result[2] >= 90)
+			printf(" GREAT");
+
+		if (ar[i].result[0] < 70 || ar[i].result[1] < 70 || ar[i].result[2] < 70)
+			printf(" BAD");
+	
+		printf("\n");
+	}
+
+
+	free(ar);
+	return 0;
+}
+=================================================================
+문제 7
+#include <stdio.h>
+#include <stdlib.h>
+#pragma warning(disable:4996)
+
+int main()
+{
+	int n, i, tmp;
+	int *ar;
+
+	scanf("%d", &n);
+
+	ar = (int*)malloc(sizeof(int)*n);
+
+	for (i = 0; i < n; i++)
+		scanf("%d", &ar[i]);
+
+	for (i = 0; i < n - 1; i++)
+	{
+		if (ar[i] > ar[i + 1])
+		{
+			tmp = ar[i];
+			ar[i] = ar[i + 1];
+			ar[i + 1] = tmp;
+		}
+	}
+
+	for (i = 0; i < n; i++)
+		printf("%d\n", ar[i]);
+
+	free(ar);
+	return 0;
+}
+=================================================================
+문제 8
+#include <stdio.h>
+#include <stdlib.h>
+#pragma warning(disable:4996)
+
+int main()
+{
+	int n, i, cnt = 0;
+	char *ar;
+
+	scanf("%d", &n);
+
+	ar = (char*)malloc(sizeof(char)*(n + 1));
+
+	scanf("%s", ar);
+
+	for (i = 0; i < n - 2; i++)
+	{
+		if (ar[i] == 'c' && ar[i + 1] == 'a' &&ar[i + 2] == 't')
+			cnt++;
+	}
+
+	printf("%d", cnt);
+
+	free(ar);
+	return 0;
+}
+=================================================================
+문제 9
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#pragma warning(disable:4996)
+
+int main()
+{
+	int n, i, small = 101, smallIdx;
+	char **ar;
+	char tmp[101];
+
+	scanf("%d", &n);
+	getchar();
+
+	ar = (char**)malloc(sizeof(char*)*n);
+
+	for (i = 0; i < n; i++)
+	{
+		gets(tmp);
+		ar[i] = (char*)malloc(sizeof(char)*strlen(tmp + 1));
+
+		strcpy(ar[i], tmp);
+
+		if (small > strlen(ar[i]))
+		{
+			small = strlen(ar[i]);
+			smallIdx = i;
+		}
+	}
+
+	printf("%s", ar[smallIdx]);
+
+	for (i = 0; i < n; i++)
+		free(ar[i]);
+	free(ar);
+	return 0;
+}
+=================================================================
+문제 10
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#pragma warning(disable:4996)
+
+int main()
+{
+	int n, i, j;
+	char **ar;
+	char tmp[101];
+	char *swap;
+
+	scanf("%d", &n);
+	getchar();
+
+	ar = (char**)malloc(sizeof(char*)*n);
+
+	for (i = 0; i < n; i++)
+	{
+		gets(tmp);
+		ar[i] = (char*)malloc(sizeof(char)*strlen(tmp)+1);
+
+		strcpy(ar[i], tmp);
+	}
+
+
+	for (i = 0; i < n - 1; i++)
+	{
+		for (j = 0; j < n - 1 - i; j++)
+		{
+			if (strlen(ar[j]) < strlen(ar[j + 1]))
+			{
+				swap = ar[j];
+				ar[j] = ar[j + 1];
+				ar[j + 1] = swap;
+			}
+		}
+	}
+
+	for (i = 0; i < n; i++)
+		printf("%s\n", ar[i]);
+
+	for (i = 0; i < n; i++)
+		free(ar[i]);
+
+	free(ar);
+	return 0;
+}
+=================================================================
+문제 11
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#pragma warning(disable:4996)
+
+int main()
+{
+	int n, i = 0, j, len = 5;
+	int *ar = (int*)malloc(sizeof(int) * 5);
+	int *tmp;
+
+	while (1)
+	{
+		scanf("%d", &n);
+
+		if (n == -1 || i > 20)
+			break;
+
+		ar[i] = n;
+		i++;
+
+		if (i == len)
+		{
+			len += 3;
+			tmp = (int*)malloc(sizeof(int)*len);
+			
+			for (j = 0; j < len - 3; j++)
+				tmp[j] = ar[j];
+			
+			free(ar);
+			ar = tmp;
+		}
+	}
+
+	for (j = 0; j < i; j++)
+		printf(" %d", ar[j]);
+	printf(" -1");
+
+	free(ar);
+	return 0;
+}
+=================================================================
+문제 12
+#include <stdio.h>
+#include <stdlib.h>
+#pragma warning(disable:4996)
+
+int main()
+{
+	int n, i, j;
+	int *ar;
+	int *ar2;
+
+	scanf("%d", &n);
+
+	ar = (int*)malloc(sizeof(int)*n);
+
+	for (i = 0; i < n; i++)
+		ar[i] = i;
+
+	ar2 = (int*)malloc(sizeof(int)*(n - 1));
+
+	for (i = 0, j = 0; j < n - 1; i++, j++)
+	{
+		ar2[j] = ar[i];
+
+		if (n / 2 == i + 1)
+			i++;
+	}
+
+	for (i = 0; i < n - 1; i++)
+		printf(" %d", ar2[i]);
+
+	free(ar2);
+	free(ar);
+	return 0;
+}
+=================================================================
+문제 13
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#pragma warning(disable:4996)
+
+int main()
+{
+	int n, i, j;
+	char **ar;
+	char tmp[101];
+	char *swap;
+
+	scanf("%d", &n);
+	getchar();
+
+	ar = (char**)malloc(sizeof(char*)*n);
+
+	for (i = 0; i < n; i++)
+	{
+		scanf("%s", tmp);
+		ar[i] = (char*)malloc(sizeof(char)*strlen(tmp) + 1);
+
+		strcpy(ar[i], tmp);
+	}
+
+
+	for (i = 0; i < n - 1; i++)
+	{
+		for (j = 0; j < n - 1 - i; j++)
+		{
+			if (strcmp(ar[j], ar[j+1]) > 0)
+			{
+				swap = ar[j];
+				ar[j] = ar[j + 1];
+				ar[j + 1] = swap;
+			}
+		}
+	}
+
+	for (i = 0; i < n; i++)
+		printf("%s\n", ar[i]);
+
+	for (i = 0; i < n; i++)
+		free(ar[i]);
+
+	free(ar);
+	return 0;
+}

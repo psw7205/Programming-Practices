@@ -1,0 +1,190 @@
+각 숫자 더하기
+#include<stdio.h>
+int main()
+{    int a, sum=0;
+    scanf("%d", &a);
+   
+    while(a != 0)
+    {
+        sum = sum +( a % 10);
+        a = a / 10;
+    }
+    
+    printf("%d", sum);
+    
+    return 0;
+}
+----------------------------------------------------------------
+각 숫자 곱
+#include<stdio.h>
+int main()
+{    int a, sum=1;
+    scanf("%d", &a);
+   
+    while(a != 0)
+    {
+        sum = sum * ( a % 10);
+        a = a / 10;
+    }
+    
+    printf("%d", sum);
+    
+    return 0;
+}
+----------------------------------------------------------------
+첫, 끝자리 숫자 더하기
+#include<stdio.h>
+int main()
+{    int a, e, f, sum=0;
+    scanf("%d", &a);
+   
+    e = a % 10;
+    f = a;
+   
+    while( f > 10)
+    {
+        f /= 10;
+    }
+    
+    sum = f + e;
+    printf("%d", sum);
+    
+    return 0;
+}
+----------------------------------------------------------------
+첫, 끝자리 스왑
+#include<stdio.h>
+#pragma warning(disable:4996)
+
+int main()
+{
+	int a, i = 0, count = 0, e, f, sum = 0;
+	scanf("%d", &a);
+
+	e = a % 10;
+	f = a;
+
+	while (f > 10)
+	{
+		f /= 10;
+		count++;
+	}
+	
+	for (i = 0; i < count; i++)
+	{
+		f *= 10;
+	}
+
+	a = a - f - e;
+
+	while (f > 1)
+	{
+		f /= 10;
+	}
+
+	for (i = 0; i < count; i++)
+	{
+		e *= 10;
+	}
+
+	sum = a + f + e;
+
+	printf("%d", sum);
+
+	return 0;
+}
+---------------------------------------------------------------
+역순으로 출력
+#include<stdio.h>
+#pragma warning(disable:4996)
+
+int main()
+{
+	int a;
+	scanf("%d", &a);
+
+	while (a > 0)
+	{
+		printf("%d", a % 10);
+		a /= 10;
+	}
+
+	return 0;
+}
+
+---------------------------------------------------------------
+회문 검사
+
+#include<stdio.h>
+#pragma warning(disable:4996)
+
+int main()
+{
+	int a, b, i, f=0, e=0,count = 0,  count2 = 0;
+	scanf("%d", &a);
+	
+	f = a;
+	b = a;
+	
+	while (b > 0)
+	{
+		b /= 10;
+		count2++;
+	}
+
+	for(i = 0; i < count2 / 2; i++)
+	{
+		e = a % 10;
+		
+		while (f > 10)
+		{
+			f /= 10;
+		}
+		a /= 10;
+		count++;
+	}
+	if(count2 % 2 == 0)
+	{
+		if (count*2 == count2)
+			printf("회문");
+		else
+			printf("아님");
+	}
+	else
+	{
+		if (count * 2 +1 == count2)
+			printf("회문");
+		else
+			printf("아님");
+	}
+
+	return 0;
+}
+---------------------------------------------------------------
+4자리 이상의 양수를 입력받아, 각 자라의 합을 구한 후, 그 값을 입력받은 양수의 자리수로 나눈 결과값을 출력
+#include<stdio.h>
+#pragma warning(disable:4996)
+
+int main()
+{
+	int a,count = 0, sum = 0;
+	scanf("%d", &a);
+	
+	while (a != 0)
+	{
+		sum += a % 10;
+		a /= 10;
+		count++;
+	}
+
+	printf("%.2lf", sum / (double)count);
+
+	return 0;
+}
+------------------------------------------------------------------
+역순 저장
+while (n > 0) // n이 0보다 클 동안만 반복합니다. 
+{
+	m = m*10 + n % 10; // 기존 숫자의 10을 곱해 자리수를 올리고 n의 마지막 자리를 더합니다.
+	n /= 10; // 더한 마지막 자리 숫자를 버립니다.
+}

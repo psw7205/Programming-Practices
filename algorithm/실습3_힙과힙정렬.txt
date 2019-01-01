@@ -1,0 +1,215 @@
+﻿문제 1
+#include <stdio.h>
+#pragma warning (disable:4996)
+
+int H[99]; // 힙
+int n; // 힙의 크기
+
+void insertItem(int key);
+int removeMax();
+void upHeap(int i);
+void downHeap(int i);
+void printHeap();
+
+int main()
+{
+	char tmp; // 명령어를 저장할 변수
+	int key; // 삽입시 key를 저장할 변수
+
+	while (1)
+	{
+		scanf("%c", &tmp); // 무한 반복문을 돌며 명령어을 입력받음
+		getchar();
+
+		if (tmp == 'q') // q가 입력되면 반복문을 탈출하고 프로그램 종료
+		{
+			break;
+		}
+
+		switch (tmp)
+		{
+		case 'i': // i가 입력될 경우
+			scanf("%d", &key); // key를 추가로 입력받고
+			getchar();
+			insertItem(key); // 삽입
+			printf("0\n"); // 0을 출력
+			break;
+
+		case 'd': // d가 입력되면
+			printf("%d\n", removeMax()); // 가장 큰 값(루트) 제거
+			break;
+
+		case 'p': // p가 입력되면
+			printHeap(); // 프린트
+			break;
+
+		default:
+			break;
+		}
+	}
+
+	return 0;
+}
+
+void insertItem(int key)
+{
+	n++; // 사이즈를 증가시키고
+	H[n] = key; // 맨 마지막에 키 삽입
+	upHeap(n); // 삽입한 키를 위로 재배치
+
+	return;
+}
+
+int removeMax()
+{
+	int tmp = H[1]; // 루트에 최대 값을 저장
+	H[1] = H[n]; // 마지막 값을 루트자리로 올림
+	H[n] = 0; // 마지막 값을 0으로 초기화
+	n--; // 사이즈를 감소
+	downHeap(1); // 루트를 아래로 재배치
+
+	return tmp;
+}
+
+void upHeap(int i)
+{
+	int tmp = H[i];
+
+	if (i == 1) // 루트면 더이상 올라갈 곳이 없으므로 리턴;
+	{
+		return;
+	}
+
+	if (H[i / 2] > H[i]) // 부모가 더 커도 올라갈 곳이 없으므로 리턴;
+	{
+		return;
+	}
+	// 위 두 경우가 아니면 재배치해야함
+	H[i] = H[i / 2];
+	H[i / 2] = tmp; // 스왑
+	upHeap(i / 2); // 스왑한 자리(부모)도 재배치
+	// 매번 1/2씩 줄어드므로 log n
+
+	return;
+}
+
+void downHeap(int i)
+{
+	int	idx = H[i * 2] < H[(i * 2) + 1] ? ((i * 2) + 1) : (i * 2); // 자식 중 큰 값의 인덱스를 저장함
+	int tmp = H[i];
+
+	if (H[i] < H[idx]) // 자식이 더 크면 내려가야함
+	{
+		H[i] = H[idx]; // 스왑
+		H[idx] = tmp;
+	}
+	else // 아니면 그냥 제자리이므로 끝
+	{
+		return;
+	}
+
+	downHeap(idx); // 내린 자리부터 다시 재배치
+
+	return;
+}
+
+void printHeap()
+{
+	int i;
+	for (i = 1; i <= n; i++) // 힙의 0은 비워두므로 1~n까지 반복하며 출력
+	{
+		printf(" %d", H[i]);
+	}
+	printf("\n");
+
+	return;
+}
+=========================================================================
+문제 2
+#include <stdio.h>
+#pragma warning (disable:4996)
+
+int H[99];
+int n;
+
+void rBuildHeap(int i);
+void buildHeap();
+void downHeap(int i);
+void printHeap();
+
+int main()
+{
+	int i;
+
+	scanf("%d", &n);
+
+	for (i = 1; i <= n; i++)
+	{
+		scanf("%d", &H[i]);
+	}
+
+	rBuildHeap(1);
+	//buildHeap();
+
+	printHeap();
+
+	return 0;
+}
+
+void rBuildHeap(int i) // 재귀로 구성된 리빌드
+{
+	if (i > n) // 사이즈보다 커치면 끝
+	{
+		return;
+	}
+
+	rBuildHeap(i * 2); // 왼쪽자식 리빌드
+	rBuildHeap(i * 2 + 1); // 오른쪽 자식 리빌드
+	downHeap(i); // 재배치
+	
+	return;
+}
+
+void buildHeap()
+{
+	int i;
+
+	for (i = n / 2; i > 0; i--)
+	{
+		downHeap(i); // 마지막 부모노드부터 루트까지 하나하니씩 재배치
+	}
+
+	return;
+}
+
+void downHeap(int i)
+{
+	int	idx = H[i * 2] < H[(i * 2) + 1] ? ((i * 2) + 1) : (i * 2); // 자식 중 큰 값의 인덱스를 저장함
+	int tmp = H[i];
+
+	if (H[i] < H[idx]) // 자식이 더 크면 내려가야함
+	{
+		H[i] = H[idx]; // 스왑
+		H[idx] = tmp;
+	}
+	else // 아니면 그냥 제자리이므로 끝
+	{
+		return;
+	}
+
+	downHeap(idx); // 내린 자리부터 다시 재배치
+
+	return;
+}
+
+void printHeap()
+{
+	int i;
+	for (i = 1; i <= n; i++) // 힙의 0은 비워두므로 1~n까지 반복하며 출력
+	{
+		printf(" %d", H[i]);
+	}
+	printf("\n");
+
+	return;
+}

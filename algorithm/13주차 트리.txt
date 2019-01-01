@@ -1,0 +1,227 @@
+문제 1
+#include <stdio.h>
+#include <malloc.h>
+#pragma warning(disable:4996)
+
+typedef struct Node {
+	struct Node* right;
+	struct Node* left;
+	int data;
+	int id;
+}Node;
+
+Node* tmp;
+
+Node* getNode()
+{
+	Node* a = (Node*)malloc(sizeof(Node));
+
+	a->right = NULL;
+	a->left = NULL;
+	a->data = 0;
+	a->id = 0;
+
+	return a;
+}
+
+Node* insertNode(int data, Node* left, Node* right)
+{
+	Node* Node = getNode();
+	Node->data = data;
+	Node->right = right;
+	Node->left = left;
+
+	return Node;
+}
+
+void preorder(Node* root)
+{
+	if (root != NULL)
+	{
+		printf(" %d", root->data);
+		preorder(root->left);
+		preorder(root->right);
+	}
+}
+
+void inorder(Node* root)
+{
+	if (root != NULL)
+	{
+		inorder(root->left);
+		printf(" %d", root->data);
+		inorder(root->right);
+	}
+}
+
+void postorder(Node* root)
+{
+	if (root != NULL)
+	{
+		postorder(root->left);
+		postorder(root->right);
+		printf(" %d", root->data);
+	}
+}
+
+void searchNode(Node* p, int n)
+{
+	if (p != NULL)
+	{
+		if (n == p->id)
+			tmp = p;
+
+		searchNode(p->left, n);
+		searchNode(p->right, n);
+	}
+}
+
+int main()
+{
+	int n, a, i;
+
+	Node* F[9];
+	F[7] = getNode();
+	F[7]->data = 130;
+	F[8] = getNode();
+	F[8]->data = 80;
+	F[4] = getNode();
+	F[4]->data = 70;
+	F[5] = getNode();
+	F[5]->data = 90;
+	F[6] = insertNode(120, F[7], F[8]);
+	F[2] = insertNode(30, F[4], F[5]);
+	F[3] = insertNode(50, NULL, F[6]);
+	F[1] = insertNode(20, F[2], F[3]);
+	F[0] = F[1];
+
+	for (i = 0; i < 9; i++)
+	{
+		F[i]->id = i;
+	}
+
+	scanf("%d %d", &a, &n);
+
+	searchNode(F[0], n);
+
+	if (tmp == NULL)
+		printf("-1");
+	else
+	{
+		switch (a)
+		{
+		case 1:
+			preorder(tmp);
+			break;
+		case 2:
+			inorder(tmp);
+			break;
+		case 3:
+			postorder(tmp);
+			break;
+		default:
+			break;
+		}
+	}
+
+	return 0;
+}
+=================================================================
+문제 2
+#include <stdio.h>
+#include <malloc.h>
+#pragma warning(disable:4996)
+
+typedef struct Node {
+	struct Node* right;
+	struct Node* left;
+	int data;
+	int id;
+}Node;
+
+Node* tmp;
+int sum;
+
+Node* getNode()
+{
+	Node* a = (Node*)malloc(sizeof(Node));
+
+	a->right = NULL;
+	a->left = NULL;
+	a->data = 0;
+	a->id = 0;
+
+	return a;
+}
+
+Node* insertNode(int data, Node* left, Node* right)
+{
+	Node* Node = getNode();
+	Node->data = data;
+	Node->right = right;
+	Node->left = left;
+
+	return Node;
+}
+
+void preorder(Node* root)
+{
+	if (root != NULL)
+	{
+		sum += root->data;
+		preorder(root->left);
+		preorder(root->right);
+	}
+}
+
+void searchNode(Node* p, int n)
+{
+	if (p != NULL)
+	{
+		if (n == p->id)
+			tmp = p;
+
+		searchNode(p->left, n);
+		searchNode(p->right, n);
+	}
+}
+
+int main()
+{
+	int n, i;
+
+	Node* F[9];
+	F[7] = getNode();
+	F[7]->data = 130;
+	F[8] = getNode();
+	F[8]->data = 80;
+	F[4] = getNode();
+	F[4]->data = 70;
+	F[5] = getNode();
+	F[5]->data = 90;
+	F[6] = insertNode(120, F[7], F[8]);
+	F[2] = insertNode(30, F[4], F[5]);
+	F[3] = insertNode(50, NULL, F[6]);
+	F[1] = insertNode(20, F[2], F[3]);
+	F[0] = F[1];
+
+	for (i = 0; i < 9; i++)
+	{
+		F[i]->id = i;
+	}
+
+	scanf("%d", &n);
+
+	searchNode(F[0], n);
+
+	if (tmp == NULL)
+		printf("-1");
+	else
+	{
+		preorder(tmp);
+		printf("%d", sum);
+	}
+		
+
+	return 0;
+}

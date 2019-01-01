@@ -1,0 +1,102 @@
+﻿문제 1, 2
+#include <stdio.h>
+#pragma warning (disable:4996)
+
+int H[100];
+int n;
+
+void buildHeap();
+void downHeap(int i);
+void printHeap();
+void inPlaceHeapSort();
+
+int main()
+{
+	int i;
+	int size;
+
+	scanf("%d", &size);
+
+	n = size;
+
+	for (i = 1; i <= n; i++)
+	{
+		scanf("%d", &H[i]);
+	}
+
+	buildHeap();
+
+	inPlaceHeapSort();
+
+	n = size;
+
+	printHeap();
+
+	return 0;
+}
+
+void inPlaceHeapSort()
+{
+	int tmp;
+
+	while (n > 1)
+	{
+		tmp = H[n];
+		H[n] = H[1];
+		H[1] = tmp;
+		n--;
+		buildHeap();
+	}
+
+	return;
+}
+
+void buildHeap()
+{
+	int i;
+
+	for (i = n / 2; i > 0; i--)
+	{
+		downHeap(i);
+	}
+
+	return;
+}
+
+void downHeap(int i)
+{
+	int left = 2 * i;
+	int right = 2 * i + 1;
+	int tmp, bigger;
+
+	if (left > n)
+		return;
+
+	bigger = left;
+
+	if (right <= n && H[right] > H[bigger])
+		bigger = right;
+
+	if (H[i] >= H[bigger])
+		return;
+
+	tmp = H[i];
+	H[i] = H[bigger];
+	H[bigger] = tmp;
+
+	downHeap(bigger);
+
+	return;
+}
+
+void printHeap()
+{
+	int i;
+	for (i = 1; i <= n; i++)
+	{
+		printf(" %d", H[i]);
+	}
+	printf("\n");
+
+	return;
+}

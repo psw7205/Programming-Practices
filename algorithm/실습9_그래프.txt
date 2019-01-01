@@ -1,0 +1,424 @@
+﻿문제 1 인접리스트
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#pragma warning (disable:4996)
+
+typedef struct node {
+	int edgeIdx;
+	struct node* next;
+}node;
+
+typedef struct edge {
+	int endPoint[2]; // 간선 양 끝 정점
+	int weight;
+}e;
+
+typedef struct vertex {
+	int Name; // 정점 이름
+	struct node *incidentEdges; // 인접간선의 헤더
+}v;
+
+v vertices[6];
+e edges[21];
+int cnt = 7;
+
+node* getNode()
+{
+	node *newNode = (node*)malloc(sizeof(node));
+	newNode->next = NULL;
+	return newNode;
+}
+
+void addNode(node *list, int n)
+{
+	node *newNode = getNode();
+	newNode->edgeIdx = n;
+
+	while (list->next != NULL)
+	{
+		list = list->next;
+	}
+
+	list->next = newNode;
+
+	return;
+}
+
+void deleteNode(node *list, int edgeIdx)
+{
+	node *pre;
+	if (list->next == NULL) return;
+
+	pre = list->next;
+	while (pre->edgeIdx != edgeIdx)
+	{
+		list = pre;
+		pre = pre->next;
+	}
+
+	list->next = pre->next;
+	return;
+}
+
+void setEdges(e *edge, int a, int b, int weight)
+{
+	edge->endPoint[0] = a;
+	edge->endPoint[1] = b;
+	edge->weight = weight;
+
+	return;
+}
+
+int deg(v v)
+{
+	int c = 0;
+	node *e = v.incidentEdges->next;
+	while (e != NULL)
+	{
+		c++;
+		e = e->next;
+	}
+
+	return c;
+}
+
+v opposite(v v, e e)
+{
+	int uIdx = e.endPoint[0] - 1;
+	int wIdx = e.endPoint[1] - 1;
+
+	if (v.Name == vertices[uIdx].Name)
+		return vertices[wIdx];
+	else
+		return vertices[uIdx];
+}
+
+int areAdjacent(v u, v w)
+{
+	v m, a, b;
+	node *e;
+
+	if (deg(u) < deg(w))
+		m = u;
+	else
+		m = w;
+
+	e = m.incidentEdges->next;
+	while (e != NULL)
+	{
+		a = vertices[edges[e->edgeIdx].endPoint[0] - 1];
+		b = vertices[edges[e->edgeIdx].endPoint[1] - 1];
+
+		if ((u.Name == a.Name) && (w.Name == b.Name) ||
+			(u.Name == b.Name) && (w.Name == a.Name))
+			return 1;
+
+		e = e->next;
+	}
+
+	return 0;
+}
+
+int AdjacentEdgeIdx(v u, v w)
+{
+	v m, a, b;
+	node *e;
+
+	if (deg(u) < deg(w))
+		m = u;
+	else
+		m = w;
+
+	e = m.incidentEdges->next;
+	while (e != NULL)
+	{
+		a = vertices[edges[e->edgeIdx].endPoint[0] - 1];
+		b = vertices[edges[e->edgeIdx].endPoint[1] - 1];
+
+		if ((u.Name == a.Name) && (w.Name == b.Name) ||
+			(u.Name == b.Name) && (w.Name == a.Name))
+			return e->edgeIdx;
+
+		e = e->next;
+	}
+
+	return 0;
+}
+
+v* adjacentVertices(v vertex)
+{
+	v *list;
+	int size = deg(vertex);
+	node *e = vertex.incidentEdges->next;
+
+	list = (v*)malloc(sizeof(v)*size);
+
+	for (int i = 0; i < size; i++)
+	{
+		list[i] = opposite(vertex, edges[e->edgeIdx]);
+		e = e->next;
+	}
+
+	return list;
+}
+
+e* adjacentEdges(v vertex)
+{
+	e *list;
+	int size = deg(vertex);
+	node *head = vertex.incidentEdges->next;
+
+	list = (e*)malloc(sizeof(e)*size);
+
+	for (int i = 0; i < size; i++)
+	{
+		list[i] = edges[head->edgeIdx];
+		head = head->next;
+	}
+
+	return list;
+}
+
+void sort(v *vlist, e *elist, int size)
+{
+	v vtmp;
+	e etmp;
+
+	for (int i = 0; i < size - 1; i++)
+	{
+		for (int j = 0; j < size - i - 1; j++)
+		{
+			if (vlist[j].Name > vlist[j + 1].Name)
+			{
+				vtmp = vlist[j];
+				vlist[j] = vlist[j + 1];
+				vlist[j + 1] = vtmp;
+
+				etmp = elist[j];
+				elist[j] = elist[j + 1];
+				elist[j + 1] = etmp;
+
+			}
+		}
+	}
+}
+
+void printAdjacentList(v vertex)
+{
+	node *head = vertex.incidentEdges->next;
+	v *vlist = adjacentVertices(vertex);
+	e *elist = adjacentEdges(vertex);
+	int size = deg(vertex);
+
+	sort(vlist, elist, size);
+
+	for (int i = 0; i < size; i++)
+	{
+		printf(" %d %d", vlist[i].Name, elist[i].weight);
+	}
+
+	printf("\n");
+
+	return;
+}
+
+void fixEdgeWeight(v u, v w, int weight)
+{
+	int idx;
+
+	if (areAdjacent(u, w) == 0 && weight != 0)
+	{
+		cnt++;
+		setEdges(&edges[cnt], u.Name, w.Name, weight);
+		
+		if (u.Name != w.Name)
+		{
+			addNode(vertices[u.Name - 1].incidentEdges, cnt);
+			addNode(vertices[w.Name - 1].incidentEdges, cnt);
+		}
+		else
+			addNode(vertices[u.Name - 1].incidentEdges, cnt);
+
+		return;
+	}
+
+	if (areAdjacent(u, w) == 0 && weight == 0)
+	{
+		printf("-1\n");
+	}
+
+	idx = AdjacentEdgeIdx(u, w);
+
+	if (weight == 0)
+	{
+		if (u.Name != w.Name) 
+		{
+			deleteNode(vertices[u.Name - 1].incidentEdges, idx);
+			deleteNode(vertices[w.Name - 1].incidentEdges, idx);
+		}
+		else
+			deleteNode(vertices[u.Name - 1].incidentEdges, idx);
+
+		edges[idx].weight = 0;
+	}
+	else
+	{
+		edges[idx].weight = weight;
+	}
+
+	return;
+}
+
+int main()
+{
+	char selectMenu;
+	int vertexName[2];
+	int w;
+
+	for (int i = 0; i < 6; i++)
+	{
+		vertices[i].Name = i + 1;
+		vertices[i].incidentEdges = getNode();
+	}
+
+	setEdges(&edges[0], 1, 2, 1);
+	setEdges(&edges[1], 1, 3, 1);
+	setEdges(&edges[2], 1, 4, 1);
+	setEdges(&edges[3], 1, 6, 2);
+	setEdges(&edges[4], 2, 3, 1);
+	setEdges(&edges[5], 3, 5, 4);
+	setEdges(&edges[6], 5, 5, 4);
+	setEdges(&edges[7], 5, 6, 3);
+
+	addNode(vertices[0].incidentEdges, 0);
+	addNode(vertices[0].incidentEdges, 1);
+	addNode(vertices[0].incidentEdges, 2);
+	addNode(vertices[0].incidentEdges, 3);
+
+	addNode(vertices[1].incidentEdges, 0);
+	addNode(vertices[1].incidentEdges, 4);
+
+	addNode(vertices[2].incidentEdges, 1);
+	addNode(vertices[2].incidentEdges, 4);
+	addNode(vertices[2].incidentEdges, 5);
+
+	addNode(vertices[3].incidentEdges, 2);
+
+	addNode(vertices[4].incidentEdges, 5);
+	addNode(vertices[4].incidentEdges, 6);
+	addNode(vertices[4].incidentEdges, 7);
+
+	addNode(vertices[5].incidentEdges, 3);
+	addNode(vertices[5].incidentEdges, 7);
+
+
+	while (1)
+	{
+		scanf("%c", &selectMenu);
+
+		if (selectMenu == 'q')
+			break;
+
+		switch (selectMenu)
+		{
+		case 'a':
+			scanf("%d", &vertexName[0]);
+			if (vertexName[0] - 1 > 5)
+				printf("-1\n");
+			else
+				printAdjacentList(vertices[vertexName[0] - 1]);
+			break;
+		case 'm':
+			scanf("%d %d %d", &vertexName[0], &vertexName[1], &w);
+			if (vertexName[0] - 1 > 5 || vertexName[1] - 1 > 5)
+				printf("-1\n");
+			else
+				fixEdgeWeight(vertices[vertexName[0] - 1], vertices[vertexName[1] - 1], w);
+			break;
+		default:
+			break;
+		}
+	}
+
+	return;
+}
+============================
+문제 2 인접 행렬
+#include <stdio.h>
+#include <stdlib.h>
+#pragma warning(disable:4996)
+
+int adjMatrix[6][6] = {
+	{-1,1,1,1,-1,2},
+	{1,-1,1,-1,-1,-1},
+	{1,1,-1,-1,4,-1},
+	{1,-1,-1,-1,-1,-1},
+	{-1,-1,4,-1,4,3},
+	{2,-1,-1,-1,3,-1}
+};
+
+void printAdjacentList(int idx)
+{
+	for (int i = 0; i < 6; i++)
+	{
+		if (adjMatrix[idx][i] == -1)
+			continue;
+
+		printf(" %d %d", i+1, adjMatrix[idx][i]);
+	}
+
+	printf("\n");
+	return;
+}
+
+void fixEdgeWeight(int i, int j,int w)
+{
+	if (w == 0)
+	{
+		adjMatrix[i][j] = -1;
+		adjMatrix[j][i] = -1;
+		return;
+	}
+
+	adjMatrix[i][j] = w;
+	adjMatrix[j][i] = w;
+	return;
+}
+
+int main()
+{
+	char selectMenu;
+	int vertexName[2];
+	int w;
+
+	while (1)
+	{
+		scanf("%c", &selectMenu);
+
+		if (selectMenu == 'q')
+			break;
+
+		switch (selectMenu)
+		{
+		case 'a':
+			scanf("%d", &vertexName[0]);
+			if (vertexName[0] - 1 > 5)
+				printf("-1\n");
+			else
+				printAdjacentList(vertexName[0] - 1);
+			break;
+		case 'm':
+			scanf("%d %d %d", &vertexName[0], &vertexName[1], &w);
+			if (vertexName[0] - 1 > 5 || vertexName[1] - 1 > 5)
+				printf("-1\n");
+			else
+				fixEdgeWeight(vertexName[0] - 1, vertexName[1] - 1, w);
+			break;
+		default:
+			break;
+		}
+	}
+
+	return 0;
+}

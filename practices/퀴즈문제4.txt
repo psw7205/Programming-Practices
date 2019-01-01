@@ -1,0 +1,485 @@
+﻿문제 1
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#pragma warning(disable:4996)
+
+int main()
+{
+	char **ar;
+	char tmp[101];
+	char maxChar;
+	int n, i, j, k, maxCnt, cnt;
+
+	scanf("%d", &n);
+	getchar();
+
+	ar = (char**)malloc(sizeof(char*)*n);
+
+	if (ar == NULL)
+		return -1;
+
+	for (i = 0; i < n; i++)
+	{
+		gets(tmp);
+		ar[i] = (char*)malloc(sizeof(char)*(strlen(tmp) + 1));
+
+		if (ar == NULL)
+			return -1;
+
+		strcpy(ar[i], tmp);
+	}
+
+	for (i = 0; i < n; i++)
+	{
+		maxCnt = 0;
+		for (j = 0; j < strlen(ar[i]); j++)
+		{
+			cnt = 0;
+
+			for (k = 0; k < strlen(ar[i]); k++)
+			{
+				if (ar[i][j] == ' ')
+					continue;
+
+				if (ar[i][j] == ar[i][k])
+					cnt++;
+			}
+
+			if (maxCnt < cnt)
+			{
+				maxCnt = cnt;
+				maxChar = ar[i][j];
+			}
+		}
+
+		printf("%c %d\n", maxChar, maxCnt);
+	}
+
+	for (i = 0; i < n; i++)
+		free(ar[i]);
+
+	free(ar);
+
+	return 0;
+}
+==================================================================================
+문제 2
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#pragma warning(disable:4996)
+
+int main()
+{
+	char **ar;
+	char *p;
+	char tmp[21];
+	int n, i, j;
+
+	scanf("%d", &n);
+	getchar();
+
+	ar = (char**)malloc(sizeof(char*)*n);
+
+	if (ar == NULL)
+		return -1;
+
+	for (i = 0; i < n; i++)
+	{
+		gets(tmp);
+		ar[i] = (char*)malloc(sizeof(char)*(strlen(tmp) + 1));
+
+		if (ar[i] == NULL)
+			return -1;
+
+		strcpy(ar[i], tmp);
+	}
+
+	for (i = 0; i < n - 1; i++)
+	{
+		for (j = 0; j < n - 1 - i; j++)
+		{
+			if (strcmp(ar[j], ar[j + 1]) > 0)
+			{
+				p = ar[j];
+				ar[j] = ar[j + 1];
+				ar[j + 1] = p;
+			}
+		}
+	}
+
+	for (i = 0; i < n - 1; i++)
+	{
+		for (j = 0; j < n - 1 - i; j++)
+		{
+			if (strlen(ar[j]) > strlen(ar[j + 1]))
+			{
+				p = ar[j];
+				ar[j] = ar[j + 1];
+				ar[j + 1] = p;
+			}
+		}
+	}
+
+	for (i = 0; i < n; i++)
+	{
+		printf("%s\n", ar[i]);
+	}
+
+
+	for (i = 0; i < n; i++)
+		free(ar[i]);
+
+	free(ar);
+
+	return 0;
+}
+
+==================================================================================
+문제 3
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#pragma warning(disable:4996)
+
+int main()
+{
+	int **ar;
+	int n, m, i, j, sum = 0, sumMax = 0;
+
+	scanf("%d %d", &m, &n);
+	getchar();
+
+	ar = (int**)malloc(sizeof(int*)*m);
+
+	if (ar == NULL)
+		return -1;
+
+	for (i = 0; i < m; i++)
+	{
+		ar[i] = (int*)malloc(sizeof(int)*n);
+
+		if (ar[i] == NULL)
+			return -1;
+	}
+
+	for (i = 0; i < m; i++)
+	{
+		for (j = 0; j < n; j++)
+		{
+			scanf("%d", &ar[i][j]);
+		}
+	}
+
+	for (i = 0; i < n; i++)
+	{
+		sum = ar[0][i];
+
+		for (j = 1; j < m; j++)
+		{
+			sum += ar[j][i];
+		}
+		sumMax = sum;
+	}
+
+	for (i = 1; i < n; i++)
+	{
+		sum = ar[0][i];
+
+		for (j = 1; j < m; j++)
+		{
+			sum += ar[j][i];
+		}
+
+		if (sum > sumMax)
+			sumMax = sum;
+
+	}
+
+	printf("%d", sumMax);
+
+	for (i = 0; i < m; i++)
+		free(ar[i]);
+
+	free(ar);
+
+	return 0;
+}
+==================================================================================
+문제 4
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#pragma warning(disable:4996)
+
+int main()
+{
+	int **ar;
+	int **ar2;
+	int n, i, j;
+
+	scanf("%d", &n);
+	getchar();
+
+	ar = (int**)malloc(sizeof(int*)*n);
+	if (ar == NULL)
+		return -1;
+	ar2 = (int**)malloc(sizeof(int*)*n);
+	if (ar2 == NULL)
+		return -1;
+
+	for (i = 0; i < n; i++)
+	{
+		ar[i] = (int*)malloc(sizeof(int)*n);
+
+		if (ar[i] == NULL)
+			return -1;
+
+		ar2[i] = (int*)malloc(sizeof(int)*n);
+
+		if (ar2[i] == NULL)
+			return -1;
+	}
+
+	for (i = 0; i < n; i++)
+	{
+		for (j = 0; j < n; j++)
+		{
+			scanf("%d", &ar[i][j]);
+		}
+	}
+
+	for (i = 0; i < n; i++)
+	{
+		for (j = 0; j < n; j++)
+		{
+			ar2[i][j] = 0;
+		}
+	}
+
+	for (i = 0; i < n; i++)
+	{
+		for (j = 0; j < n; j++)
+		{
+			if (i - 1 >= 0)
+				ar2[i][j] += ar[i - 1][j];
+
+			if (i + 1 < n)
+				ar2[i][j] += ar[i + 1][j];
+
+			if (j - 1 >= 0)
+				ar2[i][j] += ar[i][j - 1];
+
+			if (j + 1 < n)
+				ar2[i][j] += ar[i][j + 1];
+		}
+	}
+
+	for (i = 0; i < n; i++)
+	{
+		for (j = 0; j < n; j++)
+		{
+			printf("%d ", ar2[i][j]);
+		}
+		printf("\n");
+	}
+
+
+
+
+	for (i = 0; i < n; i++)
+	{
+		free(ar[i]);
+		free(ar2[i]);
+	}
+	free(ar2);
+	free(ar);
+
+	return 0;
+}
+==================================================================================
+문제 5
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#pragma warning(disable:4996)
+
+typedef struct book {
+	char *name;
+	char *author;
+	int day;
+	int pageNum;
+}book;
+
+void setBook(book *ar)
+{
+	char tmp[101];
+
+	scanf("%s", &tmp);
+	ar->name = (char*)malloc(sizeof(char)*(strlen(tmp) + 1));
+
+	if (ar->name == NULL)
+		return;
+
+	strcpy(ar->name, tmp);
+
+	scanf("%s", &tmp);
+	ar->author = (char*)malloc(sizeof(char)*(strlen(tmp) + 1));
+
+	if (ar->author == NULL)
+		return;
+
+	strcpy(ar->author, tmp);
+
+	scanf("%d %d", &ar->day, &ar->pageNum);
+}
+
+book* findOldBook(book *ar, int n)
+{
+	book *old;
+	int i;
+
+	old = &ar[0];
+
+	for (i = 1; i < n; i++)
+	{
+		if (ar[i].day <= old->day)
+			old = &ar[i];
+	}
+
+	return old;
+}
+
+int main()
+{
+	int n, i;
+	book *ar, *p;
+
+	scanf("%d", &n);
+	ar = (book*)malloc(sizeof(book)*n);
+
+	if (ar == NULL)
+		return -1;
+
+	for (i = 0; i < n; i++)
+		setBook(&ar[i]);
+
+	p = findOldBook(ar, n);
+
+	printf("%s %s %d %d", p->name, p->author, p->day, p->pageNum);
+
+
+	for (i = 0; i < n; i++)
+	{
+		free(ar[i].name);
+		free(ar[i].author);
+	}
+
+	free(ar);
+
+	return 0;
+}
+===========================================================================
+문제 6
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#pragma warning(disable:4996)
+
+typedef struct book {
+	char *name;
+	char *author;
+	int day;
+	int pageNum;
+}book;
+
+void setBook(book *book) // 책 한개 설정
+{
+	char tmp[101]; // 책이름, 저자의 최대 길이 100자
+
+	scanf("%s", &tmp); // 책이름 입력
+	book->name = (char*)malloc(sizeof(char)*(strlen(tmp) + 1)); // 길이만큼 동적할당
+
+	if (book->name == NULL)
+		return;
+
+	strcpy(book->name, tmp); // 책이름 복사
+
+	scanf("%s", &tmp); // 저자 입력
+	book->author = (char*)malloc(sizeof(char)*(strlen(tmp) + 1)); // 길이만크 동적할당
+
+	if (book->author == NULL)
+		return;
+
+	strcpy(book->author, tmp); // 저자 복사
+
+	scanf("%d %d", &book->day, &book->pageNum); // 작성일과 페이지 번호 입력
+}
+
+book* findOldBook(book **ar, int m, int *N) // 2차원 구조체 배열을 입력받아 가장 오래된 책 찾기
+{	// m은 도서관의 수, N[]은 각 도서관에 저장된 책 수
+	
+	book *old = &ar[0][0]; // 가장 오래된 책 찾기, 처음 도서관 첫번째 책으로 초기화
+	int i, j;
+
+	for (i = 0; i < m; i++) // 모든 도서관을 순회하며
+	{
+		for (j = 0; j < N[i]; j++) // 2번째 책부터 각 도서관에 저장된 책 수만큼 비교
+		{
+			if (ar[i][j].day <= old->day) // 더 오래된 책을 찾으면 
+				old = &ar[i][j]; // 오래된 책 갱신
+		}
+	}
+
+	return old; // 리턴
+}
+
+int main()
+{
+	int m, i, j;
+	int *N;
+	book **ar, *p;
+
+	scanf("%d", &m); // 도서관 수 입력
+	ar = (book**)malloc(sizeof(book*)*m); //도서관 수 만큼 동적할당
+	N = (int*)malloc(sizeof(int)*m); // 각 도서관마다 책의 수를 저장하기 위한 배열
+
+	if (ar == NULL)
+		return -1;
+
+	if (N == NULL)
+		return -1;
+	
+	for (i = 0; i < m; i++)
+	{
+		scanf("%d", &N[i]); // i번째 도서관에 몇개의 책을 저장할지 입력
+		ar[i] = (book*)malloc(sizeof(book)*N[i]); // 책의 수 만큼 동적할당
+
+		if (ar[i] == NULL)
+			return -1;
+
+		for (j = 0; j < N[i]; j++)
+			setBook(&ar[i][j]); // 각 책의 정보 입력
+	}
+
+	p = findOldBook(ar, m, N); // 가장 오래된 책 찾기
+
+	printf("%s %s %d %d", p->name, p->author, p->day, p->pageNum); // 정보 출력
+
+
+	for (i = 0; i < m; i++)
+	{
+		for (j = 0; j < N[i]; j++) // 각 도서관 책들의
+		{
+			free(ar[i][j].name); // 이름과
+			free(ar[i][j].author); // 저자 할당 해제
+		}
+		free(ar[i]); // 각 도서관 할당 해제
+	}
+
+	free(N); // 도서관 별 책의 수를 저장했던 배열 할당 해제
+	free(ar); // 도서관 배열 할당 해제
+
+	return 0;
+}

@@ -1,0 +1,430 @@
+﻿문제 1
+#include <stdio.h>
+#pragma warning(disable:4996)
+
+void input(int *p, int N)
+{
+	int *q;
+	for (q = p; q < p + N; q++)
+		scanf("%d", q);
+
+}
+
+void output(int *p, int N)
+{
+	int *q;
+	for (q = p; q < p + N; q++)
+		printf(" %d", *q);
+}
+
+int main()
+{
+	int M, N, i, K, tmp, tmp2;
+	int X[100], Y[100];
+
+	scanf("%d %d", &M, &N);
+
+	input(X, M);
+	input(Y, N);
+
+	scanf("%d", &K);
+
+	tmp = M / K;
+	tmp2 = N / K;
+	i = 0;
+
+	while (tmp != 0 && tmp2 != 0)
+	{
+		output(X + i, K);
+		tmp--;
+		output(Y + i, K);
+		tmp2--;
+		i += K;
+	}
+
+
+	while (tmp != 0)
+	{
+		output(X + i, K);
+		tmp--;
+		i += K;
+	}
+
+
+	while (tmp2 != 0)
+	{
+		output(Y + i, K);
+		tmp2--;
+		i += K;
+	}
+
+	return 0;
+}
+===================================================================================
+문제 2
+
+#include <stdio.h>
+#pragma warning(disable:4996)
+
+struct complex {
+	double a;
+	double b;
+};
+
+struct complex add(struct complex _in, struct complex _in2)
+{
+	struct complex newComplex;
+
+	newComplex.a = _in.a + _in2.a;
+	newComplex.b = _in.b + _in2.b;
+
+	return newComplex;
+}
+
+struct complex sub(struct complex _in, struct complex _in2)
+{
+	struct complex newComplex;
+
+	newComplex.a = _in.a - _in2.a;
+	newComplex.b = _in.b - _in2.b;
+
+	return newComplex;
+}
+
+void abs_val(struct complex *p1, struct complex *p2, struct complex *p3)
+{
+	double max, min;
+	double a, b, c;
+	struct complex q[3];
+
+	q[0] = *p1;
+	q[1] = *p2;
+	q[2] = *p3;
+
+	a = (p1->a) * (p1->a) + (p1->b) * (p1->b);
+	b = (p2->a) * (p2->a) + (p2->b) * (p2->b);
+	c = (p3->a) * (p3->a) + (p3->b) * (p3->b);
+
+	max = a > b ? (a > c ? a : c) : (b > c ? b : c);
+	min = a < b ? (a < c ? a : c) : (b < c ? b : c);
+
+	if (max == b)
+	{
+		p1->a = q[1].a;
+		p1->b = q[1].b;
+	}
+
+	if (max == c)
+	{
+		p1->a = q[2].a;
+		p1->b = q[2].b;
+	}
+
+	if (min == a)
+	{
+		p2->a = q[0].a;
+		p2->b = q[0].b;
+	}
+
+	if (min == c)
+	{
+		p2->a = q[2].a;
+		p2->b = q[2].b;
+	}
+
+}
+
+int main()
+{
+	struct complex a[3];
+
+	for (int i = 0; i < 3; i++)
+		scanf("%lf %lf", &a[i].a, &a[i].b);
+
+	abs_val(&a[0], &a[1], &a[2]);
+
+	a[2] = add(a[0], a[1]);
+	printf("%.1lf%+.1lfi\n", a[2].a, a[2].b);
+	a[2] = sub(a[0], a[1]);
+	printf("%.1lf%+.1lfi", a[2].a, a[2].b);
+
+	return 0;
+}
+===================================================================================
+문제 3
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#pragma warning(disable:4996)
+
+int main()
+{
+	int N, cnt = 0, max = 0, maxIdx, i, j, k;
+	char **Y;
+	char X[101];
+	char tmp[101];
+
+	scanf("%d %s", &N, X);
+	getchar();
+
+	Y = (char**)malloc(sizeof(char*)*N);
+	if (Y == NULL)
+		return -1;
+
+	for (i = 0; i < N; i++)
+	{
+		gets(tmp);
+		Y[i] = (char*)malloc(sizeof(char) * (strlen(tmp) + 1));
+		if (Y[i] == NULL)
+			return -1;
+
+		strcpy(Y[i], tmp);
+	}
+
+	for (i = 0; i < N; i++)
+	{
+		cnt = 0;
+		k = 0;
+		for (j = 0; j <= strlen(Y[i]) - strlen(X); j++)
+		{
+			for (k = 0; k < strlen(X); k++)
+			{
+				if (Y[i][k + j] == X[k])
+					continue;
+
+				break;
+			}
+
+			if (k == strlen(X))
+			{
+				cnt++;
+				j = j + k - 1;
+			}
+		}
+
+		if (max < cnt)
+		{
+			max = cnt;
+			maxIdx = i;
+		}
+
+	}
+
+	if (max == 0)
+		printf("NONE");
+	else
+		printf("%s", Y[maxIdx]);
+
+
+	for (i = 0; i < N; i++)
+		free(Y[i]);
+
+	free(Y);
+	return 0;
+}
+===================================================================================
+문제 4
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#pragma warning(disable:4996)
+
+typedef struct stu {
+	double first;
+	double second;
+	double sum;
+	int id;
+	int rank;
+	int rank2;
+	int pass;
+}stu;
+
+int main()
+{
+	int N, i, j, cnt = 0;
+	stu *ar, tmp;
+	scanf("%d", &N);
+
+	ar = (stu*)malloc(sizeof(stu)*N);
+	if (ar == NULL)
+		return -1;
+
+	for (i = 0; i < N; i++)
+		scanf("%d %lf %lf", &ar[i].id, &ar[i].first, &ar[i].second);
+
+	for (i = 0; i < N; i++)
+	{
+		ar[i].sum = ar[i].first * 0.4 + ar[i].second * 0.6;
+		ar[i].rank = 1;
+		ar[i].rank2 = 1;
+	}
+
+	for (i = 0; i < N; i++)
+	{
+		for (j = 0; j < N; j++)
+		{
+			if (ar[i].sum < ar[j].sum)
+				ar[i].rank++;
+
+			if (ar[i].second < ar[j].second)
+				ar[i].rank2++;
+		}
+	}
+
+	for (i = 0; i < N; i++)
+	{
+		if (ar[i].rank <= N * 0.6)
+		{
+			ar[i].pass = 1;
+			cnt++;
+		}
+		else
+			ar[i].pass = 0;
+
+		if (ar[i].pass == 0 && cnt <= N * 0.8 && ar[i].rank2 <= N*0.8)
+		{
+			ar[i].pass = 1;
+		}
+
+	}
+
+	for (i = 0; i < N - 1; i++)
+	{
+		for (j = 0; j < N - 1 - i; j++)
+		{
+			if (ar[j].id > ar[j + 1].id)
+			{
+				tmp = ar[j];
+				ar[j] = ar[j + 1];
+				ar[j + 1] = tmp;
+			}
+		}
+	}
+
+	for (i = 0; i < N; i++)
+	{
+		if (ar[i].pass == 1)
+			printf("%d\n", ar[i].id);
+	}
+	
+	free(ar);
+	return 0;
+}
+===================================================================================
+문제 5
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#pragma warning(disable:4996)
+
+int check_row(int **p, int M, int N)
+{
+	int max = 0, cnt = 0;
+	int i, j;
+
+	for (i = 0; i < M; i++)
+	{
+		cnt = 0;
+		for (j = 0; j < N; j++)
+		{
+			if (p[i][j] == 0)
+				cnt++;
+			else
+			{
+				if (max <= cnt)
+					max = cnt;
+				cnt = 0;
+			}
+		}
+
+		if (max <= cnt)
+			max = cnt;
+	}
+
+	return max;
+}
+
+int check_col(int **p, int M, int N)
+{
+	int max = 0, cnt = 0;
+	int i, j;
+
+	for (i = 0; i < N; i++)
+	{
+		cnt = 0;
+		for (j = 0; j < M; j++)
+		{
+			if (p[j][i] == 0)
+				cnt++;
+			else
+			{
+				if (max <= cnt)
+					max = cnt;
+				cnt = 0;
+			}
+		}
+
+		if (max <= cnt)
+			max = cnt;
+	}
+
+	return max;
+}
+
+int main()
+{
+	int M, N, i, j, x, y, z;
+	int **ar;
+
+	scanf("%d %d", &M, &N);
+	ar = (int**)malloc(sizeof(int*)*M);
+
+	if (ar == NULL)
+		return -1;
+
+	for (i = 0; i < M; i++)
+	{
+		ar[i] = (int*)malloc(sizeof(int)*N);
+		if (ar[i] == NULL)
+			return -1;
+	}
+
+	for (i = 0; i < M; i++)
+	{
+		for (j = 0; j < N; j++)
+		{
+			ar[i][j] = 0;
+		}
+	}
+
+	while(1)
+	{
+		scanf("%d %d %d", &x, &y, &z);
+		if (!x && !y && !z)
+			break;
+
+		ar[x][y] = z;
+	}
+
+	for (i = 0; i < M; i++)
+	{
+		for (j = 0; j < N; j++)
+		{
+			printf(" %d", ar[i][j]);
+		}
+		printf("\n");
+	}
+
+	x = check_col(ar, M, N);
+	y = check_row(ar, M, N);
+	z = x > y ? x : y;
+
+	printf("%d", z);
+
+	for (i = 0; i < M; i++)
+		free(ar[i]);
+
+	free(ar);
+
+	return 0;
+}

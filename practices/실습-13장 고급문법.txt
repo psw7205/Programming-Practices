@@ -1,0 +1,294 @@
+﻿문제 1
+#include <stdio.h>
+#pragma warning(disable:4996)
+
+int GCD(int a, int b)
+{
+	int tmp;
+
+	if (a < b)
+	{
+		tmp = a;
+		a = b;
+		b = tmp;
+	}
+
+	return a % b ? GCD(b, a % b) : b;
+}
+
+int main()
+{
+	int a, b;
+
+	scanf("%d %d", &a, &b);
+
+	printf("%d", GCD(a, b));
+
+	return 0;
+}
+===========================================
+문제 2
+#include <stdio.h>
+#pragma warning(disable:4996)
+
+int factorial(int n)
+{
+	if (n == 1)
+		return 1;
+	return n * factorial(n-1);
+}
+
+double e(int n)
+{
+	double tmp = 1.0;
+	int i;
+	for (i = 1; i <= n; i++)
+	{
+		tmp += 1 / (double)factorial(i);
+	}
+
+	return tmp;
+}
+
+int main()
+{
+	int a;
+
+	scanf("%d", &a);
+
+	printf("%.6lf", e(a));
+
+	return 0;
+}
+===========================================
+문제 3
+#include <stdio.h>
+#pragma warning(disable:4996)
+
+int fibonacci(int n)
+{
+	if (n == 0)
+		return 0;
+	if (n == 1)
+		return 1;
+
+	return fibonacci(n - 1) + fibonacci(n - 2);
+}
+
+int main()
+{
+	int a;
+
+	scanf("%d", &a);
+
+	printf("%d", fibonacci(a));
+
+	return 0;
+}
+===========================================
+문제 4
+#include <stdio.h>
+#pragma warning(disable:4996)
+
+int main()
+{
+	int n[4];
+	int i;
+	unsigned int result = 0;
+
+	for (i = 0; i < 4; i++)
+		scanf("%d", &n[i]);
+	
+	for (i = 0; i < 3; i++)
+	{
+		
+		result += n[i];
+		
+		result = result << 8;
+	}
+
+	result += n[3];
+
+	printf("%d", result);
+
+	return 0;
+}
+===========================================
+로또번호 랜덤
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#pragma warning(disable:4996)
+
+void sort(int *ar)
+{
+	int i, j, tmp;
+
+	for (i = 0; i < 5; i++)
+	{
+		for (j = 0; j < 5 - i; j++)
+		{
+			if (ar[j] > ar[j + 1])
+			{
+				tmp = ar[j];
+				ar[j] = ar[j + 1];
+				ar[j + 1] = tmp;
+			}
+		}
+	}
+	return;
+}
+
+int main()
+{
+	int ar[6];
+	int i, j, cnt = 0;
+	srand((unsigned int)time(NULL));
+
+	while (cnt < 20) {
+		for (i = 0; i < 6; i++)
+		{
+			ar[i] = rand() % 45 + 1;
+
+			for (j = 0; j < i; j++)
+			{
+				if (ar[j] == ar[i])
+				{
+					i--;
+					break;
+				}
+			}
+		}
+
+		sort(ar);
+
+		printf("%02d회 :", cnt + 1);
+		for (i = 0; i < 6; i++)
+			printf(" %2d", ar[i]);
+		printf("\n");
+		cnt++;
+	}
+
+	return 0;
+}
+===========================================
+문제 5
+#include <stdio.h>
+#pragma warning(disable:4996)
+
+void pswap(int** ppx, int** ppy)
+{
+	int* tmp = *ppx;
+	*ppx = *ppy;
+	*ppy = tmp;
+}
+
+int main()
+{
+	int x, y;
+	int* px = &x;
+	int* py = &y;
+
+	scanf("%d %d", &x, &y);
+
+	pswap(&px, &py);
+
+	printf("%d %d", *px, *py);
+
+	return 0;
+}
+===========================================
+문제 6
+#include <stdio.h>
+#include <stdlib.h>
+#pragma warning(disable:4996)
+
+void ABC(int (*p)[20], int k1, int k2)
+{
+	for(int i = 0; i < k1; i++)
+		for(int j = 0; j < k2; j++)
+			(*(p + i))[j] = i + j;
+}
+
+int main()
+{
+	int n;
+	int ar[20][20];
+
+	scanf("%d", &n);
+
+	for (int i = 0; i < n; i++)
+		for (int j = 0; j < n; j++)
+			ar[i][j] = 0;
+
+	ABC(&ar, n, n);
+
+	for (int i = 0; i < n; i++)
+	{
+		for (int j = 0; j < n; j++)
+			printf(" %d", ar[i][j]);
+		printf("\n");
+	}
+
+	return 0;
+}
+===========================================
+문제 7
+#include <stdio.h>
+#pragma warning(disable:4996)
+
+int add(int a, int b) {
+	return a + b;
+}
+
+int main()
+{
+	int A, x, y;
+	void* pA = &A;
+
+	int(*fp) (int, int);
+
+	scanf("%d", &A);
+	scanf("%d %d", &x, &y);
+	printf("%d\n", *(int*)pA);
+
+	fp = add;
+
+	printf("%d", fp(x, y));
+
+	return 0;
+}
+===========================================
+문제 8
+
+#include <stdio.h>
+#pragma warning(disable:4996)
+
+int add(int a, int b) {
+	return a + b;
+}
+
+int sub(int a, int b)
+{
+	return a - b;
+}
+
+int multiply(int a, int b)
+{
+	return a * b;
+}
+
+int main()
+{
+	int x, y;
+
+	int(*handle[3]) (int, int) = { add, sub, multiply };
+	scanf("%d %d", &x, &y);
+	
+	for (int i = 0; i < 3; ++i)
+	{
+		printf(" %d", handle[i](x, y));
+	}
+	
+	return 0;
+}

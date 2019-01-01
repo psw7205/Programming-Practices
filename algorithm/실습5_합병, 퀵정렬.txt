@@ -1,0 +1,415 @@
+﻿#include <stdio.h>
+#include <stdlib.h>
+#pragma warning (disable:4996)
+
+typedef struct Node
+{
+	int element;
+	struct Node* next;
+}Node; // 노드 구조체
+
+Node* getNode(); // 새 노드 할당
+void insertNode(Node**, int); // 맨 앞에 삽입 
+int removeNode(Node**); // 맨 앞 노드 제거
+void printList(Node*); // 리스트 출력
+void freeList(Node*); // 리스트 할당 해제
+
+void mergeSort(Node**);
+Node* merge(Node*, Node*);
+void partition(Node*, Node**, Node**, int);
+
+
+int main()
+{
+	Node* list = NULL;
+	int size = 0, data = 0, i;
+
+	scanf("%d", &size);
+
+	for (i = 0; i < size; i++)
+	{
+		scanf("%d", &data);
+		insertNode(&list, data);
+	}
+
+
+	mergeSort(&list);
+
+	printList(list);
+	
+	freeList(list);
+
+	return 0;
+}
+
+Node* getNode()
+{
+	Node* newNode = (Node*)malloc(sizeof(Node));
+	newNode->next = NULL;
+	return newNode;
+}
+
+void insertNode(Node** list, int elem)
+{
+	Node*p = *list;
+	Node* newNode = getNode();
+	newNode->element = elem;
+
+	if (p == NULL)
+	{
+		*list = newNode;
+		return;
+	}
+
+	while (p->next != NULL)
+	{
+		p = p->next;
+	}
+
+	p->next = newNode;
+	return;
+}
+
+int removeNode(Node** list)
+{
+	Node* p = *list;
+	int tmp;
+
+	tmp = p->element;
+	*list = p->next;
+	free(p);
+
+	return tmp;
+}
+
+void printList(Node* list)
+{
+	Node* tmp = list;
+
+	while (tmp != NULL)
+	{
+		printf(" %d", tmp->element);
+		tmp = tmp->next;
+	}
+
+	return;
+}
+
+void freeList(Node* list)
+{
+	Node* tmp;
+	while (list != NULL)
+	{
+		tmp = list->next;
+		free(list);
+		list = tmp;
+	}
+
+	list = NULL;
+
+	return;
+}
+
+void mergeSort(Node** list)
+{
+	Node* left;
+	Node* right;
+	Node* tmp = *list;
+	int size = 0;
+
+	while (tmp != NULL)
+	{
+		size++;
+		tmp = tmp->next;
+	}
+
+	tmp = *list;
+
+	if (size > 1)
+	{
+		partition(tmp, &left, &right, size / 2);
+		mergeSort(&left);
+		mergeSort(&right);
+		*list = merge(left, right);
+	}
+	return;
+}
+
+Node* merge(Node* left, Node* right)
+{
+	Node* result = NULL;
+	Node* p = result;
+
+	while (left != NULL && right != NULL)
+	{
+		if (left->element <= right->element)
+			insertNode(&result, removeNode(&left));
+		else
+			insertNode(&result, removeNode(&right));
+	}
+
+	p = result;
+
+	while (p->next != NULL)
+		p = p->next;
+
+	if (left != NULL)
+		p->next = left;
+	else
+		p->next = right;
+
+	return result;
+}
+
+void partition(Node* list, Node** left, Node** right, int idx)
+{
+	Node* tmp;
+	int i;
+
+	*left = list;
+	tmp = list;
+
+	for (i = 0; i < idx - 1; i++)
+		tmp = tmp->next;
+
+	*right = tmp->next;
+	tmp->next = NULL;
+	
+	return;
+}
+=======================================================================
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#pragma warning (disable:4996)
+
+void swap(int*, int*);
+void quickSort(int*, int, int);
+void inPlacePartition(int*, int, int, int*, int*);
+int selectPivot(int*,int, int);
+
+int main()
+{
+	int N, i;
+	int* list;
+
+	scanf("%d", &N);
+
+	list = (int*)malloc(sizeof(int)*N);
+
+	for (i = 0; i < N; i++)
+		scanf("%d", &list[i]);
+		//list[i] = rand() % 1000000;
+
+	quickSort(list, 0, N - 1);
+
+	for (i = 0; i < N; i++)
+		printf(" %d", list[i]);
+	
+
+	free(list);
+
+	return 0;
+}
+
+void swap(int* a, int* b)
+{
+	int tmp = *a;
+	*a = *b;
+	*b = tmp;
+	return;
+}
+
+void quickSort(int* list, int leftIdx, int rightIdx)
+{
+	if (leftIdx >= rightIdx)
+		return;
+	int a, b;
+
+	inPlacePartition(list, leftIdx, rightIdx, &a, &b);
+	quickSort(list, leftIdx, a - 1);
+	quickSort(list, b + 1, rightIdx);
+}
+
+void inPlacePartition(int* list, int leftIdx, int rightIdx, int* a, int* b)
+{
+	int pivotIdx, pivot, i, left = leftIdx, Right = rightIdx;
+
+	pivotIdx = selectPivot(list, leftIdx, rightIdx);
+	pivot = list[pivotIdx];
+	swap(&list[pivotIdx], &list[leftIdx]);
+	i = leftIdx;
+
+	while (i <= Right)
+	{
+		if (list[i] < pivot)
+		{
+			swap(&list[i], &list[left]);
+			i++;
+			left++;
+		}
+		else if (list[i] > pivot)
+		{
+			swap(&list[i], &list[Right]);
+			Right--;
+		}
+		else
+		{
+			i++;
+		}
+	}
+
+	*a = left;
+	*b = Right;
+
+	return;
+}
+
+int selectPivot(int* list, int leftIdx, int rightIdx)
+{
+	int i;
+	int randIdx[3];
+
+	srand((unsigned int)time(NULL));
+
+	for (i = 0; i < 3; i++)
+		randIdx[i] = leftIdx + rand() % (rightIdx - leftIdx + 1); // 인덱스 left~right 사이 랜덤 값
+
+	// 위 랜덤 인덱스로 list에서 median값을 찾아 그 인덱스를 리턴
+	if (list[randIdx[0]] > list[randIdx[1]])
+	{
+		if (list[randIdx[1]] > list[randIdx[2]])
+			return randIdx[1];
+		else if (list[randIdx[0]] > list[randIdx[2]])
+			return randIdx[2];
+		else
+			return randIdx[0];
+	}
+	else
+	{
+		if (list[randIdx[0]] > list[randIdx[2]])
+			return randIdx[0];
+		else if (list[randIdx[1]] > list[randIdx[2]])
+			return randIdx[2];
+		else
+			return randIdx[1];
+	}
+}
+========================================================================================================
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#pragma warning (disable:4996)
+
+void swap(int*, int*);
+void quickSort(int*, int, int);
+void inPlacePartition(int*, int, int, int*, int*);
+int selectPivot(int*, int, int);
+
+int main()
+{
+	int N, i;
+	int* list;
+
+	scanf("%d", &N);
+
+	list = (int*)malloc(sizeof(int)*N);
+
+	for (i = 0; i < N; i++)
+		scanf("%d", &list[i]);
+		//list[i] = rand() % 10000000;
+	
+	quickSort(list, 0, N - 1);
+
+	for (i = 0; i < N; i++)
+		printf(" %d", list[i]);
+
+
+	free(list);
+
+	return 0;
+}
+
+void swap(int* a, int* b)
+{
+	int tmp = *a;
+	*a = *b;
+	*b = tmp;
+	return;
+}
+
+void quickSort(int* list, int leftIdx, int rightIdx)
+{
+	if (leftIdx >= rightIdx)
+		return;
+	int a, b;
+
+	inPlacePartition(list, leftIdx, rightIdx, &a, &b);
+	quickSort(list, leftIdx, a - 1);
+	quickSort(list, b + 1, rightIdx);
+}
+
+void inPlacePartition(int* list, int leftIdx, int rightIdx, int* a, int* b)
+{
+	int pivotIdx, pivot, i, right = rightIdx, left = leftIdx;
+
+	pivotIdx = selectPivot(list, leftIdx, rightIdx);
+	pivot = list[pivotIdx];
+	swap(&list[pivotIdx], &list[rightIdx]);
+	i = rightIdx;
+
+	while (i >= left)
+	{
+		if (list[i] > pivot)
+		{
+			swap(&list[i], &list[right]);
+			i--;
+			right--;
+		}
+		else if (list[i] < pivot)
+		{
+			swap(&list[i], &list[left]);
+			left++;
+		}
+		else
+		{
+			i--;
+		}
+	}
+
+	*a = left;
+	*b = right;
+
+	return;
+}
+
+int selectPivot(int* list, int leftIdx, int rightIdx)
+{
+	int i;
+	int randIdx[3];
+
+	srand((unsigned int)time(NULL));
+
+	for (i = 0; i < 3; i++)
+		randIdx[i] = leftIdx + rand() % (rightIdx - leftIdx + 1); // 인덱스 left~right 사이 랜덤 값
+
+	// 위 랜덤 인덱스로 list에서 median값을 찾아 그 인덱스를 리턴
+	if (list[randIdx[0]] > list[randIdx[1]])
+	{
+		if (list[randIdx[1]] > list[randIdx[2]])
+			return randIdx[1];
+		else if (list[randIdx[0]] > list[randIdx[2]])
+			return randIdx[2];
+		else
+			return randIdx[0];
+	}
+	else
+	{
+		if (list[randIdx[0]] > list[randIdx[2]])
+			return randIdx[0];
+		else if (list[randIdx[1]] > list[randIdx[2]])
+			return randIdx[2];
+		else
+			return randIdx[1];
+	}
+}

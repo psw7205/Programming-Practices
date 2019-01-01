@@ -1,0 +1,305 @@
+﻿문제 1
+#include <stdio.h>
+#include <malloc.h>
+#pragma warning(disable:4996)
+
+typedef struct Queue{
+	int front;
+	int rear;
+	int* elem;
+	int size;
+}Queue;
+
+void init(Queue* a, int q)
+{
+	int i;
+	a->elem = (int*)malloc(sizeof(int)*q);
+	for (i = 0; i < q; i++)
+		a->elem[i] = 0;
+
+	a->front = 0;
+	a->rear = 0;
+	a->size = q;
+}
+
+int isEmpty(Queue* a)
+{
+	if (a->front == a->rear)
+		return 1;
+	return 0;
+}
+
+int isFull(Queue* a)
+{
+	if ((a->rear + 1) % a->size == a->front)
+		return 1;
+	return 0;
+}
+
+void printQ(Queue* a)
+{
+	int i;
+	
+	for(i = 0; i < a->size; i++)
+		printf(" %d", a->elem[i]);
+
+	printf("\n");
+}
+
+int enQueue(Queue* a, int e)
+{
+	if (isFull(a))
+	{
+		printf("overflow");
+		printQ(a);
+		return 0;
+	}
+
+	a->rear = (a->rear + 1 )% a->size;
+	a->elem[a->rear] = e;
+	return 1;
+}
+
+int deQueue(Queue* a)
+{
+	if (isEmpty(a))
+	{
+		printf("underflow");
+		return 0;
+	}
+	
+	a->front = (a->front + 1) % a->size;
+	a->elem[a->front] = 0;
+	return 1;
+}
+
+int main()
+{
+	int q, n, i;
+	char c;
+	Queue a;
+	
+	scanf("%d", &q);
+
+	init(&a, q);
+
+	scanf("%d", &n);
+
+	for (i = 0; i < n; i++)
+	{
+		scanf(" %c", &c);
+
+		if (c == 'I')
+		{
+			scanf("%d", &q);
+			if(!enQueue(&a, q))
+				break;
+		}
+
+		if (c == 'D')
+		{
+			if(!deQueue(&a))
+				break;
+		}
+
+		if (c == 'P')
+		{
+			printQ(&a);
+		}
+
+	}
+
+	return 0;
+}
+
+문제 2
+#include <stdio.h>
+#include <malloc.h>
+#include <string.h>
+#pragma warning(disable:4996)
+
+typedef struct DQ{
+	int data;
+	struct DQ* before;
+	struct DQ* next;
+}DQ;
+
+typedef struct {
+	DQ *front, *rear;
+}DQType;
+
+DQType* getDQ()
+{
+	DQType *a = (DQType*)malloc(sizeof(DQType));
+	a->front = NULL;
+	a->rear = NULL;
+	return a;
+}
+
+int isEmpty(DQType* a)
+{
+	if (a->front == NULL)
+		return 1;
+	else
+		return 0;
+}
+
+void add_front(DQType* a, int e)
+{
+	DQ *b = (DQ*)malloc(sizeof(DQ));
+	b->data = e;
+
+	if (a->front == NULL)
+	{
+		a->front = b;
+		a->rear = b;
+		b->next = NULL;
+		b->before = NULL;
+	}
+	else
+	{
+		a->front->before = b;
+		b->before = NULL;
+		b->next = a->front;
+		a->front = b;
+	}
+}
+
+
+void add_rear(DQType* a, int e)
+{
+	DQ *b = (DQ*)malloc(sizeof(DQ));
+	b->data = e;
+
+	if (a->rear == 0)
+	{
+		a->front = b;
+		a->rear = b;
+		b->next = NULL;
+		b->before = NULL;
+	}
+	else
+	{
+		a->rear->next = b;
+		b->before = a->rear;
+		b->next = NULL;
+		a->rear = b;
+	}
+}
+
+int delete_front(DQType* a)
+{
+	DQ* old = a->front;
+	int i;
+	if (isEmpty(a))
+	{
+		printf("underflow\n");
+		return 0;
+	}
+	else
+	{
+		i = old->data;
+		if (a->front->next == NULL)
+		{
+			a->front = NULL;
+			a->rear = NULL;
+		}
+		else
+		{
+			a->front = a->front->next;
+			a->front->before = NULL;
+		}
+		free(old);
+		return i;
+	}
+}
+
+int delete_rear(DQType* a)
+{
+	DQ* old = a->rear;
+	int i;
+	if (isEmpty(a))
+	{
+		printf("underflow\n");
+		return 0;
+	}
+	else
+	{
+		i = old->data;
+		if (a->rear->before == NULL)
+		{
+			a->front = NULL;
+			a->rear = NULL;
+		}
+		else
+		{
+			a->rear = a->rear->before;
+			a->rear->next = NULL;
+		}
+
+		free(old);
+		return i;
+	}
+}
+
+void print(DQType* a)
+{
+	DQ* tmp = a->front;
+
+	while (tmp)
+	{
+		printf(" %d", tmp->data);
+		tmp = tmp->next;
+	}
+	printf("\n");
+}
+
+int main()
+{
+	int n, i, e, tmp;
+	char ch[10];
+	DQType *a = getDQ();
+
+	scanf("%d", &n);
+
+	for (i = 0; i < n; i++)
+	{
+		scanf("%s", ch);
+		getchar();
+
+		if (!strcmp(ch, "AF"))
+		{
+			scanf("%d", &e);
+			add_front(a, e);
+		}
+
+		if (!strcmp(ch, "AR"))
+		{
+			scanf("%d", &e);
+			add_rear(a, e);
+		}
+
+		if (!strcmp(ch, "DF"))
+		{
+			tmp = delete_front(a);
+			if (!tmp)
+				break;
+		}
+
+		if (!strcmp(ch, "DR"))
+		{
+			tmp = delete_rear(a);
+			if (!tmp)
+				break;
+		}
+
+		if (!strcmp(ch, "P"))
+		{
+			print(a);
+		}
+	}
+
+
+
+	return 0;
+}

@@ -1,0 +1,318 @@
+﻿문제 1
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#pragma warning (disable:4996)
+
+enum {
+	FRESH,
+	VISITED,
+	TREE,
+	BACK
+}Lable;
+
+typedef struct node {
+	int edgeIdx;
+	struct node* next;
+}node;
+
+typedef struct edge {
+	int endPoint[2]; // 간선 양 끝 정점
+	int weight;
+	int label;
+}e;
+
+typedef struct vertex {
+	int Name; // 정점 이름
+	int label;
+	struct node *incidentEdges; // 인접간선의 헤더
+}v;
+
+v vertices[100];
+e edges[1000];
+int cnt = 7;
+
+node* getNode()
+{
+	node *newNode = (node*)malloc(sizeof(node));
+	newNode->next = NULL;
+	return newNode;
+}
+
+void deleteNode(node *list, int edgeIdx)
+{
+	node *pre;
+	if (list->next == NULL) return;
+
+	pre = list->next;
+	while (pre->edgeIdx != edgeIdx)
+	{
+		list = pre;
+		pre = pre->next;
+	}
+
+	list->next = pre->next;
+	return;
+}
+
+void setEdges(e *edge, int a, int b)
+{
+	edge->endPoint[0] = a;
+	edge->endPoint[1] = b;
+
+	return;
+}
+
+int deg(v v)
+{
+	int c = 0;
+	node *e = v.incidentEdges->next;
+	while (e != NULL)
+	{
+		c++;
+		e = e->next;
+	}
+
+	return c;
+}
+
+int opposite(v v, e e)
+{
+	int uIdx = e.endPoint[0] - 1;
+	int wIdx = e.endPoint[1] - 1;
+
+	if (v.Name == vertices[uIdx].Name)
+		return wIdx;
+	else
+		return uIdx;
+}
+
+void addNode(v *vertex, int n)
+{
+	node *it = vertex->incidentEdges;
+	node *newNode = getNode();
+	newNode->edgeIdx = n;
+
+	if (it->next == NULL)
+	{
+		it->next = newNode;
+		return;
+	}
+
+	int idx1 = opposite(*vertex, edges[it->next->edgeIdx]);
+	int idx2 = opposite(*vertex, edges[newNode->edgeIdx]);
+
+	if (vertices[idx1].Name > vertices[idx2].Name)
+	{
+		newNode->next = it->next;
+		it->next = newNode;
+		return;
+	}
+
+	while (1)
+	{
+		if (it->next != NULL)
+			idx1 = opposite(*vertex, edges[it->next->edgeIdx]);
+
+		if (it->next == NULL)
+		{
+			it->next = newNode;
+			return;
+		}
+		else if (vertices[idx1].Name > vertices[idx2].Name)
+		{
+			newNode->next = it->next;
+			it->next = newNode;
+			return;
+		}
+		else
+		{
+			it = it->next;
+		}
+	}
+
+	return;
+}
+
+void rDFS(int idx)
+{
+
+	node *e = vertices[idx].incidentEdges->next;
+	vertices[idx].label = VISITED;
+
+	while (e != NULL)
+	{
+		if (edges[e->edgeIdx].label == FRESH)
+		{
+			int w = opposite(vertices[idx], edges[e->edgeIdx]);
+
+			if (vertices[w].label == FRESH)
+			{
+				vertices[w].label = VISITED;
+				printf("%d\n", vertices[w].Name);
+				rDFS(w);
+			}
+			else
+			{
+				edges[e->edgeIdx].label = BACK;
+			}
+		}
+
+		e = e->next;
+	}
+
+	return;
+}
+
+void DFS(int startIdx, int n, int m)
+{
+	for (int i = 0; i < n; i++)
+		vertices[i].label = FRESH;
+
+	for (int i = 0; i < m; i++)
+		edges[i].label = FRESH;
+
+
+	printf("%d\n", vertices[startIdx].Name);
+	rDFS(startIdx);
+	return;
+}
+
+int main()
+{
+	int vertexName[2];
+	int n, m, s;
+
+	scanf("%d %d %d", &n, &m, &s);
+
+	for (int i = 0; i < n; i++)
+	{
+		vertices[i].Name = i + 1;
+		vertices[i].incidentEdges = getNode();
+	}
+
+	for (int i = 0; i < m; i++)
+	{
+		scanf("%d %d", &vertexName[0], &vertexName[1]);
+
+		setEdges(&edges[i], vertexName[0], vertexName[1]);
+		addNode(&vertices[vertexName[0] - 1], i);
+		addNode(&vertices[vertexName[1] - 1], i);
+	}
+
+	DFS(s - 1, n, m);
+
+	return 0;
+}
+==========================================================================
+문제 2
+#include <stdio.h>
+#include <stdlib.h>
+#pragma warning(disable:4996)
+
+enum {
+	FRESH = 1,
+	VISITED,
+	TREE,
+	CROSS
+}Lable;
+
+typedef struct node {
+	int vIdx;
+	struct node* next;
+}node;
+
+int adjMatrix[100][100];
+int vertices[100];
+
+node* getNode()
+{
+	node *newNode = (node*)malloc(sizeof(node));
+	newNode->next = NULL;
+	return newNode;
+}
+
+void addNode(node *list, int vIdx)
+{
+	node *newNode = getNode();
+	newNode->vIdx = vIdx;
+
+	while (list->next != NULL)
+	{
+		list = list->next;
+	}
+
+	list->next = newNode;
+
+	return;
+}
+
+void BFS(int vIdx, int n)
+{
+	int i = 0, j = 0, v;
+	node *it;
+	node *list[100];
+
+	for (i = 0; i < n; i++)
+		vertices[i] = FRESH;
+
+	vertices[vIdx] = VISITED;
+	
+	list[0] = getNode();
+	addNode(list[0], vIdx);
+
+	printf("%d\n", vIdx + 1);
+
+	i = 0;
+	while(list[i]->next != NULL)
+	{
+		list[i + 1] = getNode();
+		
+		for (it = list[i]->next; it != NULL; it = it->next)
+		{
+			v = it->vIdx;
+
+			for (j = 0; j < n; j++)
+			{
+				if (adjMatrix[v][j] == FRESH)
+				{
+					if (vertices[j] == FRESH)
+					{
+						printf("%d\n", j + 1);
+						adjMatrix[v][j] = VISITED;
+						adjMatrix[j][j] = VISITED;
+						vertices[j] = VISITED;
+						addNode(list[i + 1], j);
+					}
+					else
+					{
+						adjMatrix[v][j] = CROSS;
+						adjMatrix[j][j] = CROSS;
+					}
+				}
+			}
+		}
+		
+		i++;
+	}
+}
+
+int main()
+{
+	int v1, v2;
+	int n, m, s;
+
+	scanf("%d %d %d", &n, &m, &s);
+
+	for (int i = 0; i < m; i++)
+	{
+		scanf("%d %d", &v1, &v2);
+
+		adjMatrix[v1 - 1][v2 - 1] = FRESH;
+		adjMatrix[v2 - 1][v1 - 1] = FRESH;
+	}
+
+	BFS(s - 1, n);
+
+	return 0;
+}

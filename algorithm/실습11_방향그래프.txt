@@ -1,0 +1,199 @@
+﻿#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#pragma warning (disable:4996)
+
+int n, m;
+int *in;
+int *topOrder; // n+1크기, 0번째에 DAG 표시, DAG일 경우 위상순서
+int *queue; // 최대 n크기, 정점들 대기열
+int queueSize = -1;
+
+int queueIsEmpty()
+{
+	if (queueSize == -1)
+		return 1;
+
+	return 0;
+}
+
+void enQueue(int _in)
+{
+	queueSize++;
+	queue[queueSize] = _in;
+}
+
+int deQueue()
+{
+	if (queueIsEmpty())
+		return -1;
+	
+	int tmp = queue[0];
+	for (int i = 0; i < queueSize; i++)
+		queue[i] = queue[i + 1];
+
+	queueSize--;
+	return tmp;
+}
+
+
+typedef struct node {
+	int elem;
+	struct node* next;
+}node;
+
+typedef struct edge {
+	int origin;
+	int destination;
+}e;
+
+typedef struct vertex {
+	char Name; // 정점 이름
+	int inDegree;
+	struct node *outEdges;
+	struct node *inEdges; 
+}v;
+
+node* getNode()
+{
+	node *newNode = (node*)malloc(sizeof(node));
+	newNode->next = NULL;
+	return newNode;
+}
+
+struct G {
+	v vertices[100];
+	e edges[1000];
+}G;
+
+int findIdx(char vName)
+{
+	for (int i = 0; i < n; i++)
+	{
+		if (G.vertices[i].Name == vName)
+			return i;
+	}
+
+	return -1;
+}
+
+void insertFisrt(node *h, int i)
+{
+	node *newNode = getNode();
+	newNode->elem = i;
+	newNode->next = h->next;
+	h->next = newNode;
+	return;
+}
+
+void insertVertex(char vName, int i)
+{
+	G.vertices[i].Name = vName;
+	G.vertices[i].inDegree = 0;
+	G.vertices[i].inEdges = getNode();
+	G.vertices[i].outEdges = getNode();
+}
+
+void insertDirectedEdge(char uName,char wName,int i)
+{
+	int u = findIdx(uName);
+	int w = findIdx(wName);
+
+	G.edges[i].origin = u;
+	G.edges[i].destination = w;
+
+	insertFisrt(G.vertices[u].outEdges, i);
+	insertFisrt(G.vertices[w].outEdges, i);
+
+	G.vertices[w].inDegree++;
+	return;
+}
+
+void buildGraph()
+{
+	char vName;
+	char uName, wName;
+	scanf("%d", &n);
+	getchar();
+	topOrder = (int*)malloc(sizeof(int)*(n + 1));
+	queue = (int*)malloc(sizeof(int)*n);
+	in = (int*)malloc(sizeof(int)*n);
+	
+	for (int i = 0; i < n; i++)
+	{
+		scanf("%c", &vName);
+		insertVertex(vName, i);
+		getchar();
+	}
+
+	scanf("%d", &m);
+	getchar();
+
+	for (int i = 0; i < m; i++)
+	{
+		scanf("%c %c", &uName, &wName);
+		getchar();
+		insertDirectedEdge(uName, wName, i);
+	}
+
+	return;
+}
+
+void topologicalSort()
+{
+	int t = 1;
+	int u, w;
+	node *it;
+	for (int i = 0; i < n; i++)
+		queue[i] = 0;
+
+	for (int i = 0; i < n; i++)
+	{
+		in[i] = G.vertices[i].inDegree;
+		if (in[i] == 0)
+			enQueue(i);
+	}
+
+	while (!queueIsEmpty())
+	{
+		u = deQueue();
+		topOrder[t] = u;
+		t++;
+		
+		it = G.vertices[u].outEdges->next;
+		while (it != NULL)
+		{
+			w = G.edges[it->elem].destination;
+			in[w]--;
+			if (in[w] == 0)
+				enQueue(w);
+
+			it = it->next;
+		}
+	}
+
+	if (t < n + 1)
+		topOrder[0] = 0;
+	else
+		topOrder[0] = 1;
+	
+	return;
+}
+
+int main()
+{
+	int i;
+
+	buildGraph();
+	topologicalSort();
+
+	if (topOrder[0] == 0)
+		printf("0\n");
+	else
+	{
+		for (i = 1; i <= n; i++)
+			printf(" %c", G.vertices[topOrder[i]].Name);
+	}
+
+	return 0;
+}

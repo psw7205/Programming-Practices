@@ -1,0 +1,221 @@
+문제 1
+#include<stdio.h>
+#pragma warning(disable: 4996)
+int main()
+{	char a = '0'; // 알파벳을 입력받을 변수입니다.
+	scanf("%c", &a);
+	if ('a' <= a && 'z' >= a)
+	{
+		printf("%c", a - ('a' - 'A'));
+	}// 입력받은 문자 a가 a~z 사이라면 a - A 만큼을 뺴 대문자로 변환 후 출력합니다.
+	else if ('A' <= a && 'Z' >= a)
+	{
+		printf("%c", a + ('a' - 'A'));
+	} // 입력받은 문자 a가 A~Z 사이라면 a - A 만큼을 더해 소문자로 변환 후 출력합니다.
+	else
+	{
+		printf("%c", a);
+	} // 위 두가지 경우가 아닌 경우 그대로 출력합니다.
+	/*
+	'a' = 97, 'b' = 98 ... 'A'= 65 , 'B' = 66 로 아스키 코드에서 차이가 32입니다.
+	따라서 소문자에서 'a' - 'A'(32)를 빼면 대문자가, 대문자에서 'a' - 'A'(32)를 더하면 소문자가 됩니다.
+	*/
+	return 0;
+}
+------------------------------------------------------------------------------------------------------------------------
+문제 2
+
+#include<stdio.h>
+#pragma warning(disable: 4996)
+
+int main()
+{
+	int a0 = 0, a1 = 0, a2 = 0;
+	int sum = 0; //메뉴 번호를 받을 3개의 변수와 금액을 더할 변수 sum을 선언했습니다.
+
+	scanf("%d %d %d",&a0, &a1, &a2); //메뉴 번호를 입력받습니다.
+
+	switch (a0) // a0에 들어오는 번호에 따라 case를 나누었습니다.
+	{
+		case 0: 
+			printf("None\n"); // a0가 0이라면 none을 출력합니다. 
+			break; 
+		case 1:
+			sum += 15000;
+			printf("Pizza\n"); // 1일 때 sum에 15000원을 누적하고 Pizza를 출력합니다.
+			break;
+		case 2:
+			sum += 5000;
+			printf("Burger\n");  // 2일 때 sum에 5000원을 누적하고 Burger를 출력합니다.
+			break;
+		case 3:
+			sum += 4500;
+			printf("Salad\n"); // 3일 때 sum에 4500원을 누적하고 Salad를 출력합니다.
+			break;
+		case 4:
+			sum += 800;
+			printf("Ice cream\n"); // 4일 때 sum에 800원을 누적하고 Ice cream를 출력합니다.
+			break;
+		case 5:
+			sum += 500;
+			printf("Beverage\n"); // 5일 때 sum에 500원을 누적하고 Beverage를 출력합니다.
+			break;
+	}
+
+	switch (a1) // a1에 들어오는 번호에 따라 case를 나누었습니다.
+	{
+		case 0:
+			printf("None\n"); // a1가 0이라면 none을 출력합니다. 
+			break;
+		case 1:
+			sum += 15000;
+			printf("Pizza\n"); // 1일 때 sum에 15000원을 누적하고 Pizza를 출력합니다.
+			break;
+		case 2:
+			sum += 5000;
+			printf("Burger\n");  // 2일 때 sum에 5000원을 누적하고 Burger를 출력합니다
+			break;
+		case 3:
+			sum += 4500;
+			printf("Salad\n");  // 3일 때 sum에 4500원을 누적하고 Salad를 출력합니다.
+			break;
+		case 4:
+			sum += 800;
+			printf("Ice cream\n"); // 4일 때 sum에 800원을 누적하고 Ice cream를 출력합니다.
+			break;
+		case 5:
+			sum += 500;
+			printf("Beverage\n"); // 5일 때 sum에 500원을 누적하고 Beverage를 출력합니다.
+			break;
+	}
+
+	switch (a2) // a2에 들어오는 번호에 따라 case를 나누었습니다.
+	{
+		case 0:
+			printf("None\n"); // a2가 0이라면 none을 출력합니다. 
+			break;
+		case 1:
+			sum += 15000;
+			printf("Pizza\n"); // 1일 때 sum에 15000원을 누적하고 Pizza를 출력합니다.
+			break;
+		case 2:
+			sum += 5000;
+			printf("Burger\n");  // 2일 때 sum에 5000원을 누적하고 Burger를 출력합니다
+			break;
+		case 3:
+			sum += 4500;
+			printf("Salad\n");  // 3일 때 sum에 4500원을 누적하고 Salad를 출력합니다.
+			break;
+		case 4:
+			sum += 800;
+			printf("Ice cream\n"); // 4일 때 sum에 800원을 누적하고 Ice cream를 출력합니다.
+			break;
+		case 5:
+			sum += 500;
+			printf("Beverage\n"); // 5일 때 sum에 500원을 누적하고 Beverage를 출력합니다.
+			break;
+	}
+
+	printf("Total:%dwon", sum); // 위에서 a0, a1, a2의 번호대로 메뉴를 출력했기 때문에 마지막 최종 가격 합계만 출력했습니다. =
+
+	return 0;
+}
+
+-------------------------------------------------------------------------------------------------------------------------------------------------
+문제 3
+
+#include<stdio.h>
+#pragma warning(disable: 4996)
+
+int main()
+{
+	int a = 0, b = 0, c = 0; // 정수를 입력받을 a,b,c를 선언합니다.
+	
+	scanf("%d %d %d", &a, &b, &c);
+
+	if (c == a + b)
+		printf("+\n"); // a + b가 C와 같다면 +를 출력합니다.
+
+	if (c == a - b)
+		printf("-\n"); // a - b가 C와 같다면 +를 출력합니다.
+
+	if (c == a * b)
+		printf("*\n"); // a * b가 C와 같다면 +를 출력합니다.
+
+	if (c == a / b)
+		printf("/\n"); // a / b가 C와 같다면 +를 출력합니다.
+
+	if ((c != a + b) && (c != a - b) && (c != a * b) && (c != a / b))
+		printf("Incorrect");  // c가 사칙연산 값들과 전부 다를 때 Incorrect를 출력합니다.
+
+	// 사칙연산이 중복 될 경우 각각 따로 출력해야하므로 서로 독립된 조건문을 사용했습니다.
+	
+
+	return 0;
+}
+
+-------------------------------------------------------------------------------------------------------------------------------------------------
+문제 4
+
+#include<stdio.h>
+#pragma warning(disable: 4996)
+int main()
+{	char o = '0'; // 사칙연산기호를 입력받을 변수 o를 선언합니다
+	int a = 0, b = 0; // 정수를 입력받을 a,b를 선언합니다.
+		scanf("%c %d %d", &o, &a, &b);
+	if (o == '+')
+		printf("%d", a + b); // operator가 +라면 a+b를 출력합니다.
+	else if (o == '-')
+		printf("%d", a - b);  // operator가 -라면 a-b를 출력합니다.
+	else if (o == '*')
+		printf("%d", a * b);  // operator가 *라면 a*b를 출력합니다.
+	else if (o == '/')
+		printf("%.1lf", a / (double)b);  // operator가 /라면 실수연산을 위해 b를 double형으로 형변환 후 계산한 값을 소숫점 첫째자리까지 출력합니다.
+	else
+		printf("none"); // 위 4개의 사칙연산에 해당하지 않는다면 none을 출력합니다.
+	return 0;
+}
+
+-------------------------------------------------------------------------------------------------------------------------------------------------
+문제 5
+
+#include<stdio.h>
+#include<math.h>
+#pragma warning(disable: 4996)
+
+int main()
+{
+	double a = 0, b = 0, c = 0; // 계수를 입력받을 a,b,c를 선언합니다.
+	double d = 0, e1 = 0, e2 = 0; // 판별식을 저장할 변수 d와 근을 저장할 변수 e를 선언합니다.
+	
+	scanf("%lf %lf %lf", &a, &b, &c);
+
+	d = (b*b) - (4 * a * c ); // d에 판별식 계산 결과를 저장합니다.
+	
+	if (a == 0)
+		printf("%lf", -c / b); // 2차항이 0이라면 -c/b를 출력합니다.
+	else if (d < 0)
+		printf("none"); // 판별식 d가 음수라면 근이 없다고 출력합니다.
+/*
+	else if( d == 0)
+		printf("%lf", - b / ( 2 * a));  // 판별식 d가 0이라면 중근입니다. 
+	else
+	{
+		e1 = ( -b - sqrt(d) )/ (2 * a); 
+		e2 = (-b + sqrt(d)) / (2 * a);
+		printf("%lf %lf", e1, e2); // 위 조건이 전부 아니라면 서로다른 두 근을 가지고 있는 경우고 근의 공식을 이용해 출력합니다.
+	}
+*/
+	else 
+	{
+		e1 = ( -b - sqrt(d) )/ (2 * a); 
+		e2 = (-b + sqrt(d)) / (2 * a); // 근의 공식을 이용해 두 근을 구합니다.
+		
+		if (e1 == e2)
+			printf("%lf", e1); // 두 근이 같다면 중근이므로 하나만 출력하고 
+		else
+			printf("%lf %lf", e1, e2); // 다르다면 작은 순서대로 출력합니다.
+	}
+
+	return 0;
+}

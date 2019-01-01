@@ -1,0 +1,121 @@
+#include <stdio.h>
+#include <malloc.h>
+#include <string.h>
+#pragma warning(disable:4996)
+
+typedef struct Node {
+	struct Node* right;
+	struct Node* left;
+	int data;
+}Node;
+
+Node* tmp;
+
+Node* getNode()
+{
+	Node* a = (Node*)malloc(sizeof(Node));
+
+	a->right = NULL;
+	a->left = NULL;
+	a->data = 0;
+
+	return a;
+}
+
+
+void searchNode(Node* p, int n)
+{
+	if (p != NULL)
+	{
+		if (n == p->data)
+			tmp = p;
+
+		searchNode(p->left, n);
+		searchNode(p->right, n);
+	}
+}
+
+void insertNode(int n, int leftData, int rightData, Node* root)
+{
+	searchNode(root, n);
+
+	Node* r = getNode();
+	Node* l = getNode();
+
+	r->data = rightData;
+	l->data = leftData;
+
+	if (tmp == NULL)
+	{
+		root->data = n;
+		root->left = l;
+		root->right = r;
+		return;
+	}
+
+	if (leftData == 0)
+		tmp->left = NULL;
+	else
+		tmp->left = l;
+
+	if (rightData == 0)
+		tmp->right = NULL;
+	else
+		tmp->right = r;
+	
+}
+
+void SearchPrint(char a[], Node* root)
+{
+	int len = strlen(a);
+	int i;
+	char ch;
+	Node* p = root;
+
+	printf(" %d", root->data);
+
+	for (i = 0; i < len; i++)
+	{
+		ch = a[i];
+
+		if (ch == 'R')
+		{
+			p = p->right;
+			printf(" %d", p->data);
+		}
+
+		if (ch == 'L')
+		{
+			p = p->left;
+			printf(" %d", p->data);
+		}
+	}
+	printf("\n");
+}
+
+int main()
+{
+	int n, a, b, c, i;
+	char ch[100] = { '\0' };
+
+	Node* root = getNode();
+
+	scanf("%d", &n);
+
+	for (i = 0; i < n; i++)
+	{
+		scanf("%d %d %d", &a, &b, &c);
+		insertNode(a, b, c, root);
+	}
+
+	scanf("%d", &n);
+	getchar();
+
+	for (i = 0; i < n; i++)
+	{
+		scanf("%s", ch);
+		SearchPrint(ch, root);
+	}
+
+	return 0;
+}

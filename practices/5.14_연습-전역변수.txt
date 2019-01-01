@@ -1,0 +1,75 @@
+﻿실습 10
+#include <stdio.h>
+#pragma warning(disable:4996)
+
+int z;
+
+int div(int x, int y)
+{
+	z = x % y;
+	return x / y;
+}
+
+int main()
+{
+	int a, b, result;
+
+	scanf("%d %d", &a, &b);
+	
+	result = div(a, b);
+
+	printf("%d %d", result, z);
+
+	return 0;
+}
+
+#include <stdio.h>
+#pragma warning(disable:4996)
+
+int div(int x, int y)
+{
+	return x / y;
+}
+
+int mod(int x, int y)
+{
+	return x % y;
+}
+
+int main()
+{
+	int a, b;
+
+	scanf("%d %d", &a, &b);
+
+	printf("%d %d", div(a, b), mod(a, b));
+
+	return 0;
+}
+==============================================
+실습 11
+#include <stdio.h>
+#pragma warning(disable:4996)
+
+int a, b;
+
+void swap()
+{
+	int tmp;
+	tmp = a;
+	a = b;
+	b = tmp;
+}
+
+int main()
+{
+	scanf("%d %d", &a, &b);
+	
+	printf("스왚 전 %d %d \n", a, b);
+
+	swap();
+
+	printf("스왚 후 %d %d \n", a, b);
+
+	return 0;
+}

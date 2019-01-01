@@ -1,0 +1,439 @@
+﻿문제 1
+#include <stdio.h>
+#pragma warning (disable:4996)
+
+typedef struct student{ // 학생번호, 키, 몸무게를 저장하는 구조체입니다.
+	int num;
+	double height; 
+	double weight;
+}student; // struct student를 student로 재정의 합니다.
+
+int main()
+{
+	student a[10]; // 학생은 10명까지 입력됩니다.
+	double avgHeight = 0.0;
+	double avgWeight = 0.0;
+	int i, n;
+
+	scanf("%d", &n); // 학생 수를 입력받습니다
+
+	for (i = 0; i < n; i++)
+	{
+		scanf("%d %lf %lf", &a[i].num, &a[i].height, &a[i].weight);
+	} // 학번, 키, 몸무게를 입력받습니다.
+
+	for (i = 0; i < n; i++)
+	{
+		avgHeight += a[i].height; // 키와 몸무게를 각각 다 더하고
+		avgWeight += a[i].weight;
+	}
+
+	avgHeight /= n;
+	avgWeight /= n;
+	printf("%.1lf %.1lf\n", avgHeight, avgWeight); // 학생 수로 나누고 평균을 출력합니다.
+
+	for (i = 0; i < n; i++)
+	{
+		printf("%d ", a[i].num); // 먼저 학번을 출력하고
+
+		if (avgHeight <= a[i].height && avgWeight <= a[i].weight)
+			printf("super\n"); // 키, 몸무게가 모두 평균보다 크면 super를
+		else if(avgHeight <= a[i].height || avgWeight <= a[i].weight)
+			printf("average\n"); // 둘 중 하나라도 평균보다 크면 average를
+		else
+			printf("below\n"); // 위에서 출력되지 않으면 둘 다 미만이란 뜻이므로 below를 출력합니다.
+	}
+
+	return 0;
+}
+============================================================================================================================
+문제 2-1
+#include <stdio.h>
+#include <string.h>
+#pragma warning (disable:4996)
+
+typedef struct student {
+	char name[10]; // 학생이름
+	char friendName[3][10]; // 좋아하는 학생 3명
+}student;
+
+int main()
+{
+	int i, j;
+	student a[3]; // 총 3명의 학생
+	char tmp[10]; // 찾는 학생의 이름
+
+	for (i = 0; i < 3; i++)
+	{
+		scanf("%s ->", a[i].name); // 학생의 이름을 입력하고
+		for (j = 0; j < 3; j++)
+		{
+			scanf("%s", a[i].friendName[j]); // 좋아하는 학생의 이름을 3번 입력
+		}
+	}
+
+	scanf("%s", tmp); // 찾는 학생 입력
+
+	for (i = 0; i < 3; i++)
+	{
+		if (!strcmp(a[i].name, tmp)) // 학생이름을 비교하고 같으면
+		{
+			for (j = 0; j < 3; j++)
+			{
+				printf(" %s", a[i].friendName[j]); // 좋아하는 학생 출력
+			}
+		}
+	}
+
+	return 0;
+}
+
+============================================================================================================================
+문제 2-2
+#include <stdio.h>
+#include <string.h>
+#pragma warning (disable:4996)
+
+typedef struct student {
+	char name[10]; // 학생이름
+	char friendName[3][10]; // 좋아하는 학생 3명
+}STUDENT;
+
+int ABC(STUDENT stu[], char* perA, char* perB) // 학생 구조체 배열, 문자열 2개를 인자로 받음
+{
+	int i, j;
+	for (i = 0; i < 3; i++)
+	{
+		if (!strcmp(stu[i].name, perB)) // stu배열에서 perB를 찾고
+		{
+			for (j = 0; j < 3; j++)
+			{
+				if (!strcmp(stu[i].friendName[j], perA)) // 친구 이름중에 perA가 있으면
+					return 1; // 1을 리턴
+			}
+		}
+	}
+
+	return 0; // 못찾으면 0리턴
+}
+
+int main()
+{
+	int i, j;
+	STUDENT a[3]; // 총 3명의 학생
+	char* perA;
+	char* perB;
+
+	for (i = 0; i < 3; i++)
+	{
+		scanf("%s ->", a[i].name); // 학생의 이름을 입력하고
+		for (j = 0; j < 3; j++)
+		{
+			scanf("%s", a[i].friendName[j]); // 좋아하는 학생의 이름을 3번 입력
+		}
+	}
+
+	for (i = 0; i < 3; i++)
+	{
+		perA = a[i].name; // 먼저 perA로 찾는 학생 이름을 가르킴
+ 
+		for (j = 0; j < 3; j++)
+		{
+			perB = a[i].friendName[j]; // perB로 친구이름을 가르키고
+			if (ABC(a, perA, perB) == 1 && ABC(a, perB, perA) == 1) // 서로 목록에 있으면 서로 좋아하는 관계
+			{
+				printf("%s %s\n", perA, perB); // perA와 perB출력
+			}
+		}
+	}
+
+	return 0;
+}
+
+============================================================================================================================
+문제 3
+#include <stdio.h>
+#pragma warning (disable:4996)
+
+typedef struct parking {
+	int carNum; // 차번호
+	int stuNum; // 학번
+	char Day[2][11]; //  Day[0] = 입차 날짜, Day[1] = 출차 날짜
+	int hour[2]; // hour[0] = 입차 시간, hour[1] = 출차 시간
+	int min[2]; // min[0] = 입차 시간, min[1] = 출차 시간
+}parking;
+
+int main()
+{
+	parking a[100]; // 최대 주차 개수 100대
+	parking tmp; // 스왑시 사용할 임시변수
+
+	int n, i, j, cnt = 0; // 주차대수 n, 반복문 i,j, 부정차량 갯수를 세는 cnt
+
+	scanf("%d", &n); // 주차 대수를 입력
+
+	for (i = 0; i < n; i++)
+	{
+		scanf("%d %d %s %d:%d %s %d:%d", &a[i].carNum, &a[i].stuNum,
+			a[i].Day[0], &a[i].hour[0], &a[i].min[0], a[i].Day[1], &a[i].hour[1], &a[i].min[1]);
+	} // 차량번호, 학번, 입차날짜, 입차 시간, 분, 출차 날짜, 출차 시간, 분 순서로 입력 
+
+	for (i = 0; i < n - 1; i++) // 학번 순으로 parking배열 정렬
+	{
+		for (j = 0; j < n - i - 1; j++)
+		{
+			if (a[j].stuNum > a[j + 1].stuNum)
+			{
+				tmp = a[j];
+				a[j] = a[j + 1];
+				a[j + 1] = tmp;
+			}
+		}
+	}
+
+	// 학번순으로 정렬했으므로 같은 학번이 연속으로 등장
+	i = 0;
+
+	while (i < n)
+	{
+		for (j = i + 1; j < n; j++) // 확인할 학번 다음 부터 검사
+		{
+			if (a[i].carNum != a[j].carNum && a[i].stuNum == a[j].stuNum)
+				cnt++; // 차량번호가 다르면서 학번이 같으면 부정차량 갯수를 증가
+			if (a[i].stuNum != a[j].stuNum) // 학번이 다르면 중복된 학번 순회가 끝난 것 탈출
+				break;
+		}
+
+		if (cnt > 0) // 카운트가 1 이상이면 부정사용자
+			printf("%d\n", a[i].stuNum); // 출력
+
+		i = j; // 중복된 학번 검사가 끝났으므로 i를 중복된 만큼 건너뜀
+		cnt = 0; // cnt 초기화
+	}
+
+	return 0;
+}
+============================================================================================================================
+문제 4
+#include <stdio.h>
+#pragma warning (disable:4996)
+typedef struct parking {
+	int carNum; // 차번호
+	int stuNum; // 학번
+	char Day[2][11]; //  Day[0] = 입차 날짜, Day[1] = 출차 날짜
+	int hour[2]; // hour[0] = 입차 시간, hour[1] = 출차 시간
+	int min[2]; // min[0] = 입차 시간, min[1] = 출차 시간
+}parking;
+int main()
+{	parking a[100]; // 최대 주차 개수 100대
+	parking tmp; // 스왑시 사용할 임시변수
+	int n, i, j, k = 0, cnt = 0; // 주차대수 n, 반복문 i,j,k, 부정차량 갯수를 세는 cnt
+	int bad[100]; // 부정사용자를 저장할 배열
+	int m, time[2], car, fee; // 요금 산정시 차량 대수 m, 시간계산에 사용할 time, 요금을 확인할 차량 car, 요금을 저장할 변수 fee
+	int stu; // 요금확인할 차량의 학번
+	scanf("%d", &n); // 주차 대수를 입력
+	for (i = 0; i < n; i++)
+	{
+		scanf("%d %d %s %d:%d %s %d:%d", &a[i].carNum, &a[i].stuNum,
+			a[i].Day[0], &a[i].hour[0], &a[i].min[0], a[i].Day[1], &a[i].hour[1], &a[i].min[1]);
+	} // 차량번호, 학번, 입차날짜, 입차 시간, 분, 출차 날짜, 출차 시간, 분 순서로 입력 
+	for (i = 0; i < n - 1; i++) // 학번 순으로 parking배열 정렬
+	{
+		for (j = 0; j < n - i - 1; j++)
+		{
+			if (a[j].stuNum > a[j + 1].stuNum)
+			{
+				tmp = a[j];
+				a[j] = a[j + 1];
+				a[j + 1] = tmp;
+			}
+		}
+	}
+	// 학번순으로 정렬했으므로 같은 학번이 연속으로 등장
+	i = 0;
+	while (i < n)
+	{
+		for (j = i + 1; j < n; j++) // 확인할 학번 다음 부터 검사
+		{
+			if (a[i].carNum != a[j].carNum && a[i].stuNum == a[j].stuNum)
+				cnt++; // 차량번호가 다르면서 학번이 같으면 부정차량 갯수를 증가
+			if (a[i].stuNum != a[j].stuNum) // 학번이 다르면 중복된 학번 순회가 끝난 것 탈출
+				break;
+		}
+		if (cnt > 0) // 카운트가 1 이상이면 부정사용자
+		{
+			bad[k] = a[i].stuNum; // 저장
+			k++;
+		}
+		i = j; // 중복된 학번 검사가 끝났으므로 i를 중복된 만큼 건너뜀
+		cnt = 0; // cnt 초기화
+	}
+	scanf("%d", &m); // 확인할 차량 갯수 입력
+	for (i = 0; i < m; i++)
+	{
+		scanf("%d", &car); // 차번호 입력 
+		for (j = 0; j < n; j++)
+		{
+			if (car == a[j].carNum) // 배열에서 차번호를 찾으면
+			{
+				stu = a[j].stuNum; // 나중에 부정사용자 확인을 위해 학번을 저장하고
+				time[0] = a[j].hour[0] * 60 + a[j].min[0]; // 시간을 분으로 통합
+				time[1] = a[j].hour[1] * 60 + a[j].min[1];
+				time[0] = time[1] - time[0]; // 출차시간 - 입차시간 -> 실제로 주차되어 있던 시간 (단위 : 분)
+				if (time[0] <= 60) // 60분 이하면
+					fee = 3000; // 기본요금 3000원
+				else
+				{
+					time[0] -= 60; // 주차시간에서 기본 시간 1시간 제외
+					fee = 3000 + ((time[0] / 10) + 1) * 1000; // 10분당 1000원이고 1분이라도 지나면 10분요금 받기에 (남은시간/10) + 1
+				}
+				if (fee > 30000) // 최대요금이 30000이므로
+					fee = 30000; // 총 요금이 3만원 이상이면 요금 3만원
+				break;
+			}
+		}
+		// 요금계산 끝
+		for (j = 0; j < k; j++)
+		{
+			if (stu == bad[j]) // 부정사용자 학번 배열을 순회하며
+			{
+				fee = 100000; // 부정사용자가 발견되면 요금을 10만원으로
+				break;
+			}
+		}
+		printf("%d\n", fee); // 요금 출력
+	}
+	return 0;
+}
+============================================================================================================================
+문제 5
+#include <stdio.h>
+#include <string.h>
+#pragma warning (disable:4996)
+
+typedef struct student {
+	char name[31]; //이름
+	int num; // 학번
+	int courseNum; // 과목 수
+	char course[10][31]; // 과목 이름
+	double grade[10]; // 점수
+}student;
+
+void insert(student* a, int* n)
+{ // 구조체 포인터를 인자로 값 입력
+	int i;
+	scanf("%s %d %d", a->name, &a->num, &a->courseNum); // 이름, 학번, 과목수를 입력
+
+	for (i = 0; i < a->courseNum; i++)
+	{ // 과목 수 만큼 과목 이름, 점수를 입력
+		scanf("%s %lf", a->course[i], &a->grade[i]);
+	}
+	(*n)++; // 배열 길이 증가
+	getchar(); // '\n' 제거
+}
+
+void print(student* a, int n) 
+{ // 배열과 길이를 인자로 값 출력
+	int i, j;
+	double avg;
+
+	for (i = 0; i < n; i++) // 구조체 배열을 순회하며
+	{
+		avg = 0.0; // 계산을 위해 0.0 저장
+		for (j = 0; j < a[i].courseNum; j++)
+		{ // 점수를 전부 +
+			avg += a[i].grade[j];
+		}
+		avg /= a[i].courseNum; // 과목 수로 나누어 평균 계산
+
+		printf("%s %d %d %.2lf\n", a[i].name, a[i].num, a[i].courseNum, avg); //이름, 학번, 과목수, 평균 출력
+	}
+}
+
+void sortPrint(student* origin, int n)
+{
+	student tmp;
+	student copy[100]; // 정렬을 위한 배열
+	int i, j;
+
+	for (i = 0; i < n; i++) // 원본 배열의 훼손 방지를 위해 배열을 순회하며
+		copy[i] = origin[i]; // 배열 값 복사
+
+	for (i = 0; i < n - 1; i++) // 버블정렬로 정렬
+	{
+		for (j = 0; j < n - i - 1; j++)
+		{
+			if (strcmp(copy[j].name, copy[j + 1].name) > 0)
+			{
+				tmp = copy[j];
+				copy[j] = copy[j + 1];
+				copy[j + 1] = tmp;
+			}
+		}
+	}
+
+	print(copy, n); // 위에서 만든 print()를 호출해 구조체 배열 copy 출력
+}
+
+void deleteStudent(student* a, int* n)
+{
+	char str[31];
+	int i, j;
+
+	scanf("%s", str); // 삭제할 학생 이름을 저장
+	getchar(); //'\n' 제거
+
+	for (i = 0; i < *n; i++) // 구조체 배열을 확인하며
+	{
+		if (!strcmp(str, a[i].name)) // 이름이 같으면
+		{
+			for (j = i; j < *n - 1; j++)
+			{
+				a[j] = a[j + 1]; // 전부 한칸씩 당겨 해당 값 삭제
+			}
+
+			(*n)--; // 배열길이 감소
+			break; // 삭제가 되었으므로 반복문 탈출, 
+		}
+	}
+}
+
+int main()
+{
+	char c; // 키를 입력받을 변수
+	int len = 0; // 배열의 길이
+	student a[100]; // 학생은 최대 100명
+
+	while (1) // 무한반복하며
+	{
+		scanf("%c", &c); // 키를 입력받고
+		getchar(); //'\n' 제거
+
+		if (c == 'Q') // Q면 탈출
+			break;
+
+		switch (c)
+		{
+		case 'I': // 값 입력
+			insert(&a[len], &len); // insert()함수를 호출해 값을 입력받음
+			break;
+
+		case 'S': // 정렬 후 출력
+			sortPrint(a, len);
+			break;
+
+		case 'D': // 값 삭제
+			deleteStudent(a, &len);
+			break;
+
+		case 'P': // 배열 출력
+			print(a, len);
+			break;
+
+		default:
+			break;
+		}
+	}
+
+	return 0;
+}
