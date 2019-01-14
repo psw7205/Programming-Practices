@@ -1,0 +1,318 @@
+문제 1
+#include<iostream>
+#include<string>
+using namespace std;
+
+void convert(string &a)
+{
+	for(int i = 0; i < a.length(); i++)
+	{
+		if(a.at(i) >= 'a' && a.at(i) <= 'z')
+			a.at(i) = a.at(i) - 'a'-'z';
+	}
+}
+
+int main()
+{
+	string a[5];
+	string b;
+
+	cout << "5명의 이름을 ;로 구분하여 입력하세요:" << endl;
+	cout << ">>";
+	
+	for(int i = 0; i < 5; i++)
+	{
+		getline(cin, a[i], ';');
+		convert(a[i]);
+	}
+
+
+
+	for(int i = 0; i < 5; i++)
+	{
+		cout << i+1 << ":";
+		cout << a[i] << endl;
+	}
+
+	b = a[0];
+
+	for(int i = 1; i < 5; i++)
+	{
+		if(a[0].length() < a[i].length())
+			b = a[i];
+	}
+
+	cout<<  "가장 긴 이름은 " << b << endl;
+
+	return 0;
+}
+
+
+============================================================
+문제 2
+
+#include<iostream>
+#include<string>
+using namespace std;
+
+class CBox{
+	int n, m;
+	char c;
+public:
+	CBox(int a, int b)
+	{ 
+		n = a; m = b; c = '*';
+	}
+
+	void draw()
+	{
+		for(int i = 0; i < m; i++)
+		{
+			for(int j = 0; j < n; j++)
+					cout << c;
+			cout << endl;
+		}
+		cout << endl;
+	}
+
+	void setSize(int a, int b)
+	{
+		n = a; m = b;
+	}
+
+	char setFill(char a)
+	{
+		c = a;
+		return c;
+	}
+
+};
+
+
+int main()
+{
+	CBox b(10,2);
+	b.draw();
+	b.setSize(7,4);
+	b.setFill('^');
+	b.draw();
+
+	return 0;
+}
+
+
+============================================================
+문제 3
+
+#include<iostream>
+#include<string>
+using namespace std;
+
+class CFamily{
+	string fname;
+	string *p;
+	int size;
+public:
+	CFamily(string a, int b) 
+	{
+		fname = a;
+		size = b;
+		p = new string[size];
+	}
+
+	~CFamily()
+	{
+		delete [] p;
+	}
+
+	void setName(int a, string b)
+	{
+		p[a] = b;
+	}
+
+	void show()
+	{
+		cout << fname <<"의 가족은 " << size << "명 입니다." << endl;
+		for(int i = 0; i < size; i++)
+			cout << p[i] << endl;
+	}
+
+};
+
+
+int main()
+{
+	CFamily simpson("simson", 3);
+	simpson.setName(0, "Mr. Simson");
+	simpson.setName(1, "Mrs. Simson");
+	simpson.setName(2, "Bart Simson");
+	simpson.show();
+
+	return 0;
+}
+============================================================
+문제 4
+
+#include<iostream>
+#include<string>
+using namespace std;
+
+class CBook{
+	char *title;
+	int price;
+public:
+	CBook() {}
+	CBook(char *a, int n)
+	{
+		title = a;
+		price = n;
+	}
+	CBook(CBook &a)
+	{
+		char *p = a.title ;
+		price = a.price;
+	}
+	void set(char *a ,int n)
+	{
+		title = a;
+		price = n;
+	}
+
+	void show()
+	{
+		cout << title << " " << price << endl;
+	}
+
+};
+
+
+int main()
+{
+	CBook cpp("명품 C++", 10000);
+	CBook java = cpp;
+	java.set("명품자바", 12000);
+	cpp.show();
+	java.show();
+
+	return 0;
+}
+
+============================================================
+문제 5 --- X
+
+#include<iostream>
+#include<string>
+using namespace std;
+
+class CBoard{
+public:
+	static string s;
+	static string add(string a);
+	static void print();
+};
+
+string CBoard::s = "/0";
+
+
+string add(string a)
+{
+	CBoard::s += a;
+
+	return CBoard::s;
+}
+
+void print()
+{
+	cout << "**** 게시판 입니다. ****" << endl;
+	cout << CBoard::s ;
+}
+
+
+int main()
+{
+	CBoard::add("중간고사 실시 중");
+	CBoard::add("총 6문제");
+	CBoard::print();
+
+	CBoard::add("손들어 검사");
+	CBoard::print();
+
+	return 0;
+}
+
+============================================================
+문제 6
+
+#include<iostream>
+#include<string>
+using namespace std;
+
+class CVector{
+	int a, b, c, d;
+
+public:
+	CVector() {a = 0 ; b = 0; c = 0; d = 0; }
+	CVector(int e, int f, int g, int h)
+	{
+		a = e;
+		b = f;
+		c = g;
+		d = h;
+	}
+
+	void show()
+	{
+		cout << "Vector = { " << a << " " << b << " " << c << " " << d << " }" << endl;
+	}
+
+	friend CVector operator+(CVector a, CVector b);
+	friend CVector operator+=(CVector &a, CVector b);
+	friend bool operator==(CVector a, CVector b);
+
+};
+
+CVector operator+(CVector a, CVector b)
+{
+	CVector c;
+	c.a = a.a + b.a;
+	c.b = a.b + b.b;
+	c.c = a.c + b.c;
+	c.d = a.d + b.d;
+
+	return c;
+}
+
+CVector operator+=(CVector &a, CVector b)
+{
+	a.a = a.a + b.a;
+	a.b = a.b + b.b;
+	a.c = a.c + b.c;
+	a.d = a.d + b.d;
+
+	return a;
+}
+
+bool operator==(CVector a, CVector b)
+{
+	if(a.a == b.a && a.b == b.b && a.c == b.c && a.d == b.d)
+		return true;
+	else
+		return false;
+}
+
+int main()
+{
+	CVector a(1, 2, 3, 4) , b(2, 3, 4 ,5) ,c ;
+
+	c = a + b;
+
+	a += b;
+
+	a.show();
+	b.show();
+	c.show();
+	if(a == c)
+		cout <<"a and c are the same." << endl;
+
+	return 0;
+}
