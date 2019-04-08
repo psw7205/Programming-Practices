@@ -1,10 +1,18 @@
-// 2019년 1학기 네트워크프로그래밍 숙제 1번 서버
-// 성명: 홍길동 학번: 16013093
+// 2019년 1학기 네트워크프로그래밍 숙제 1번 클라이언트
+// 성명: 박상우 학번: 16013093
 // 플랫폼: VS2017
-// 작동하는 도메인 네임: www.sejong.ac.kr ....
+// 작동하는 도메인 네임
+// www.naver.com
+// www.daum.net
+// www.amazon.com
+// stackoverflow.com
+
+// Aliases의 길이가 50보다 긴 도메인
+// www.apple.com
+// www.ibm.com
+// www.microsoft.com
 
 #define _WINSOCK_DEPRECATED_NO_WARNINGS // 최신 VC++ 컴파일 시 경고 방지
-#pragma warning(disable:4996)
 #pragma comment(lib, "ws2_32")
 
 #include <winsock2.h>
@@ -13,7 +21,7 @@
 
 #define SERVERIP   "127.0.0.1"
 #define SERVERPORT 9000
-#define BUFSIZE    50
+#define BUFSIZE    256
 
 // 소켓 함수 오류 출력 후 종료
 void err_quit(char *msg)
@@ -86,15 +94,14 @@ int main(int argc, char *argv[])
 	// 데이터 통신에 사용할 변수
 	char buf[BUFSIZE];
 	int len;
-	HOSTENT *ptr;
 
 	// 서버와 데이터 통신
-	while (true)
+	while (1)
 	{
 		// 데이터 입력
-		printf("도메인 네임을 입력하세요 (quit 입력 시 종료) : ");
+		printf("\n도메인 네임을 입력하세요 (quit 입력 시 종료) : ");
 		fgets(buf, BUFSIZE, stdin);
-		len = strlen(buf);
+		len = (int)strlen(buf);
 
 		buf[len - 1] = '\0';
 
@@ -114,7 +121,7 @@ int main(int argc, char *argv[])
 
 		if (!strcmp(buf, "quit"))
 		{
-			printf("quit입력 프로그램을 종료합니다");
+			printf("quit입력 프로그램을 종료합니다\n");
 			break;
 		}
 
