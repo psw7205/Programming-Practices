@@ -1,0 +1,134 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: "나눔 고딕", "NanumGothic", "맑은 고딕", "Gothic";
+}
+
+a {
+    text-decoration: none;
+}
+
+li {
+    list-style: none;
+}
+
+body {
+    width: 960px;
+    margin: 0 auto;
+    background-color: #e6e6e6;
+}
+
+#page-wrapper {
+    background-color: #ffffff;
+    margin: 40px 0;
+    padding: 10px 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 6px rgba(100, 100, 100, 0.3);
+}
+
+header#main-header {
+    padding: 40px 50px;
+}
+
+header .master-title {
+    font-size: 30px;
+    color: #181818;
+}
+
+header .master-description {
+    font-size: 15px;
+    color: #383838;
+    font-weight: 500;
+}
+
+nav#main-navigation {
+    border-top: 1px solid #c8c8c8;
+    border-bottom: 1px solid #c8c8c8;
+    margin-bottom: 20px;
+    height: 40px;
+}
+
+nav .outer-menu-item {
+    float: left;
+}
+
+nav .menu-title {
+    display: block;
+    height: 30px;
+    text-align: center;
+    padding: 5px 20px;
+    color: #000000;
+    cursor: pointer;
+}
+
+nav .menu-title:active {
+    color: #ffff00;
+}
+
+div#content {
+    overflow: hidden;
+}
+
+section#main-section {
+    float: left;
+    width: 710px;
+}
+
+section#main-aside {
+    float: right;
+    width: 200px;
+}
+
+section article {
+    padding: 0 10px 20px 10px;
+    border-bottom: 1px solid #c8c8c8;
+}
+
+section .article-header {
+    padding: 20px 0;
+}
+
+section .article-title {
+    font-size: 25px;
+    padding-bottom: 10px;
+    font-weight: 500;
+}
+
+section .aticle-data {
+    font-size: 13px;
+}
+
+section .aticle-body {
+    font-size: 14px;
+}
+
+section img[src*="Sejong"] {
+    width: 280px;
+    height: 280px;
+}
+
+section img[src*="Datascience"] {
+    width: 430px;
+    height: 280px;
+}
+
+aside .aside-list {
+    padding-top: 10px;
+    padding-bottom: 30px;
+}
+
+aside h3 {
+    font-size: 15px;
+    font-weight: 600;
+}
+
+aside a {
+    margin-left: 8px;
+    font-size: 13px;
+    color: #6c6c6c;
+}
+
+footer {
+    font-size: 10px;
+    color: #666666;
+}

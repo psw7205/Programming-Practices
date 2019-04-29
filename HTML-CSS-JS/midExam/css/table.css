@@ -1,0 +1,13 @@
+.time-table {
+    color: #06425c;
+    text-align: center;
+    border: 3px solid #000000;
+    border-spacing: 0;
+}
+
+caption {
+    font-variant: small-caps;
+    background-color: #666666;
+    color: #ffffff;
+    font-size: 150%;
+}
