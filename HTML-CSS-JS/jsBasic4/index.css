@@ -1,0 +1,16 @@
+h1 {
+  color: #000000;
+}
+
+body {
+  background: #f1f1f1;
+}
+
+.form,
+.greeting {
+  display: none;
+}
+
+.showing {
+  display: block;
+}
