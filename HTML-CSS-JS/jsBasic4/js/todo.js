@@ -21,6 +21,8 @@ function delTodo(event) {
 }
 
 function paintValue(text) {
+  if (text === "") return;
+
   const li = document.createElement("li");
   const btn = document.createElement("button");
   const newId = todoArray.length;

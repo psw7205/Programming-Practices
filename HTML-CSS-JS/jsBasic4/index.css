@@ -1,7 +1,7 @@
 * {
   font-family: "D2coding ligature";
   color: #ffffff;
-  text-shadow: 1px 1px #000000;
+  text-shadow: 1 1 25px rgba(0, 0, 0, 0.3);
   font-size: 40px;
 }
 
@@ -21,7 +21,10 @@ body {
 }
 
 input {
-  color: #000000;
+  color: #ffffff;
+  border: none;
+  border-bottom: 2px solid #ffffff;
+  background: transparent;
 }
 
 .form,
