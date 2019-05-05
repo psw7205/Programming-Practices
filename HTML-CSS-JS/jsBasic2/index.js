@@ -5,24 +5,24 @@ const BASE_COLOR = "rgb(0, 255, 0)";
 const OTHER_COLOR = "#ff0000";
 
 function handleClick() {
-  const currentColor = title.style.color;
+    const currentColor = title.style.color;
 
-  if (currentColor === BASE_COLOR) {
-    title.style.color = OTHER_COLOR;
-  } else {
-    title.style.color = BASE_COLOR;
-  }
+    if (currentColor === BASE_COLOR) {
+        title.style.color = OTHER_COLOR;
+    } else {
+        title.style.color = BASE_COLOR;
+    }
 }
 
 function init() {
-  title.style.color = BASE_COLOR;
-  title.addEventListener("click", handleClick);
+    title.style.color = BASE_COLOR;
+    title.addEventListener("click", handleClick);
 }
 
 init();
 
 function handleOffline() {
-  console.log("byebye");
+    console.log("byebye");
 }
 
 window.addEventListener("offline", handleOffline);

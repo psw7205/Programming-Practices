@@ -1,66 +1,66 @@
 @import "./reset.css";
 
 h1 {
-  margin-bottom: 20px;
-  font-weight: 800;
-  font-size: 40px;
+    margin-bottom: 20px;
+    font-weight: 800;
+    font-size: 40px;
 }
 
 body {
-  background-color: #f6f9fc;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-top: 10px;
-  font-family: "D2coding ligature";
+    background-color: #f6f9fc;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 10px;
+    font-family: "D2coding ligature";
 }
 
 .canvas {
-  width: 600px;
-  height: 600px;
-  background-color: #ffffff;
-  border-radius: 20px;
-  box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
+    width: 600px;
+    height: 600px;
+    background-color: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
 }
 
 .controls {
-  margin-top: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .controls__btns {
-  margin-top: 20px;
+    margin-top: 20px;
 }
 
 .controls__btns button {
-  all: unset;
-  background: #ffffff;
-  padding: 5px 0;
-  width: 60px;
-  text-align: center;
-  border-radius: 10px;
-  cursor: pointer;
-  box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
-  border: 1px solid #000000;
-  font-weight: 800;
-  text-transform: uppercase;
+    all: unset;
+    background: #ffffff;
+    padding: 5px 0;
+    width: 60px;
+    text-align: center;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
+    border: 1px solid #000000;
+    font-weight: 800;
+    text-transform: uppercase;
 }
 .controls__btns button:active {
-  transform: scale(0.95);
+    transform: scale(0.95);
 }
 
 .controls .controls__color {
-  display: flex;
-  margin-bottom: 20px;
+    display: flex;
+    margin-bottom: 20px;
 }
 
 .controls__color .controls__color {
-  margin-top: 20px;
-  width: 50px;
-  height: 50px;
-  border-radius: 25px;
-  box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
-  cursor: pointer;
+    margin-top: 20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 25px;
+    box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
+    cursor: pointer;
 }
