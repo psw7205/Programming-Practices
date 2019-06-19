@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ko" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>오시는 길</title>
+  <link rel="stylesheet" href="css/googlemap.css">
+</head>
+
+<body>
+  <div id="card">
+    <h1>대양AI센터 오시는 길</h1>
+    <div id="googleMap"></div>
+    <h3>지하철</h3>
+    <p><span id="line7">● 7호선 어린이대공원역</span> 6번 출구로 나오셔서 도보로 5분 걸어오시면 됩니다.</p>
+    <h3>버스</h3>
+    <p><span id="greenbus">● 지선</span> | 3216, 4212</p>
+    <p><span id="bluebus">● 간선</span> | 721, N61, N62</p>
+    <p><span id="redbus">● 광역</span> | 3500</p>
+  </div>
+  <script src="./js/6_googlemap.js">
+  </script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=APIKEY&callback=myMap">
+  </script>
+</body>
+
+</html>
