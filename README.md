@@ -15,3 +15,4 @@
 * WinForm
 * WinSock
 * problem solving
+* Python
