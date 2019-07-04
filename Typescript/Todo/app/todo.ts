@@ -55,7 +55,6 @@ function toAlltask(task: string, description: string) {
 
     //Casting
     (<HTMLInputElement>document.getElementById("todoName")).value = "";
-
     (<HTMLInputElement>document.getElementById("todoDescription")).value = "";
 
 }
