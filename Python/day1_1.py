@@ -5,9 +5,9 @@
 '''
 # 출력문 print(value/variable, end='대체문자나 공백')
 print('Hello world')
-print(100+200)
+print(100 + 200)
 print(True)
-print(100,'+',200,'=',100+200)
+print(100, '+', 200, '=', 100 + 200)
 
 # 한줄로 출력하기
 # print( 수식/값, end='')
@@ -18,21 +18,21 @@ print(a)
 print(b)
 print(a, end='')
 print(b, end='')
-print(a+b)
+print(a + b)
 # 문자열 연산자
 # + 연결
 # * 반복 : 문자열*반복횟수
 txt1 = '안녕하세요...'
 txt2 = ' 홍길동입니다.'
-print( txt1 + txt2)
-print('-'*10)
+print(txt1 + txt2)
+print('-' * 10)
 
 # 이스케이프 코드 : p49 참조
 # \n  : 줄바꿈
 # \t : 탭공백
 # \\ : \ 표시
 # \', \" : 인용부호 표시
-print('\n'*3)
+print('\n' * 3)
 print('\t\t 점심 시간 안내')
 print('시간 \" \\ 12-1 \\ \"  ')
 
@@ -64,8 +64,8 @@ print('user2 : ', user2)
 # 변수1,변수2 = 값1,값2
 print('user1 : ', user1)
 print('user2 : ', user2)
-user1,user2 = user2, user1
-print('-'*10)
+user1, user2 = user2, user1
+print('-' * 10)
 print('user1 : ', user1)
 print('user2 : ', user2)
 
@@ -79,47 +79,11 @@ print('user2 : ', user2)
 
 # 키워드 출력하기
 import keyword
+
 print('키워드 목록 ')
 print(keyword.kwlist)
-print('키워드 갯수 : ', len(keyword.kwlist) )
+print('키워드 갯수 : ', len(keyword.kwlist))
 
 # len() : 문자열, 리스트 등의 길이를 표시한다.
 today = '오늘은 화요일입니다.'
 print('today 길이:', len(today))
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

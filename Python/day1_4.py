@@ -27,5 +27,3 @@ print(' f => ', sampleTxt.index('f'))
 print(' 가 => ', sampleTxt.find('가'))
 # 찾고자하는 문자열 없다면 ValueError 에러 발생
 # print(' 가 => ', sampleTxt.index('가'))
-
-
