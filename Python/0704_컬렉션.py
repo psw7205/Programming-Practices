@@ -5,6 +5,13 @@
 집합 set()
 '''
 
+myString = 'abcdefg' + \
+           'hijklmno' + \
+           'qrsuv' + \
+           'wxyz'
+
+print(myString)
+
 myList = [1, 2, 3, 4, 5]
 print(myList)
 print(myList[0:2])
@@ -154,3 +161,26 @@ print(s1 - s2)
 print(s1.difference(s2))
 
 print(s1 ^ s2)
+
+drinks = {
+    'martini': {'vodka', 'vermouth'},
+    'black russian': {'vodka', 'kahlua'},
+    'white russian': {'vodka', 'kahlua', 'cream'},
+    'manhattan': {'rye', 'vermouth', 'bitters'},
+    'screwdriver': {'vodka', 'orange juice'}
+}
+
+for name, contents in drinks.items():
+    if 'vodka' in contents:
+        print(name)
+print('-' * 30)
+
+for name, contents in drinks.items():
+    if contents & {'vermouth', 'orange juice'}:
+        print(name)
+print('-' * 30)
+
+for name, contents in drinks.items():
+    if 'vodka' in contents and \
+            not contents & {'vermouth', 'orange juice'}:
+        print(name)
