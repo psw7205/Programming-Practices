@@ -1,4 +1,5 @@
 # Typescript
+  - 참고자료 https://github.com/typescript-kr/awesome-typescript-korean
 
  ```
 npm install -g typescript
