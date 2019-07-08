@@ -33,9 +33,9 @@ val = "string";
 
 // enum
 enum Color {
-  Red,
-  Green,
-  Blue
+    Red,
+    Green,
+    Blue
 }
 
 let color: Color = Color.Green;

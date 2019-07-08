@@ -8,17 +8,17 @@
 
 */
 class News {
-  constructor(title: string, num: number) {
-    this.newsTitle = title;
-    this.channelNum = num;
-  }
-  public newsTitle: string;
-  public channelNum: number;
-  private author: string = "ESPN";
+    constructor(title: string, num: number) {
+        this.newsTitle = title;
+        this.channelNum = num;
+    }
+    public newsTitle: string;
+    public channelNum: number;
+    private author: string = "ESPN";
 
-  format(): string {
-    return `${this.newsTitle} : ${this.channelNum} by ${this.author}`;
-  }
+    format(): string {
+        return `${this.newsTitle} : ${this.channelNum} by ${this.author}`;
+    }
 }
 
 let espn = new News("Today News", 1);
@@ -26,36 +26,36 @@ console.log(espn.format());
 
 // 생성자에서 프로퍼티 생성, 할당
 class News2 {
-  private author: string = "ESPN";
-  constructor(public newsTitle: string, public channelNum: number) {}
-  format(): string {
-    return `${this.newsTitle} : ${this.channelNum} by ${this.author}`;
-  }
+    private author: string = "ESPN";
+    constructor(public newsTitle: string, public channelNum: number) {}
+    format(): string {
+        return `${this.newsTitle} : ${this.channelNum} by ${this.author}`;
+    }
 }
 
 let espn2 = new News2("Today News", 1);
 console.log(espn2.format());
 
 class GetterSetter {
-  private _value!: string;
-  public get GetValue(): string {
-    return this._value;
-  }
-  public set SetValue(v: string) {
-    if (v != "") this._value = v;
-  }
+    private _value!: string;
+    public get GetValue(): string {
+        return this._value;
+    }
+    public set SetValue(v: string) {
+        if (v != "") this._value = v;
+    }
 }
 
 // static 정적 변수, 메소드는 클래스 이름으로 공유
 class Counter {
-  static cnt: number = 0;
+    static cnt: number = 0;
 
-  static CountIncrease() {
-    Counter.cnt += 1;
-  }
-  GetCount(): number {
-    return Counter.cnt;
-  }
+    static CountIncrease() {
+        Counter.cnt += 1;
+    }
+    GetCount(): number {
+        return Counter.cnt;
+    }
 }
 
 let cnt = new Counter();
@@ -73,29 +73,29 @@ console.log("cnt2 :", cnt2.GetCount());
 // 상속관계에서만 사용 가능한 protected
 // 부모의 생성자는 super()로 호출
 class base {
-  protected id: number;
-  constructor(num: number) {
-    this.id = num;
-  }
+    protected id: number;
+    constructor(num: number) {
+        this.id = num;
+    }
 }
 
 class child extends base {
-  name: string;
-  constructor(str: string, num: number) {
-    super(num);
-    this.name = str;
-  }
+    name: string;
+    constructor(str: string, num: number) {
+        super(num);
+        this.name = str;
+    }
 
-  print(): string {
-    return `${this.name} id is ${this.id}`;
-  }
+    print(): string {
+        return `${this.name} id is ${this.id}`;
+    }
 }
 
 // readonly 변수 선언 시 또는 생성자에서만 할당 가능
 class HelloWorld {
-  readonly name: string = "park sang woo";
+    readonly name: string = "park sang woo";
 
-  changeName() {
-    // name = 'tmp'; // readonly이기 때문에 쓰기 불가능
-  }
+    changeName() {
+        // name = 'tmp'; // readonly이기 때문에 쓰기 불가능
+    }
 }
