@@ -19,9 +19,9 @@ console.log(ar);
 console.log("-------------------------------------------------");
 
 const info = {
-  name: "park",
-  age: 25,
-  gender: "male"
+    name: "park",
+    age: 25,
+    gender: "male"
 };
 
 console.log(info);
@@ -47,14 +47,14 @@ console.log("-------------------------------------------------");
 // 함수 function funcName (pram1, ...) { ... }
 // 문자열의 연결은 ,도 가능하고 +로도 가능
 function sayHello(name, age) {
-  console.log("hello", name, "// age : " + age);
+    console.log("hello", name, "// age : " + age);
 }
 sayHello("psw", 26);
 
 //함수 return
 //`` 을 사용한 { }로 스트링 사용하기
 function sayHello2(name, age) {
-  return `hello ${name} // age : ${age}`;
+    return `hello ${name} // age : ${age}`;
 }
 const sayPSW = sayHello2("psw", 26);
 console.log(sayPSW);
@@ -62,12 +62,12 @@ console.log(sayPSW);
 console.log("-------------------------------------------------");
 
 const cal = {
-  plus: function(x, y) {
-    return x + y;
-  },
-  minus: function(x, y) {
-    return x - y;
-  }
+    plus: function(x, y) {
+        return x + y;
+    },
+    minus: function(x, y) {
+        return x - y;
+    }
 };
 
 console.log(cal.plus(1, 2));

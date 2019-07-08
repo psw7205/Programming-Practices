@@ -30,13 +30,13 @@ let rest = new TestRest("title", 1, 2, 3, 4, 5);
 function Add(str: string, str2: string): string;
 function Add(num: number, num2: number): number;
 function Add(prop: any, prop2: any): any {
-  if (typeof prop == "string") {
-    return prop + prop2 + " 문자열 더하기";
-  } else if (typeof prop == "number") {
-    return prop + prop2 + " 숫자 더하기";
-  }
+    if (typeof prop == "string") {
+        return prop + prop2 + " 문자열 더하기";
+    } else if (typeof prop == "number") {
+        return prop + prop2 + " 숫자 더하기";
+    }
 
-  return "오류";
+    return "오류";
 }
 
 console.log("Add(1, 2) :", Add(1, 2));
