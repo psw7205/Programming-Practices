@@ -297,3 +297,252 @@ print(sumTwo2(20))  # 20
 # def multiTest(20)
 # def multiTest(30,20)
 # def multiTest(30,20,70)
+# 함수 정의 6
+# 가변인자를 이용한 함수 정의
+# 인자가 정해지지 않은 함수
+# 결과값은 튜플
+'''
+# 정의
+def 함수명(*args):
+    인자 args 있는 명령문
+    return 결과
+
+# 호출
+함수명(인자)
+함수명(인자1,인자2..)
+함수명(인자1,인자2,인자3)
+'''
+
+
+# 가변인자를 받아서 출력한다.
+def printM(*args):
+    print(args)
+    print(type(args))
+    # 한개씩 출력
+    for i in args:
+        print(i)
+
+
+printM(100)
+printM('함수', '제어문', '클래스')
+
+
+# 가변인자를 이용해서 n개의 합 구하기
+def sumArgs(*args):
+    result = 0
+    for i in args:
+        result += i
+    return result
+
+
+print(sumArgs(10, 20, 30))
+print(sumArgs(10, 20))
+print(sumArgs(10, 20, 100, 300, -20))
+
+# 함수 정의 7
+# 인자와 가변인자가 함께 정의된 경우
+# 가변인자가 마지막에 정의되어야 한다.
+'''
+# 정의
+def 함수명(인자, *args):
+    인자가 있는 명령문 
+    인자 args 있는 명령문
+    return 결과
+
+# 호출
+함수명(인자, 가변인자)
+함수명(인자, 가변인자1, 가변인자2 ...)
+'''
+
+
+def printTest(symbol, *args):
+    print('인자 = ', symbol)
+    print('가변인자 = ', args)
+    print('-' * 30)
+
+
+printTest('*', 10)
+printTest('-', 10, '가나다')
+printTest('+', '파이썬', '자바', '자바스크립트')
+
+# 퀴즈
+# 다음 함수를 호출하면 계산 결과가 출력되도록
+# 가변인자와 인자를 정의하여라
+
+# def calChoice(계산기호인자, *args) :
+#     if 계산기호인자 == *:
+#           명령문1
+#     elif 계산기호인자 == +:
+#           명령문2
+#     else:
+#           명령문3
+
+# calChoice('*', 20,30)
+# 계산결과 : 곱 : 600
+# calChoice('+', 20,30,50)
+# 계산결과 : 합 : 100
+
+# 스코프(Scope) ?
+# 변수의 범위
+#   - 함수안의 정의된 변수와 함수밖의 변수 범위
+# 전역변수 : 파일 전체에서 사용되는 변수
+# 지역변수 : 함수내에서 사용되는 변수
+# global 변수 : 함수안에서 전역변수를 사용할 때 사용
+
+# 전역변수 정의
+v = 10
+print('테스트1 : v 값은?', v)  # 10
+
+
+# 함수내의 같은 변수값 테스트
+def testScope():
+    # 지역 변수
+    v = 20
+    print('함수내의 v 값은?', v)
+
+
+# 함수 호출
+testScope()  # 20
+
+print('테스트2 : v 값은?', v)  # 10
+
+print('-' * 20)
+
+# 전역변수 정의
+v1 = 10
+print('테스트1 : v1 값은?', v1)  # 10
+
+
+# 함수내의 같은 변수값 테스트
+def testScope2():
+    # 전역 변수 정의
+    # global 변수명
+    global v1
+
+    print('함수내의 v 값은?', v1)  # 10
+
+    # 전역 변수에 값 할당
+    v1 = 20
+    print('함수내의 v 값은?', v1)  # 20
+
+
+# 함수 호출
+testScope2()  # 20
+
+print('테스트2 : v1 값은?', v1)  # 20
+
+# 람다함수 정의
+# lambda 함수 = 익명함수
+# define 정의문이 없다.
+# 한줄로 코딩한다.
+# 축약형 함수
+# lambda 함수로 정의
+# 함수변수 = lambda 인자:명령문
+# lambda 함수 호출
+# 함수변수(인자)
+
+# 인자를 출력하는 lambda 함수 정의
+f1 = lambda x: x + x
+# lambda 함수 호출
+print(f1(10))  # 20
+print(f1('Python / '))  # Python / Python /
+
+# 세수의 합을 구하는 lambda 함수 정의
+f2 = lambda x, y, z: x + y + z
+# lambda 함수 호출
+print(f2(10, 20, 40))
+print(f2('알라딘 ', '로미오와 줄리엣 ', '기생충 '))
+
+# 내장함수
+# 수학관련 함수
+# 절대값 출력 : abs(숫자)
+print('-1 =>', abs(-1))
+print('10 =>', abs(10))
+
+# 리스트의 최대값과 최소값 출력하기
+# max(리스트/튜플/집합...)
+# min(리스트/튜플/집합...)
+print('[20, 40, 56, 100]')
+print('최대값 =>', max([20, 40, 56, 100]))
+print('최소값 =>', min([20, 40, 56, 100]))
+
+print('(20, 40, 56, 100)')
+print('최대값 =>', max((20, 40, 56, 100)))
+print('최소값 =>', min((20, 40, 56, 100)))
+
+# 나누기 연산자 /, //
+# 나머지 연산자 %
+# divmod(n1,n2) => 몫과 나머지 값을 구한다. => 튜플
+print(10 / 3.2)  # 3.125
+print(10 // 3.2)  # 3.0
+result = divmod(100, 20)
+print(result, type(result))  # (5, 0) <class 'tuple'>
+# 튜플 인덱싱
+print(result[0])
+print(result[1])
+# 값 1개씩 출력
+for i in result:
+    print(i)
+
+# 5개의 값을 입력문을 이용하여 리스트로 저장한 후
+# 최대값과 최소값을 출력한다.
+# 빈 리스트 생성
+
+# result = []
+# for i in range(0,5):
+#     # 정수 데이터로 변환
+#     data = int(input('숫자를 입력해주세요 ... '))
+#     result.append(data)
+# print('전체 리스트 => ', result)
+# print('최대 값 => ', max(result) )
+# print('최소 값 => ', min(result) )
+
+# eval(문자열계산식)
+# 입력받은 수식을 계산하여라
+# result = input('수식을 입력하세요? ... ')
+# print(result, ' = ', eval(result))
+
+# enumerate(리스트/튜플/문자열 , 인덱스숫자 )
+# 인덱스숫자로 구성된 리스트/튜플/문자열
+# => enumerate 객체 생성
+# => for .. in 하나씩아이템 출력 가능
+# => 각각 튜플아이템으로 생성 (인덱스, 값)
+listA = ['a', 'b', 'c']
+enumResult = enumerate(listA, 5)
+print(enumResult, type(enumResult))
+for i in enumResult:
+    print(i)  # (인덱스번호, 값)
+
+# 한개씩 출력하기
+for i, v in enumerate(listA, 5):
+    print(i, ' => ', v)
+
+# 문자열 변환
+for i, v in enumerate('abcd', 1):
+    print(i, ' => ', v)
+
+
+# map() 함수
+
+# 제곱을 구하는 함수 정의
+def doubleMulti(x):
+    return x ** 2
+
+
+print(doubleMulti(3))  # 9
+print(doubleMulti(-10))  # -10
+print(doubleMulti(5))  # 25
+print(doubleMulti(7))  # 49
+
+# map() 사용
+mapResult = map(doubleMulti, [3, -10, 5, 7])
+print(mapResult, type(mapResult))
+# <map object at 0x00A4FA10> <class 'map'>
+
+# 한개씩 값 출력하기
+for i in map(doubleMulti, [3, -10, 5, 7]):
+    print(i, end=' ')
+
+print('\n\n')
+# 리스트화
+print(list(map(doubleMulti, [3, -10, 5, 7])))
