@@ -184,3 +184,20 @@ for name, contents in drinks.items():
     if 'vodka' in contents and \
             not contents & {'vermouth', 'orange juice'}:
         print(name)
+
+eng = 'Monday', 'Tuesday', 'Wednesday'
+fre = 'Lundi', 'Mardi', ' Mercredi'
+
+print(list(zip(eng, fre)))
+print(dict(zip(eng, fre)))
+
+# 표현식 for 항목 in 순회가능한 객체
+myList = [number - 1 for number in range(1, 6)]
+print(myList)
+
+myList = [number for number in range(1, 20) if number % 2 == 1]
+print(myList)
+
+word = 'Letter Count'
+myDict = {letter: word.count(letter) for letter in set(word)}
+print(myDict)
