@@ -99,3 +99,39 @@ class HelloWorld {
         // name = 'tmp'; // readonly이기 때문에 쓰기 불가능
     }
 }
+
+// 추상 클래스
+abstract class Book {
+    constructor(public author: string, public title: string) {}
+    abstract getTitle(): string;
+}
+
+class TypeScript extends Book {
+    getTitle(): string {
+        return `${this.title} : ${this.author}`;
+    }
+}
+
+let ts = new TypeScript("psw", "typescript");
+console.log(ts.getTitle());
+
+// 인터페이스
+interface IArticle {
+    author: string;
+    title: string;
+
+    Date(): void;
+}
+
+class Article implements IArticle {
+    constructor(_author: string, _title: string) {
+        this.author = _author;
+        this.title = _title;
+    }
+    author: string;
+    title: string;
+
+    Date(): void {}
+}
+
+let article: IArticle = new Article("psw", "typescript");
