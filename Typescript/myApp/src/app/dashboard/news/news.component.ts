@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Article } from '../../../models/article';
 import { News } from '../../../models/news';
+import { IArticle } from '../../../models/IArticle';
+import { catchError, map, tap } from 'rxjs/operators';
+import { NewsAPIService } from '../../service/newsapi.service';
 
 @Component({
   selector: 'app-news',
@@ -8,43 +11,12 @@ import { News } from '../../../models/news';
   styleUrls: ['./news.component.css']
 })
 export class NewsComponent implements OnInit {
-  tmp: News = new News();
-
-  private createArticleData(): Article[] {
-    const articles: Article[] = new Array();
-    articles.push({
-      author: '박상우',
-      title: 'Sample News',
-      desc: 'Angular 연습 뉴스 컴포넌트',
-      url: 'http://naver.com',
-      urlToImg: '',
-      date: '2019-07-06'
-    });
-
-    articles.push({
-      author: '박상우',
-      title: 'Sample News',
-      desc: 'Angular 연습 뉴스 컴포넌트',
-      url: 'http://naver.com',
-      urlToImg: '',
-      date: '2019-07-06'
-    });
-
-    return articles;
-  }
-
-  private createNewsData(): News {
-    const news: News = new News();
-    news.status = 'ok';
-    news.source = 'PSW';
-    news.sortBy = 'top';
-    news.articles = this.createArticleData();
-    return news;
-  }
-
-  constructor() {}
-
+  type = 'business';
+  news: News = new News(this.type);
+  constructor(private service: NewsAPIService) {}
   ngOnInit() {
-    this.tmp = this.createNewsData();
+    this.service
+      .fecthMyNews(this.type)
+      .subscribe((items: News) => (this.news = items));
   }
 }

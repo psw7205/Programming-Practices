@@ -1,8 +1,10 @@
-export class Article {
+import { IArticle } from './IArticle';
+
+export class Article implements IArticle {
   public author: string;
   public title: string;
-  public desc: string;
+  public description: string;
   public url: string;
-  public urlToImg: string;
-  public date: string;
+  public urlToImage: string;
+  public publishedAt: string;
 }
