@@ -1,13 +1,12 @@
 <p>news works!</p>
 <nav>
-  <a class="navbar-brand" href="#">Sports News Combinator</a>
+  <a class="navbar-brand" href="#">News Combinator</a>
 </nav>
 
 <div>
   <h4>{{ source | uppercase }}</h4>
 </div>
-
-<table border="1">
+<table>
   <thead>
     <tr>
       <th></th>
@@ -17,20 +16,20 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let article of tmp.articles">
+    <tr *ngFor="let article of news.articles">
       <td>
-        <p>이미지</p>
+        <img [src]="article.urlToImage" [title]="article.title | uppercase" />
       </td>
       <td colspan="3">
         <a href="{{ article.url }}" target="_blank">
           {{ article.title }}
         </a>
         <p>
-          {{ article.desc }}
+          {{ article.description }}
         </p>
       </td>
       <td>{{ article.author | uppercase }}</td>
-      <td>{{ article.date }}</td>
+      <td>{{ article.publishedAt | date: "mediumDate" }}</td>
     </tr>
   </tbody>
 </table>
