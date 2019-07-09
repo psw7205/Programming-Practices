@@ -92,11 +92,3 @@ for i, j in myEnum:
 
 myEnum = enumerate(['apple', 'banana', 'carrot', 'dict'], 10)
 print(list(myEnum))
-
-result = map(lambda x: x ** 2, [3, -10, 2, 6])
-print(list(result))
-
-for i in map(lambda x: x ** 2, [3, -10, 2, 6]):
-    print(i, end=' ')
-print()
-
