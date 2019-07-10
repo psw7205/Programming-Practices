@@ -18,11 +18,22 @@ npm install -g typescript
     tsconfig.json에서 "sourcemap": true 활성화 
     - 브라우저에서 .ts파일 확인 가능
 작업 목록
-    
-    TodoList
-    SportNews
 
+---    
+TodoList
 
+    open index.html
+
+--- 
+News Combinator
+
+    This project was generated with Angular CLI version 8.1.0.
+
+    cd ./myApp
+    npm install
+    ng serve --open
+
+---
     
 
 
