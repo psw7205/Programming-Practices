@@ -1,4 +1,3 @@
-<p>news works!</p>
 <nav>
   <a class="navbar-brand" href="#">News Combinator</a>
 </nav>
@@ -17,10 +16,10 @@
   </thead>
   <tbody>
     <tr *ngFor="let article of news.articles">
-      <td>
+      <td style="width: 15%">
         <img [src]="article.urlToImage" [title]="article.title | uppercase" />
       </td>
-      <td colspan="3">
+      <td colspan="3" style="width: 65%">
         <a href="{{ article.url }}" target="_blank">
           {{ article.title }}
         </a>
@@ -28,8 +27,8 @@
           {{ article.description }}
         </p>
       </td>
-      <td>{{ article.author | uppercase }}</td>
-      <td>{{ article.publishedAt | date: "mediumDate" }}</td>
+      <td style="width: 10%">{{ article.author | uppercase }}</td>
+      <td style="width: 10%">{{ article.publishedAt | date: "mediumDate" }}</td>
     </tr>
   </tbody>
 </table>

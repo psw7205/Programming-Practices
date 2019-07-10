@@ -1,7 +1,6 @@
 import { Article } from './article';
-import { IArticle } from './IArticle';
 
 export class News {
-  private articles: IArticle[];
+  private articles: Article[];
   constructor(public source: string) {}
 }
