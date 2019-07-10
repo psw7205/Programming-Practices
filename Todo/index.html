@@ -3,24 +3,67 @@
     <head>
         <meta charset="UTF-8" />
         <title>TodoList</title>
+        <link
+            rel="stylesheet"
+            href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+        />
+        <style>
+            form {
+                display: inline-block;
+            }
+            .form-group {
+                text-align: center;
+                padding-bottom: 25px;
+            }
+            #todoList {
+                margin: 0 auto;
+                width: 500px;
+            }
+        </style>
     </head>
 
     <body>
-        <h1>Todo with TypeScript</h1>
-        <input
-            type="text"
-            class="form-control"
-            placeholder="해야할 일"
-            id="todoName"
-        />
-        <input
-            type="text"
-            class="form-control"
-            placeholder="설명"
-            id="todoDescription"
-        />
-        <input type="button" id="add" value="추가" />
-        <h2>현재 해야할 일</h2>
+        <div class="form-group">
+            <h1>Todo with TypeScript</h1>
+            <div class="row">
+                <div class="col-xs-2"></div>
+                <div class="col-xs-4">
+                    <div class="input-group">
+                        <span class="input-group-addon"
+                            ><span class="glyphicon glyphicon-pencil"></span
+                        ></span>
+                        <input
+                            type="text"
+                            class="form-control"
+                            placeholder="해야할 일"
+                            id="todoName"
+                        />
+                    </div>
+                </div>
+                <div class="col-xs-4">
+                    <div class="input-group">
+                        <span class="input-group-addon"
+                            ><span class="glyphicon glyphicon-tag"></span
+                        ></span>
+                        <input
+                            type="text"
+                            class="form-control"
+                            placeholder="설명"
+                            id="todoDescription"
+                        />
+                    </div>
+                </div>
+                <div class="col-xs-2"></div>
+            </div>
+            <br />
+            <input
+                type="button"
+                id="add"
+                value="추가"
+                class="btn btn btn-primary"
+            />
+        </div>
+        <h2 class="text-center">현재 해야할 일</h2>
         <div id="todoList"></div>
 
         <script src="app/todo.js"></script>

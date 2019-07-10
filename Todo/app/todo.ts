@@ -38,11 +38,10 @@ window.onload = function() {
     );
 
     // 버튼 클릭 시 이벤트 추가
-    document
-        .getElementById("add")
-        .addEventListener("click", () =>
-            toAlltask(task.value, description.value)
-        );
+    (<HTMLElement>document.getElementById("add")).addEventListener(
+        "click",
+        () => toAlltask(task.value, description.value)
+    );
 };
 
 // 버튼 클릭시 호출되는 함수
@@ -53,19 +52,20 @@ function toAlltask(task: string, description: string) {
 
     // 일정 업데이트
     let div = <HTMLDivElement>document.getElementById("todoList");
-    let list = "";
+    let list = '<ul class="list-group">';
 
     for (let index = 0; index < TodoList.allTodos.length; index++) {
         list =
             list +
+            ' <li class="list-group-item"> ' +
             TodoList.allTodos[index].name +
             " : " +
             TodoList.allTodos[index].description +
-            "</br>";
+            "</li>";
     }
+    list += "</ul>";
     div.innerHTML = list;
 
-    //Casting
     (<HTMLInputElement>document.getElementById("todoName")).value = "";
     (<HTMLInputElement>document.getElementById("todoDescription")).value = "";
 }
