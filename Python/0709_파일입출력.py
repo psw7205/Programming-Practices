@@ -59,3 +59,34 @@ with open('./data/sample.txt', 'rt') as f:
         string += line
 
 print(len(string))
+
+import csv
+
+with open('./data/data.csv', 'rt') as f:
+    rdr = csv.reader(f)
+    csvList = [x for x in rdr]
+    for line in csvList:
+        print(line)
+
+for line in csvList[1:]:
+    print(line[2])
+
+with open('./data/population.csv', 'rt') as f:
+    population = list(csv.reader(f))
+    city = [line[0] for line in population[1:]]
+    people = [line[1].replace(',', '') for line in population[1:]]
+    people = list(map(int, people))
+    print(city[people.index(max(people))], max(people))
+    print(city[people.index(min(people))], min(people))
+
+myList = [[3, "Paul", False],
+          [4, "Peter", True],
+          [5, "Thomas", True],
+          [6, "Vincent", False],
+          [7, "William", False]]
+
+with open('./data/output.csv', 'w') as f:
+    wr = csv.writer(f)
+    wr.writerow([1, "Antony", False])
+    wr.writerow([2, "John", True])
+    wr.writerows(myList)

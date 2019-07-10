@@ -65,3 +65,13 @@ print(random.random())
 data = [1, 2, 3, 4, 5]
 print(random.shuffle(data))
 
+import calendar
+
+print(calendar.calendar(2019))
+
+calendar.prcal(2019)
+calendar.prmonth(2019, 7)
+
+day = ['월', '화', '수', '목', '금', '토', '일']
+print(day[calendar.weekday(2019, 7, 10)])
+
