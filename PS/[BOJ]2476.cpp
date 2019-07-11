@@ -6,7 +6,7 @@ int main()
 	int n;
 
 	scanf("%d", &n);
-	
+
 	int maxPrize = 0;
 	for (int i = 0; i < n; ++i)
 	{

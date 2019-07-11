@@ -1,8 +1,8 @@
 #include <bits/stdc++.h>
 
-int num[1001][1001] = { 0 };
+int num[1001][1001] = {0};
 
-void fill(int n, int m, int x, int y, int*cnt, int max)
+void fill(int n, int m, int x, int y, int *cnt, int max)
 {
 	int i, j, k;
 	if (*cnt > max) // 다 채우면 끝
@@ -13,12 +13,12 @@ void fill(int n, int m, int x, int y, int*cnt, int max)
 	{
 		for (j = y + 1; j < n + y; j++) // 아랫방향으로 채움
 			num[j][i - 1] = (*cnt)++;
-		if (i - 2 >= x) // 왼쪽으로 이동가능하다면 
+		if (i - 2 >= x) // 왼쪽으로 이동가능하다면
 		{
 			for (k = i - 2; k >= x; k--)
 				num[j - 1][k] = (*cnt)++; // 왼쪽을 채우고
 			for (i = j - 2; i > y; i--)
-				num[i][k + 1] = (*cnt)++; // 위로 채운다
+				num[i][k + 1] = (*cnt)++;				// 위로 채운다
 			fill(n - 2, m - 2, k + 2, i + 1, cnt, max); // 재귀하며 반복
 		}
 	}
@@ -32,10 +32,11 @@ int main()
 
 	if (k > n * m)
 		printf("0");
-	else {
+	else
+	{
 
 		int cnt = 1;
-		fill(n, m, 0, 0, &cnt, n*m);
+		fill(n, m, 0, 0, &cnt, n * m);
 
 		bool flag = false;
 		for (int i = 0; i < n; i++)
@@ -54,7 +55,6 @@ int main()
 				break;
 		}
 	}
-
 
 	return 0;
 }

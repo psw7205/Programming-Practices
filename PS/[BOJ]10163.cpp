@@ -7,7 +7,7 @@ int main()
 	int n;
 	scanf("%d", &n);
 
-	int ar[101][101] = { 0 };
+	int ar[101][101] = {0};
 
 	for (int i = 1; i <= n; ++i)
 	{
@@ -16,7 +16,6 @@ int main()
 		for (int j = x; j < x + w; ++j)
 			for (int k = y; k < y + h; ++k)
 				ar[j][k] = i;
-				
 	}
 
 	for (int i = 1; i <= n; ++i)

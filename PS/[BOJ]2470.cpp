@@ -43,6 +43,6 @@ int main()
 	int big = vec[a] > vec[b] ? vec[a] : vec[b];
 	int small = vec[a] < vec[b] ? vec[a] : vec[b];
 	printf("%d %d", small, big);
-	
+
 	return 0;
 }

@@ -7,9 +7,9 @@ int main()
 	int n;
 	scanf("%d", &n);
 
-	int ar[1001][5] = { 0 };
-	int stu[1001] = { 0 };
-	bool check[1001][1001] = { 0 };
+	int ar[1001][5] = {0};
+	int stu[1001] = {0};
+	bool check[1001][1001] = {0};
 
 	for (int i = 0; i < n; ++i)
 		for (int j = 0; j < 5; ++j)

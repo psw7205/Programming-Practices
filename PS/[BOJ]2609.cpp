@@ -1,4 +1,4 @@
-#pragma warning (disable:4996)
+#pragma warning(disable : 4996)
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -17,7 +17,7 @@ int main()
 			gcd = std::max(gcd, i);
 		}
 	}
-	
+
 	cout << gcd << endl;
 	cout << n * m / gcd << endl;
 

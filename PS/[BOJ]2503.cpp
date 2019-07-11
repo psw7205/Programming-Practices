@@ -1,11 +1,10 @@
 #include <bits/stdc++.h>
 
-typedef struct {
+typedef struct
+{
 	int s, b;
 	int num[3];
-}info;
-
-
+} info;
 
 int main()
 {
@@ -46,7 +45,7 @@ int main()
 					int s = 0;
 					int b = 0;
 
-					if (ar[idx].num[0] == i)	
+					if (ar[idx].num[0] == i)
 						s++;
 
 					if (ar[idx].num[1] == j)

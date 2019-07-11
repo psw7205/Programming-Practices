@@ -5,13 +5,13 @@ int k;
 vector<int> vMax, vMin;
 string str;
 
-bool isPossible(vector<int>& num)
+bool isPossible(vector<int> &num)
 {
 	for (int i = 0; i < str.length(); ++i)
 	{
 		if (str[i] == '>' && num[i] < num[i + 1])
 			return false;
-		
+
 		else if (str[i] == '<' && num[i] > num[i + 1])
 			return false;
 	}

@@ -7,7 +7,7 @@ int count()
 {
 	int cnt = 0;
 	for (int i = 0; i < 5; ++i)
-	{ 
+	{
 		bool rowCheck = true;
 		bool colCheck = true;
 		for (int j = 0; j < 5; ++j)
@@ -40,7 +40,6 @@ int count()
 	return cnt;
 }
 
-
 int main()
 {
 	int map[5][5];
@@ -48,7 +47,7 @@ int main()
 	for (int i = 0; i < 5; ++i)
 		for (int j = 0; j < 5; ++j)
 			scanf("%d", &map[i][j]);
-	
+
 	int cnt = 0;
 	while (cnt <= 25)
 	{

@@ -31,7 +31,7 @@ int main()
 			}
 			else
 			{
-				if(str[i- 1] == '(')
+				if (str[i - 1] == '(')
 					result += op;
 				op /= 2;
 			}
@@ -60,7 +60,7 @@ int main()
 			{
 				op *= 2;
 			}
-			else if(str[i] == '[')
+			else if (str[i] == '[')
 			{
 				op *= 3;
 			}
