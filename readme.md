@@ -34,7 +34,9 @@ News Combinator
     ng serve --open
 
 ---
-    
+Tour of Heroes
+
+    This project was generated with Angular CLI version 8.1.1.
 
 
 
