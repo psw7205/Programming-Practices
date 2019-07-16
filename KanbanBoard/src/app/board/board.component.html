@@ -1,0 +1,10 @@
+<div *ngIf="board" class="board-title">
+  <span [style.display]="editingTitle ? 'none' : ''" (click)="editTitle()">{{
+    board?.title
+  }}</span>
+
+  <input
+    [style.display]="editingTitle ? '' : 'none'"
+    [(ngModel)]="board.title"
+  />
+</div>
