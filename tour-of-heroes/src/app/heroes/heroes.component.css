@@ -39,7 +39,7 @@
   font-size: small;
   color: white;
   padding: 0.8em 0.7em 0 0.7em;
-  background-color: #04517b;
+  background-color: #3b5998;
   line-height: 1em;
   position: relative;
   left: -1px;
@@ -50,7 +50,7 @@
 }
 
 .heroes a {
-  color: #333;
+  color: #3b5998;
   text-decoration: none;
   position: relative;
   display: block;
@@ -59,4 +59,26 @@
 
 .heroes a:hover {
   color: #607d8b;
+}
+
+button {
+  background-color: #eee;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  cursor: hand;
+  font-family: Arial;
+}
+
+button:hover {
+  background-color: #cfd8dc;
+}
+
+button.delete {
+  position: relative;
+  left: 194px;
+  top: -35px;
+  background-color: gray !important;
+  color: white;
 }

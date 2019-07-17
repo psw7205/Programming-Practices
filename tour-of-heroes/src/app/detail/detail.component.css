@@ -3,7 +3,7 @@
 label {
   width: 3em;
   margin: 0.5em;
-  color: #607d8b;
+  color: #3b5998;
   font-weight: bold;
 }
 
@@ -15,7 +15,7 @@ input {
 
 button {
   margin-top: 20px;
-  background-color: #eee;
+  background-color: #dfe3ee;
   border: none;
   padding: 5px 10px;
   border-radius: 4px;
@@ -24,11 +24,11 @@ button {
 }
 
 button:hover {
-  background-color: #cfd8dc;
+  background-color: #f7f7f7;
 }
 
 button:disabled {
-  background-color: #eee;
-  color: #ccc;
+  background-color: #dfe3ee;
+  color: #f7f7f7;
   cursor: auto;
 }
