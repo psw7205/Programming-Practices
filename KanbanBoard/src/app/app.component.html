@@ -1,5 +1,9 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>Welcome to {{ title }}!</h1>
+<header>
+  <nav>
+    <a class="btn" [routerLink]="['']">Homepage</a>
+    <a class="logo">Sample Trello Application</a>
+  </nav>
+</header>
+<div id="content-wrapper">
+  <router-outlet></router-outlet>
 </div>
-<router-outlet></router-outlet>
