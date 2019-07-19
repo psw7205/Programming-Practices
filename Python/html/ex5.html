@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>CSS 인라인스타일</title>
+</head>
+<body>
+<h1>CSS 인라인스타일</h1>
+<hr>
+<!--(div>h2{box$}+p{문단$}*3)*3-->
+<!--
+ background-color:배경색상
+ color:글자색상
+ text-align:left/right/center/justify(양끝정렬)
+ width:숫자와 단위(%,px)
+ height:숫자와 단위(%,px)
+ font-size:글자크기 단위(em, px, pt), medium, large, xx-large, small, xx-small
+   13pt=1em=medium
+
+
+-->
+<div style="background-color:gold;
+            color:brown">
+    <h2 style="text-align:center">box1</h2>
+    <p style="text-align:justify; width:500px">
+        다양한 영화 포스터들을 비교해 보는 것은 영화를 즐기는 또 다른 재미다. 'CineMaterial'은 각종 영화 포스터, 표지, 로고 등의 이미지를 수집해놓은 해외 웹사이트다. 어떤 영화의 다양한 버전의 포스터들을 한눈에 구경하기 좋다. 이 사이트에 등록된 영화 포스터들 중 최근 개봉한 한국 영화들의 해외 버전 포스터들을 모았다. </p>
+    <p style="width:80%">다양한 영화 포스터들을 비교해 보는 것은 영화를 즐기는 또 다른 재미다. 'CineMaterial'은 각종 영화 포스터, 표지, 로고 등의 이미지를 수집해놓은 해외 웹사이트다. 어떤 영화의 다양한 버전의 포스터들을 한눈에 구경하기 좋다. 이 사이트에 등록된 영화 포스터들 중 최근 개봉한 한국 영화들의 해외 버전 포스터들을 모았다. </p>
+    <p style="width:500px;background-color:yellowgreen">다양한 영화 포스터들을 비교해 보는 것은 영화를 즐기는 또 다른 재미다. 'CineMaterial'은 각종 영화 포스터, 표지, 로고 등의 이미지를 수집해놓은 해외 웹사이트다. 어떤 영화의 다양한 버전의 포스터들을 한눈에 구경하기 좋다. 이 사이트에 등록된 영화 포스터들 중 최근 개봉한 한국 영화들의 해외 버전 포스터들을 모았다. </p>
+</div>
+
+<div style="background-color:red;
+            color:white">
+    <h2>box2</h2>
+    <p style="font-size:15pt;color:crimson">문단1</p>
+    <p style="font-size:50px;font-style:italic">문단2</p>
+    <p style="font-size:2em;font-weight:bold">문단3</p>
+</div>
+<div style="background-color:black;
+            color:white">
+    <h2 style="font-family:'맑은 고딕',굴림, console, arial;">box3</h2>
+    <p style="text-decoration:underline">문단1</p>
+    <p style="line-height:200%; word-spacing:10px">다양한 영화 포스터들을 비교해 보는 것은
+        영화를 즐기는 또 다른 재미다.
+        'CineMaterial'은 각종 영화 포스터,
+        표지, 로고 등의 이미지를 수집해놓은 해외 웹사이트다. 어떤 영화의 다양한 버전의 포스터들을 한눈에 구경하기 좋다. 이 사이트에 등록된 영화 포스터들 중 최근 개봉한 한국 영화들의 해외 버전 포스터들을 모았다.
+    </p>
+    <p style="letter-spacing:20px">각종 영화 포스터</p>
+</div>
+<hr>
+<!--div>div>div-->
+<div style="background:red;width:300px;padding-top:50px">
+    <div style="background:green;padding:20px 50px 80px 120px;
+        width:80px">
+        <!--  width+왼쪽패딩+오른쪽패딩   => 90px    -->
+        <!-- height = 40px       -->
+        <div style="background:blue;padding:20px;width:50px;"></div>
+    </div>
+</div>
+<hr>
+<!--(ul>li{목록$}*4)*3-->
+<ul style="list-style-type:none">
+    <li >목록1</li>
+    <li>목록2</li>
+    <li>목록3</li>
+    <li>목록4</li>
+</ul>
+<ul>
+    <li style="list-style-type:square">목록1</li>
+    <li>목록2</li>
+    <li style="list-style-type:circle">목록3</li>
+    <li style="list-style-type:none">목록4</li>
+</ul>
+<ul style="padding:0;margin:0;line-height:200%">
+    <li>목록1</li>
+    <li>목록2</li>
+    <li>목록3</li>
+    <li>목록4</li>
+</ul>
+
+
+
+</body>
+</html>

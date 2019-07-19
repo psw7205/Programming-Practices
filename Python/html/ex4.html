@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8" />
+        <title>멀티미디어와 아이프레임</title>
+    </head>
+    <body>
+        <h1>멀티미디어와 아이프레임</h1>
+        <hr />
+        <h2>유투브 무비 삽입하기</h2>
+        <!--
+1) 유투브 무비
+2) 마우스 우측 버튼
+3) 소스 코드 복사
+4) 에디터에서 붙이기
+-->
+        <iframe
+            width="360"
+            height="240"
+            src="https://www.youtube.com/embed/YBnGBb1wg98"
+            frameborder="0"
+            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+        >
+        </iframe>
+        <hr />
+        <h2>로컬상의 무비 삽입하기</h2>
+        <!-- 동영상무비 : mp4, avi
+<video src="media/동영상무비" controls="true" width="320" height="240"></video>
+-->
+        <hr />
+        <h2>아이프레임으로 페이지 연결하기</h2>
+        <!--ul>(li>a[target=iframe href=ex$.html]{ex$})*3-->
+        <ul>
+            <li><a href="ex1.html" target="iframe">ex1</a></li>
+            <li><a href="ex2.html" target="iframe">ex2</a></li>
+            <li><a href="ex3.html" target="iframe">ex3</a></li>
+        </ul>
+        <!--  아이프레임 컨텐츠 영역 -->
+        <!--iframe[src=ex1.html name=iframe width=600 height=600]-->
+        <iframe
+            src="ex1.html"
+            frameborder="1"
+            name="iframe"
+            width="600"
+            height="300"
+        >
+            아이프레임이 지원되지 않습니다.
+        </iframe>
+    </body>
+</html>

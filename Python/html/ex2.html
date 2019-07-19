@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Title</title>
+    </head>
+    <body>
+        <!--h1{HTML 태그2}-->
+        <h1>HTML 태그2</h1>
+        <hr />
+        <!--p*2-->
+        <p>
+            아버지의 죽음에 대한 죄책감에 시달리던 ‘심바’ <br />
+            의욕 충만한 친구들 ‘품바’와 ‘티몬’의 도움으로 희망을 되찾는다.
+            <br />
+            <br />
+            <br />
+            어느 날 우연히 옛 친구 ‘날라’를 만난 ‘심바’는 과거를 마주할 용기를
+            얻고, <br />
+            진정한 자신의 모습을 찾아 위대하고도 험난한 도전을 떠나게 되는데…
+        </p>
+        <hr />
+        <h2>
+            모든 것이 다시 시작된다!
+        </h2>
+        <!---->
+        <blockquote>
+            ‘엔드게임’ 이후 변화된 세상,<br />
+            스파이더맨 ‘피터 파커’는 학교 친구들과 유럽 여행을 떠나게 된다.<br />
+            그런 그의 앞에 ‘닉 퓨리’가 등장해 도움을 요청하고<br />
+            정체불명의 조력자 ‘미스테리오’까지 합류하게 되면서<br />
+            전 세계를 위협하는 새로운 빌런 ‘엘리멘탈 크리쳐스’와<br />
+            맞서야만 하는 상황에 놓이게 되는데…
+        </blockquote>
+        <hr />
+        <!-- b, i , em, strong -->
+        <p>
+            아버지의 죽음에 대한 죄책감에 시달리던 <strong>심바</strong> 의욕
+            충만한 친구들 <b>품바</b>와 <em>티몬</em>의 <i>도움</i>으로 희망을
+            되찾는다.
+        </p>
+        <hr />
+        <!--div>img*3-->
+        <div>
+            <img src="images/ah.png" alt="ah" /> <br />
+            <img src="images/baffle.png" alt="baffle" /><br />
+            <img src="images/boss.png" alt="boss" />
+        </div>
+
+        <hr />
+        <h2>텍스트 하이퍼링크</h2>
+        <!--ul>(li>a)*3-->
+        <ul>
+            <li><a href="http://google.com" target="_blank">구글</a></li>
+            <li><a href="http://naver.com" target="_blank">네이버</a></li>
+            <li>
+                <a
+                    href="http://yes24.com"
+                    title="예스24로 이동하기"
+                    target="_blank"
+                >
+                    예스24</a
+                >
+            </li>
+        </ul>
+        <!--h2{이미지 하이퍼링크}+div>(a>img)*2-->
+        <h2>이미지 하이퍼링크</h2>
+        <div>
+            <a href="http://google.com" target="_blank">
+                <img src="images/cold.png" alt="구글로 이동하기" />
+            </a>
+            <a href="http://naver.com" target="_blank">
+                <img src="images/cry.png" alt="네이버로 이동하기" />
+            </a>
+        </div>
+        <hr />
+        <h2>2*2 테이블</h2>
+        <!--table>(tr>td{데이타$}*2)*2-->
+        <table
+            border="1"
+            width="400"
+            align="center"
+            cellpadding="10"
+            cellspacing="0"
+            bordercolor="crimson"
+        >
+            <tr>
+                <td>데이타1</td>
+                <td>데이타2</td>
+            </tr>
+            <tr>
+                <td>데이타1</td>
+                <td>데이타2</td>
+            </tr>
+        </table>
+
+        <h2>3*4 테이블</h2>
+        <!--table[border=1 width=300]>(tr>td{데이타$}*4)*3-->
+        <table border="1" width="300">
+            <tr>
+                <!-- 1행 -->
+                <td colspan="2" align="center" bgcolor="lightblue">
+                    데이타1
+                </td>
+                <!--  <td>데이타2</td>-->
+                <td>데이타3</td>
+                <td
+                    rowspan="3"
+                    align="center"
+                    bgcolor="lightgreen"
+                    valign="top"
+                >
+                    데이타4
+                </td>
+            </tr>
+            <tr>
+                <!-- 2행 -->
+                <td>데이타1</td>
+                <td>데이타2</td>
+                <td>데이타3</td>
+                <!--        <td>데이타4</td>-->
+            </tr>
+            <tr>
+                <!-- 3행 -->
+                <td>데이타1</td>
+                <td>데이타2</td>
+                <td>데이타3</td>
+                <!--        <td>데이타4</td>-->
+            </tr>
+        </table>
+
+        <hr />
+        <h2>슬라이드44 테이블퀴즈</h2>
+        <!--
+table[border=1 align=center cellpadding=10 cellspacing=0 width=400]
+(tr>td{&nbsp;}*4)*4
+
+-->
+        <!--&nbsp; 묶음빈칸. 엔티티코드, 공백한칸을 표시하는 특수코드값 -->
+        <table
+            border="1"
+            align="center"
+            cellpadding="10"
+            cellspacing="0"
+            width="400"
+        >
+            <!--    (tr>td{&nbsp;}*4)*4-->
+            <tr>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+        </table>
+
+        <hr />
+        <table
+            border="1"
+            align="center"
+            cellpadding="10"
+            cellspacing="0"
+            width="400"
+        >
+            <!--    (tr>td{&nbsp;}*4)*4-->
+            <tr>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+        </table>
+
+        <hr />
+        <table
+            border="1"
+            align="center"
+            cellpadding="10"
+            cellspacing="0"
+            width="400"
+        >
+            <!--    (tr>td{&nbsp;}*4)*4-->
+            <tr>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+        </table>
+    </body>
+</html>

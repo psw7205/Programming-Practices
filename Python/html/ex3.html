@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Form</title>
+    </head>
+    <body>
+        <h1>폼 문서</h1>
+        <hr />
+        <!-- 폼정의 -->
+        <form action="http://www.google.com">
+            <!-- 제목과 텍스트필드-->
+            <!--label{아이디}+input:text-->
+            <!--   라벨의 for 값과 텍스트필드의 id 값은 동일 -->
+            <label for="userID">아이디</label>
+            <input type="text" name="" id="userID" />
+            <br />
+            <!-- 제목과 암호텍스트필드-->
+            <!--label{암호}+input:password-->
+            <label for="userPwd">암호</label>
+            <input type="password" name="" id="userPwd" />
+            <br />
+            <!-- 제목 + 여러줄글상자-->
+            <!--label{메세지}+textarea-->
+            <label for="message">메세지</label>
+            <br />
+            <textarea name="" id="message" cols="50" rows="10"></textarea>
+            <!-- 제목 + 파일상자 -->
+            <!--    label{첨부파일}+input:file-->
+            <br />
+            <label for="userFile">첨부파일</label>
+            <input type="file" name="" id="userFile" />
+            <!-- 필드셋 + 필드셋제목-->
+            <!--    fieldset>legend{제목}-->
+            <!-- 탐색 단어 상자
+    label{검색어}+input:search -->
+            <fieldset>
+                <legend>검색창 제목</legend>
+                <!--        label{검색어}+input:search-->
+                <label for="searchBox">검색어</label>
+                <input type="search" name="" id="searchBox" />
+            </fieldset>
+            <!--    라디오버튼 -->
+            <!--    h3{성별}+(label+input:radio)*2-->
+            <h3>성별</h3>
+            <label for="male">남자</label>
+            <input type="radio" name="gender" id="male" checked />
+            <label for="female">여자</label>
+            <input type="radio" name="gender" id="female" />
+
+            <!-- 체크박스 -->
+            <!--fieldset>legend{취미}-->
+            <!--(label+input:checkbox)*4    -->
+            <fieldset>
+                <legend>취미</legend>
+                <label for="hobby1">영화 감상</label>
+                <input type="checkbox" name="" id="hobby1" checked />
+                <label for="hobby2">낚시</label
+                ><input type="checkbox" name="" id="hobby2" />
+                <label for="hobby3">요리</label
+                ><input type="checkbox" name="" id="hobby3" />
+                <label for="hobby4">게임</label
+                ><input type="checkbox" name="" id="hobby4" />
+            </fieldset>
+            <!--    셀렉트 메뉴 -->
+            <!-- select>option*3 -->
+            <!--    label{직업}+select>option*5-->
+            <label for="job">직업</label>
+            <select name="" id="job">
+                <option>-- 선택해주세요 --</option>
+                <option value="">학생</option>
+                <option value="">회사원</option>
+                <option value="">자영업</option>
+                <option value="">기타</option>
+            </select>
+            <br /><br />
+            <!--    칼라 선택 폼요소 -->
+            <!--    label{색상 선택}+input:color-->
+            <label for="colorBox">색상 선택</label>
+            <input type="color" name="" id="colorBox" />
+            <!-- 달력과 시간 선택 폼요소 -->
+            <!--    label{예약일}+input:date-->
+            <!--    label{예약시간}+input:time-->
+            <br />
+            <label for="choiceDate">예약일</label
+            ><input type="date" name="" id="choiceDate" />
+            <br />
+            <label for="choiceTime">예약시간</label
+            ><input type="time" name="" id="choiceTime" />
+            <!-- 이메일 폼요소 -->
+            <br />
+            <!--    label{이메일}+input:email-->
+            <label for="userEmail">이메일</label>
+            <input type="email" name="" id="userEmail" />
+            <br />
+            <!--    label{홈페이지 주소 : }+input:url-->
+            <label for="userURL">홈페이지 주소 : </label>
+            <input type="url" name="" id="userURL" />
+
+            <br /><br />
+            <!-- 폼버튼 - 전송  -->
+            <!--    input:submit 또는 button-->
+            <button>전송</button>
+            <input type="submit" value="완료" />
+            <!--    폼버튼 - 취소 -->
+            <!--    input:reset  -->
+            <input type="reset" value="취소 " />
+        </form>
+
+        <hr />
+
+        <h2>퀴즈 - 슬라이드 65나 66</h2>
+
+        <form action="">
+            <h3>수강신청서</h3>
+            <p>
+                <label for="formUser">성명</label>
+                <input type="text" name="" id="formUser" />
+            </p>
+            <p>
+                <label for="formPwd">비밀키</label>
+                <input type="password" name="" id="formPwd" />
+            </p>
+            <p>
+                <label for="formAddr">주소</label>
+                <input type="text" name="" id="formAddr" />
+            </p>
+            <p>
+                <label>교육과정</label>
+                <select name="" id="">
+                    <option value=""><------- 교육신청서 ------> </option>
+                    <option value="">파이썬</option>
+                    <option value="">MySQL</option>
+                    <option value="">HTML</option>
+                    <option value="">CSS</option>
+                </select>
+            </p>
+        </form>
+    </body>
+</html>
