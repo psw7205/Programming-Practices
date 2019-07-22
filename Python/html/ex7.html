@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>클래스랑 아이디 선택자</title>
+    <style>
+    /* 전체 선택자 : 여백 초기화 */
+    * { margin:0; padding:0 }
+
+    /* 클래스 정의 */
+    .box1 { text-align:center;
+            border:1px solid gray;
+            padding:10px}
+    .box2 { text-align:right;
+            border:1px solid red;
+            padding:10px}
+
+    /* 아이디 정의 */
+    #ulBox1 { background:lightgray;
+              text-decoration:underline;
+              width:500px;
+              margin:20px auto}
+
+    #ulBox2 { background:lightgreen;
+              font-size:1.8em;
+              width:800px;
+              margin:20px auto}
+
+    /* #div1 li - 자손 선택자 */
+    /* div1 아이디값안에 삽입된 모든 li */
+    #div1 li { color:red; font-weight:bold; }
+
+    /* div1 아이디값안에서 div 태그안에서 ol 태그안에 삽입된 li
+        자식 선택자
+    */
+    #div1>div>ol>li { font-size:2em }
+
+
+    </style>
+
+</head>
+<body>
+<!--h1{클래스와 아이디선택자}+hr+(div>h2{box$})*3+(ul>li{목록}*5)-->
+<h1>클래스와 아이디선택자</h1>
+<hr>
+<div class="box1">
+    <h2>box1</h2>
+</div>
+<div class="box2">
+    <h2>box2</h2>
+</div>
+<div>
+    <h2>box3</h2>
+</div>
+<ul id="ulBox1">
+    <li>목록</li>
+    <li>목록</li>
+    <li>목록</li>
+    <li>목록</li>
+    <li>목록</li>
+</ul>
+<ul id="ulBox2">
+    <li>목록</li>
+    <li>목록</li>
+    <li>목록</li>
+    <li>목록</li>
+    <li>목록</li>
+</ul>
+<hr>
+<!--div>div>(ul>li{sub$}*4)*2-->
+
+<div id="div1">
+    <div>
+        <ul>
+            <li>sub1</li>
+            <li>sub2</li>
+            <li>sub3</li>
+            <li>sub4</li>
+        </ul>
+        <ol>
+            <li>sub1</li>
+            <li>sub2</li>
+            <li>sub3</li>
+            <li>sub4</li>
+        </ol>
+    </div>
+</div>
+
+
+<div id="div2">
+    <div>
+        <ul>
+            <li>sub1</li>
+            <li>sub2</li>
+            <li>sub3</li>
+            <li>sub4</li>
+        </ul>
+        <ul>
+            <li>sub1</li>
+            <li>sub2</li>
+            <li>sub3</li>
+            <li>sub4</li>
+        </ul>
+    </div>
+</div>
+
+
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>CSS 레이아웃</title>
+    <style>
+        /* 목록을 가로로 배치하기 1 */
+        /* border-radius : 모서리둥글게 */
+        #ulBox1 { background:gold; padding:20px; width:500px; border-radius:20px;
+                   text-align:center; margin:20px auto; }
+        /* li 태그가 인라인화 */
+        #ulBox1 li { display:inline }
+
+        /* 목록을 가로로 배치하기 2 */
+        #ulBox2 { background:hotpink; padding:20px; width:500px; border-radius:20px;
+                   text-align:center; margin:20px auto; }
+        /* 인라인요소는 width/height이 적용불가 */
+        #ulBox2 li { display:inline-block; border-right:1px dashed black;
+                     width:80px}
+        #ulBox2 li:last-child { border:none }
+
+        /* 이미지를 세로로 배치 */
+        #gallery1 { width:500px; border-radius:20px; paddingL10px;
+                    background:lime;
+                    }
+        /* img를 블록요소로 변경 */
+        #gallery1 img { display:block; margin:10px auto }
+
+        /* 부모요소를 기준으로 커지는 이미지 만들기 */
+        #gallery2 { width:500px; background:black  }
+        /* img를 블록요소로 변경 */
+        #gallery2 img { display:block;
+                        width:100%;
+                        height:auto}
+
+        /* display:none를 이용하면 화면에서 숨겨지는 효과  */
+        #testBox { background:black; padding:10px; height:100px}
+        #testBox h3 { color:white; padding:10px;
+                        width:100px; height:50px  }
+        #testBox h3:hover { display:none;  }
+
+
+    </style>
+</head>
+<body>
+<h1>CSS 레이아웃</h1>
+<hr>
+<h2>목록문단의 목록을 가로로 배치하기</h2>
+<!--(ul#ulBox$>li{목록$}*5)*2-->
+<ul id="ulBox1">
+    <li>목록1</li>
+    <li>목록2</li>
+    <li>목록3</li>
+    <li>목록4</li>
+    <li>목록5</li>
+</ul>
+<ul id="ulBox2">
+    <li>목록1</li>
+    <li>목록2</li>
+    <li>목록3</li>
+    <li>목록4</li>
+    <li>목록5</li>
+</ul>
+<hr>
+<h2>이미지를 세로로 배치</h2>
+<!--(div#gallery$>img*3)*2-->
+<div id="gallery1">
+    <img src="images/cold.png" alt="cold">
+    <img src="images/cry.png" alt="cry">
+    <img src="images/boss.png" alt="boss">
+</div>
+<div id="gallery2">
+    <img src="images/cold.png" alt="cold">
+    <img src="images/cry.png" alt="cry">
+    <img src="images/boss.png" alt="boss">
+</div>
+<hr>
+<h2> 화면에 보이지 않게 만들기 </h2>
+<!--div#testBox>h3{testBox}-->
+<div id="testBox">
+    <h3>testBox</h3>
+</div>
+
+
+</body>
+</html>

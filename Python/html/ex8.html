@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>가상클래스 선택자</title>
+    <style>
+    /* 하이퍼링크 스타일 정의 - 문서 공통  */
+    a:link { text-decoration:none; color:black }
+    a:visited { text-decoration:none; color:black }
+    a:hover { text-decoration:underline; color:green  }
+    a:active { text-decoration:underline; color:green }
+
+    /* #nav1 안에 삽입된 모든  a 태그 -> 자손 */
+    #nav1 a { font-size:2em }
+
+    /* #nav2 안에 삽입된 li중에서 activeMenu 클래스가 적용
+     안에서 a 태그 - 직계자식
+    */
+    #nav2>li.activeMenu>a { color:crimson; font-weight:bold }
+
+    /* 전체 폼 요소 디자인 */
+    input { border:1px solid black; padding:3px; width:200px}
+    input:hover { border:1px solid red }
+    /* 텍스트필드안에 커서 위치 */
+    input:focus { background:lightgreen }
+
+    /* .formBox2 안에 있는 모든 label */
+    .formBox2 label { font-style:italic }
+    .formBox2>input#userId2 { border:5px solid crimson }
+
+    /* #ulStyle */
+    #ulStyle li:first-child { color:red }
+    #ulStyle li:last-child { color:blue }
+    #ulStyle li:nth-child(5) { color:green }
+    /* 홀수 */
+    #ulStyle li:nth-child(odd) { background:lightgray }
+    /* 짝수 */
+    #ulStyle li:nth-child(even) { background:pink}
+    /* 3의 배수번째 */
+    #ulStyle li:nth-child(3n) { font-weight:bold }
+
+    </style>
+</head>
+<body>
+<!--h1{가상클래스 선택자}+(ul>(li>a{링크$})*4)*2-->
+
+<h1>가상클래스 선택자</h1>
+<ul id="nav1">
+    <li><a href="">링크1</a></li>
+    <li><a href="">링크2</a></li>
+    <li><a href="">링크3</a></li>
+    <li><a href="">링크4</a></li>
+</ul>
+<ul id="nav2">
+    <li class="activeMenu"><a href="">링크1-active</a></li>
+    <li><a href="">링크2</a></li>
+    <li><a href="">링크3</a></li>
+    <li><a href="">링크4</a></li>
+</ul>
+<hr>
+<!--form>(label+input:text+br)*3-->
+<form action="">
+    <label for="userId">아이디 : </label>
+    <input type="text" name="" id="userId">
+    <br>
+    <label for="userName">이 름 :</label>
+    <input type="text" name="" id="userName">
+    <br><label for="email">이메일 :</label>
+    <input type="text" name="" id="email">
+    <br>
+</form>
+<hr>
+<form action="" class="formBox2">
+    <label for="userId2">아이디 : </label>
+    <input type="text" name="" id="userId2">
+    <br>
+    <label for="userName2">이 름 :</label>
+    <input type="text" name="" id="userName2">
+    <br><label for="email3">이메일 :</label>
+    <input type="text" name="" id="email3">
+    <br>
+</form>
+<hr>
+<!--ul#ulStyle>li{목록}*10-->
+<ul id="ulStyle">
+    <li>목록</li>
+    <li>목록</li>
+    <li>목록</li>
+    <li>목록</li>
+    <li>목록</li>
+    <li>목록</li>
+    <li>목록</li>
+    <li>목록</li>
+    <li>목록</li>
+    <li>목록</li>
+</ul>
+
+</body>
+</html>
+
+
+
+
+
+
+

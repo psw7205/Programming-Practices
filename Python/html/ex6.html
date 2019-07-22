@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>CSS 선택자</title>
+    <!--  css 정의   -->
+    <style type="text/css">
+
+    /* h1 태그 정의 */
+    h1 { text-align:center; color:red; }
+
+    /* li 태그 정의 */
+    li { list-style-type:none;
+         line-height: 180%;  /* 줄 간격 */
+       }
+
+    /* dl, dt, dd 태그 정의 */
+    dl { background:#efefef;
+         width:400px }
+    dt { color: darkgreen }
+    dd { margin:0 }
+
+    /* 테두리 적용
+    border-style:dashed, dotted, solid, none, double
+    border-color:색상값
+    border-width:숫자와단위 표시 (3px)
+    border:값1 값2 값3;
+    */
+    /* img 태그 정의 */
+    img {   border-style:solid;
+            border-color:black;
+            border-width:1px }
+
+    img { border:double red 5px }
+
+    /* 테이블 태그 정의 */
+    /* margin은 바깥여백
+       블록요소(table/div/p/h1~h6..)를 중앙정렬하고 싶다면?
+       margin:0 auto;
+       margin-left:auto; margin-right:auto;
+    */
+    table { width:300px; margin:0 auto}
+    tr { border:5px solid hotpink }
+    td { text-align:center; background:black; color:white }
+
+    </style>
+
+</head>
+<body>
+<!--h1{CSS 선택자}+hr+h2{태그선택자}+(ul>li{목록$}*5)
+    +(dl>dt{제목}+dd{내용})-->
+<!--hr+table[border=1]>(tr>td{데이타$}*3)*3-->
+<!--hr+div>img*3-->
+<h1>CSS 선택자</h1>
+<hr>
+<h2>태그선택자</h2>
+<ul>
+    <li>목록1</li>
+    <li>목록2</li>
+    <li>목록3</li>
+    <li>목록4</li>
+    <li>목록5</li>
+</ul>
+<dl>
+    <dt>제목</dt>
+    <dd>내용</dd>
+</dl>
+
+
+<hr>
+<table border="1">
+    <tr>
+        <td>데이타1</td>
+        <td>데이타2</td>
+        <td>데이타3</td>
+    </tr>
+    <tr>
+        <td>데이타1</td>
+        <td>데이타2</td>
+        <td>데이타3</td>
+    </tr>
+    <tr>
+        <td>데이타1</td>
+        <td>데이타2</td>
+        <td>데이타3</td>
+    </tr>
+</table>
+
+<hr>
+<div>
+    <img src="images/ah.png" alt="ah">
+    <img src="images/big_smile.png" alt="big_smile">
+    <img src="images/byebye.png" alt="byebye">
+</div>
+
+
+</body>
+</html>
