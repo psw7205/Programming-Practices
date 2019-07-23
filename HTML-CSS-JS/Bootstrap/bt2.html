@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>부트스트랩 - 그리드, 네비게이션 </title>
+    <!--    부트스트랩 연결-->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <style>
+    div > div:nth-of-type(1) > div, div > div:nth-of-type(2) > div
+    , div > div:nth-of-type(3) > div
+     {
+        border:1px solid black
+    }
+    </style>
+</head>
+<body>
+<!-- 메인박스 생성 -->
+<!--div.container-->
+<div class="container">
+<h1>부트스트랩</h1>
+<hr>
+    <h2>한칸에 4개 구성</h2>
+<!--    div.row>div.col-sm-3*4-->
+    <div class="row">
+        <div class="col-sm-3">1</div>
+        <div class="col-sm-3">2</div>
+        <div class="col-sm-3">3</div>
+        <div class="col-sm-3">4</div>
+    </div>
+    <h2>한칸에 2개 구성</h2>
+<!--    div.row>div.col-sm-6*2-->
+    <div class="row">
+        <div class="col-sm-6">1</div>
+        <div class="col-sm-6">2</div>
+    </div>
+    <h2> 비율로 정의  3:6:3 </h2>
+<!--    div.row>div.col-sm-6*2-->
+    <div class="row">
+        <div class="col-sm-3">
+            <img src="../html/images/ah.png" alt="">
+        </div>
+        <div class="col-sm-6">
+            <ul>
+                <li>목록1</li>
+                <li>목록2</li>
+                <li>목록3</li>
+            </ul>
+        </div>
+        <div class="col-sm-3">
+            <ol>
+                <li>목록1</li>
+                <li>목록2</li>
+                <li>목록3</li>
+            </ol>
+        </div>
+    </div>
+
+    <hr>
+    <h2>탭 메뉴</h2>
+<!--    ul.nav.nav-tabs>(li>a[href=#]{Menu$})*5-->
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="#">Menu1</a></li>
+        <li><a href="#">Menu2</a></li>
+        <li><a href="#">Menu3</a></li>
+        <li><a href="#">Menu4</a></li>
+        <li><a href="#">Menu5</a></li>
+    </ul>
+    <hr>
+<!--    ul.nav.nav-pills>(li>a[href=#]{Menu$})*5-->
+    <ul class="nav nav-pills">
+        <li class="active"><a href="#">Menu1</a></li>
+        <li><a href="#">Menu2</a></li>
+        <li><a href="#">Menu3</a></li>
+        <li><a href="#">Menu4</a></li>
+        <li><a href="#">Menu5</a></li>
+    </ul>
+
+    <hr>
+<!--    nav.navbar.navbar-default
+      >div.container-fluid
+      >(div.navbar-header+ul.nav.navbar-nav)
+      -->
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <!-- 왼쪽 -->
+            <div class="navbar-header">
+                <a href="#" class="navbar-brand">Website-Name</a>
+            </div>
+            <!-- 오른쪽 -->
+            <ul class="nav navbar-nav">
+             <!--  (li>a{Menu$})*5-->
+                <li class="active"><a href="">Menu1</a></li>
+                <li><a href="">Menu2</a></li>
+                <li><a href="">Menu3</a></li>
+                <li><a href="">Menu4</a></li>
+                <li><a href="">Menu5</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <!-- 왼쪽 -->
+            <div class="navbar-header">
+                <a href="#" class="navbar-brand">Website-Name</a>
+            </div>
+            <!-- 오른쪽 -->
+            <ul class="nav navbar-nav">
+             <!--  (li>a{Menu$})*5-->
+                <li class="active"><a href="">Menu1</a></li>
+                <li><a href="">Menu2</a></li>
+                <li><a href="">Menu3</a></li>
+                <li><a href="">Menu4</a></li>
+                <li><a href="">Menu5</a></li>
+            </ul>
+        </div>
+    </nav>
+
+
+<hr>
+    <h2>글리피콘 아이콘 삽입하기</h2>
+    <p> 오늘도 좋은 하루
+<!--        span.glyphicon.glyphicon- -->
+<!--        하트문자 한개 -->
+        <span class="glyphicon glyphicon-heart"></span>
+        <span class="glyphicon glyphicon-heart" style="color:red"></span>
+        <span class="glyphicon glyphicon-heart" style="font-size:5em"></span>
+
+    </p>
+
+    <hr>
+    <h3>캐로즐 갤러리 구현하기 - 슬라이드138 참조 </h3>
+    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#myCarousel" data-slide-to="1"></li>
+            <li data-target="#myCarousel" data-slide-to="2"></li>
+            <li data-target="#myCarousel" data-slide-to="3"></li>
+            <li data-target="#myCarousel" data-slide-to="4"></li>
+        </ol>
+
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner">
+            <div class="item active">
+                <img src="images/course05.jpg" alt="course05">
+            </div>
+            <div class="item">
+                <img src="images/course06.jpg" alt="course06">
+            </div>
+            <div class="item">
+                <img src="images/course07.jpg" alt="course07">
+            </div>
+            <div class="item">
+                <img src="images/course01.jpg" alt="course01">
+            </div>
+            <div class="item">
+                <img src="images/course02.jpg" alt="course02">
+            </div>
+        </div>
+
+
+        <!-- Left and right controls -->
+        <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left"></span>
+            <span >Prev</span>
+        </a>
+        <a class="right carousel-control" href="#myCarousel" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right"></span>
+            <span >Next</span>
+        </a>
+
+
+    </div> <!-- carousel end -->
+
+
+
+
+</div>
+
+</body>
+</html>

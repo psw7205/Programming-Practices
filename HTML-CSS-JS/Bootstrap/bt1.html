@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>버튼과 패널</title>
+    <!--    부트스트랩 연결-->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <style>
+       body > div > a:nth-child(6) { color:black }
+    </style>
+</head>
+<body>
+<div class="container">
+<h1>버튼과 패널</h1>
+<hr>
+<h2>독립 버튼</h2>
+<!--button.btn{Click}-->
+<button class="btn btn-primary">Click</button>
+<!--a.btn[href=http://google.com]{GOOGLE}-->
+<a href="http://google.com" class="btn btn-info">GOOGLE</a>
+<a href="http://google.com" class="btn btn-info">GOOGLE</a>
+<!--input:reset.btn-->
+<input type="reset" value="취소" class="btn btn-warning"
+       style="border:1px solid black">
+
+<h2>그룹 버튼</h2>
+<!--div.btn-group>a.btn{Menu$}*4-->
+<!--    가로형  -->
+    <div class="btn-group">
+        <a href="#" class="btn btn-danger">Menu1</a>
+        <a href="#" class="btn btn-danger">Menu2</a>
+        <a href="#" class="btn btn-danger">Menu3</a>
+        <a href="#" class="btn btn-danger">Menu4</a>
+    </div>
+    <hr>
+<!-- 세로형 -->
+    <div class="btn-group-vertical">
+        <a href="#" class="btn btn-danger">Menu1</a>
+        <a href="#" class="btn btn-danger">Menu2</a>
+        <a href="#" class="btn btn-danger">Menu3</a>
+        <a href="#" class="btn btn-danger">Menu4</a>
+    </div>
+
+    <h2> 정적 패널 </h2>
+<!--    div.panel>div.panel-heading+div.panel-body-->
+    <div class="panel panel-success">
+        <div class="panel-heading">
+            panel-heading
+        </div>
+        <div class="panel-body">
+            panel-body
+        </div>
+    </div>
+
+<!--div.panel>div.panel-heading+div.panel-body+div.panel-footer-->
+    <div class="panel panel-danger">
+        <div class="panel-heading">panel-heading</div>
+        <div class="panel-body">panel-body</div>
+        <div class="panel-footer">panel-footer</div>
+    </div>
+    <hr>
+    <h2>동적 패널 (Collapsible Panel) </h2>
+    <!--  제어 토글 버튼   -->
+    <button class="btn btn-success"
+            data-toggle="collapse" data-target="#demo1">
+        Click</button>
+    <!--    내용 패널 -->
+    <!--    div#demo1.collapse>h3{Demo1}-->
+    <div id="demo1" class="collapse panel panel-primary ">
+        <h3>Demo1</h3>
+    </div>
+
+    <div class="panel panel-primary " style="height:200px">
+        하단 샘플 박스
+    </div>
+    <hr>
+    <h2>아코디언 병합 패널 </h2>
+<!--    슬라이드 108번  -->
+<!--    div.panel-group#accordion>(div.panel>div*2)*2 -->
+    <div class="panel-group" id="accordion">
+        <div class="panel">
+            <div class="panel-heading">
+                <h3>
+                    <a href="#sub1" data-toggle="collapse"
+                         data-parent="#accordion" >
+                        Title1</a>
+                </h3>
+            </div>
+            <div class="panel-collapse collapse" id="sub1">
+                Content
+            </div>
+        </div>
+        <div class="panel">
+            <div class="panel-heading">
+                <h3>
+                    <a href="#sub2" data-toggle="collapse"
+                        data-target="#sub2" data-parent="#accordion" >
+                        Title2</a>
+                </h3>
+            </div>
+            <div class="panel-collapse collapse" id="sub2">
+                Content
+            </div>
+        </div>
+    </div>
+
+
+
+</div>  <!-- container End-->
+
+</body>
+</html>
