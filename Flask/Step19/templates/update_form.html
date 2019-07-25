@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title> 레코드 수정 </title>
+    <!-- 부트스트랩 연동 -->
+    <link rel="stylesheet" href="static/css/bootstrap.min.css">
+    <script src="static/js/jquery.min.js"></script>
+    <script src="static/js/bootstrap.min.js"></script>
+    <style>
+        form label {
+            display: block;
+            margin-top: 10px
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="container">
+        <h1>레코드 수정</h1>
+        <!--    form[method=post]>(label+input:text)*3-->
+        <form action="/update_country_pro" method="post">
+            <label for="c_code">CODE</label>
+            <!--   disabled : 읽기전용 텍스트필드. 수정불가       -->
+            <input type="text" name="c_code" id="c_code" value={{c_code}} disabled>
+            <label for="c_name">NAME</label>
+            <input type="text" name="c_name" id="c_name" value={{c_name}}>
+            <label for="c_gnp">GNP</label>
+            <input type="text" name="c_gnp" id="c_gnp" value={{c_gnp}}>
+            <br>
+            <button type="submit" class="btn btn-danger"> SUBMIT </button>
+        </form>
+        <a href="/" class="btn btn-success">처음으로 이동</a>
+
+    </div>
+</body>
+
+</html>

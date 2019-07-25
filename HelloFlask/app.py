@@ -1,28 +1,19 @@
 from flask import Flask, render_template, request
+import db
 
 app = Flask(__name__)
 
 
 @app.route('/')
-def hello_world():
-    return render_template('index.html')
+def root_route():
+    return render_template('index.html', list=db.get_list())
 
 
-@app.route('/route1')
-def route_test():
-    return render_template('route1.html')
-
-
-@app.route('/form')
-def form_test():
-    return render_template('form.html')
-
-
-@app.route('/result', methods=['GET', 'POST'])
-def result():
-    print(request.method)
-    return render_template('result.html')
+@app.route('/result', methods=['get'])
+def result_route():
+    data = request.args['code']
+    return render_template('index.html', data=db.find_list(data))
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)

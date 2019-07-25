@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Country_list</title>
+    <!-- 부트스트랩 연동 -->
+    <link rel="stylesheet" href="static/css/bootstrap.min.css">
+    <script src="static/js/jquery.min.js"></script>
+    <script src="static/js/bootstrap.min.js"></script>
+    <style>
+        /* 컬럼 디자인 */
+        .container>div>ul {
+            width: 500px
+        }
+
+        .container>div>ul>li>span {
+            padding: 10px;
+            display: inline-block
+        }
+
+        .container>div>ul>li>span:nth-child(1) {
+            width: 10%;
+        }
+
+        .container>div>ul>li>span:nth-child(2) {
+            width: 20%;
+        }
+
+        .container>div>ul>li>span:nth-child(3) {
+            width: 30%;
+        }
+
+        .container>div>ul>li>span:nth-child(4) {
+            width: 30%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>DB 목록확인 2</h1>
+        <hr>
+        <div>
+            <!--  ...  -->
+            <!--      ul>(li>span*4)*2  -->
+            <ul class="list-group">
+                <!--  제목 용도 -->
+                <li class="list-group-item  list-group-item-danger">
+                    <span>CODE</span>
+                    <span>NAME</span>
+                    <span>GNP</span>
+                </li>
+                <!--  레코드 출력 -->
+                {% for i in range(0, 10) %}
+                <li class="list-group-item">
+                    <span>{{ country_list[i][0] }}</span>
+                    <span>{{ country_list[i][1] }}</span>
+                    <span>{{ country_list[i][2] }}</span>
+                </li>
+                {% endfor %}
+            </ul>
+
+        </div>
+        <p class="text-align">
+            <a href="/" class="btn btn-success">처음으로 이동</a>
+        </p>
+    </div>
+
+
+</body>
+
+</html>
