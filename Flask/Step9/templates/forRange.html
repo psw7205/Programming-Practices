@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <title>for ...range </title>
+</head>
+
+<body>
+    <h1>for..range</h1>
+    <hr>
+    <h2>1~10까지 출력하기</h2>
+    <ul>
+        {% for i in range(1,11) %}
+        <li>{{i}}</li>
+        {% endfor %}
+    </ul>
+
+
+    <hr>
+    <h2>5단의 구구단을 출력하여라</h2>
+    <ul>
+        {% for i in range(1,10) %}
+        <li>5 X {{i}} = {{5*i}}</li>
+        {% endfor %}
+    </ul>
+
+    <hr>
+    <h2> 구구단 모두를 출력하여라 </h2>
+    <!-- -->
+    {% for i in range(2,10) %}
+    <h2> {{i}} 단 출력하기 </h2>
+    <ul>
+        {% for j in range(1,10) %}
+        <li>{{i}} X {{j}} = {{i*j}}</li>
+        {% endfor %}
+    </ul>
+    <hr>
+    {% endfor %}
+
+
+</body>
+
+</html>
