@@ -1,0 +1,665 @@
+﻿강사메일
+coderecipe@naver.com
+
+세션(Session)이란?
+ 로그인 로그아웃
+
+파이썬의 세션 지원모듈
+- flask 라이브러리의 session
+
+첫페이지로 이동
+세션이 있는가? -> 명령어1
+세션이 없는가? -> 명령어2
+
+---------------------
+아이디 : admin
+비밀번호 : 1234
+
+특정아이디와 비밀번호가 고정
+세션 기능 이용하기
+
+index =>
+  세션이 없다 => login.html
+
+login.html (아이디, 비밀번호 폼요소)
+     - 아이디와 비밀번호가 맞으면 메세지 출력.
+
+logout.html
+     logout 이동 버튼 표시
+     logout 버튼 클릭시 index 페이지로 이동
+
+
+1) login.html / logout.html
+2) app.py
+
+
+---------------------
+DB와 연동하여 세션 기능 이용하기
+
+1) DB 생성
+CREATE DATABASE IF NOT EXISTS flask_db;
+USE flask_db;
+CREATE TABLE memberTBL (userId char(10) PRIMARY KEY NOT NULL,
+						password char(12) NOT NULL);
+INSERT INTO memberTBL VALUES ('admin', '1234');
+INSERT INTO memberTBL VALUES ('test', 'test');
+
+2) 파이썬에서 DB 접속확인
+db.py
+데이타베이스, 테이블 접속 확인
+
+3) app.py <= DB 접속 연결
+ DB의 각 레코드이 값과 login.html 폼필드의 값과
+  같은지 비교
+
+4) 모든 DB의 레코드값과 비교
+   4-1) db.py
+
+
+---------------------
+세션에 따라서 서로다른 메뉴 표시
+
+1) 상속 레이아웃 형태로 변경
+templates/layout.html 확인
+=> login.html, logout.html
+
+{% extends '상속파일경로' %}
+
+교체블록 확인 => layout.html
+{% block pageTitle %}{% endblock %}
+{% block contents %}{% endblock %}
+
+2) layout.html 레이아웃 파일에서
+세션에 따라서
+login / join
+logout
+
+
+---------------------------------
+회원 가입
+
+1) db.py
+회원가입 함수 생성
+
+2) 회원가입페이지 : 로그임폼 문서를 회원가입폼 문서로 저장
+   login.html => join.html
+
+   제목, 버튼 명, 폼의action 경로 수정 => /joinPro
+
+3) 상단 메뉴에서 회원가입 메뉴 [Join] 에 하이퍼링크 지정
+ layout.html
+
+<a href="/join"  class="btn btn-primary">Join</a>
+
+4) 회원가입페이지 이동 라우터 등록 :  app.py
+ /join
+
+5) 회원가입처리 라우터 등록 :  app.py
+ /joinPro
+
+
+6) 회원가입완료 페이지 => joinResult.html
+  logout.html => joinResult.html
+
+   로그인 버튼 삽입
+
+7) app.py
+   6번에 만든 joinResult.html 로 이동하기
+   5번 회원가입처리 라우터의 return 값 수정
+
+---------------------------------
+게시판 생성하기
+- 로그인 후에 게시판 메뉴 활성화
+
+1) layout.html
+<!-- 세션이 있다면 -->
+   {% if session['logged_in'] %}
+    <a href="/bbs" class="btn btn-primary">BBS</a>
+    <a href="/logout"  class="btn btn-primary">Logout</a>
+
+2) bbs.html 생성
+  logout.html => bbs.html
+
+3) app.py
+  라우터 등록 (/bbs)
+
+4) 데이타베이스 생성
+ bbsTBL
+ id : int(100) primary key  autoincrement not null
+ title : text 또는 varchar(50)    not null
+ writer : varchar(50) not null
+ contents : text  not null
+
+5) 데이타베이스 접속 후 bbsTBL 목록 출력
+   -> bbs.html
+   -> 게시판쓰기 버튼 삽입
+
+6) 게시판 폼 생성 -> bbsForm.html
+  title, writer => 텍스트필드
+  contents => 텍스트애리어 (여러줄 글상자)
+  button:submit
+
+7) bbsTBL에 자료 입력함수
+
+8) 6번의 게시판폼문서의 확인버튼 클릭시 데이타가 저장되게
+   라우터 등록
+
+
+
+
+
+
+
+
+
+index =>
+  세션이 없다 => login.html
+
+login.html (아이디, 비밀번호 폼요소)
+     - 아이디와 비밀번호가 맞으면 메세지 출력.
+
+logout.html
+     logout 이동 버튼 표시
+     logout 버튼 클릭시 index 페이지로 이동
+
+
+1) login.html / logout.html
+2) app.py
+
+
+
+
+
+
+
+
+----------------------
+
+** MySQL DB 이용하기
+
+1) 관련 모듈 : PyMySQL
+2) MySQL  설치확인
+   데이타베이스 확인 :
+   테이블 확인 :
+3) 별도의 데이타베이스 관련 모듈(py) 생성
+   => db.py
+4) app.py <= db.py
+5) templates 폴더에 관련 html 파일 생성
+   worldCity_list.html
+
+-----------------
+샘플 데이타베이스 만들기 1
+
+world.country
+  => GNP 높은 나라 중에서 30레코드
+  => gnpCountry 테이블 생성
+  => ID 컬럼 추가후 primary key, autoincrement 지정
+
+1) 테이블 확인 => gnpCountry(ID, Code, Name, GNP )
+2) db.py <= 데이타베이스 관련 파일 생성
+3) app.py <= db.py
+4) index.html <=  app.py
+5) country_list.html <= app.py
+
+
+-----------------
+샘플 데이타베이스 만들기 2
+
+world DB에서 country 테이블
+  => 인구가 가장 높은 나라 중에서 20레코드
+  => popCountry 테이블 생성
+  => ID 컬럼 추가후 primary key, autoincrement 지정
+
+1) 테이블 확인 => popCountry(ID, Code, Name, Population  )
+2) db.py <= 데이타베이스 관련 파일 생성
+3) app.py <= db.py
+4) index.html <=  app.py
+5) country_pop_list.html <= app.py
+
+-----------------
+데이타베이스에 레코드 추가하기
+1) 레코드 추가 폼문서 생성 - add_country.html
+2) 시작페이지 index.html => 폼문서로 이동하는 버튼 생성
+3) app.py
+   레코드추가문서로 이동하는 라우터로 등록
+   add_country
+4) app.py
+   레코드추가문서에서 텍스트필드의 값을 저장하는
+   라우터가 필요
+5) db.py
+   레코드를 추가하는 sql 처리를 담당하는 함수
+6) 목록보기 버튼 클릭시
+   ID가 마지막인 목록부터 보이게 수정하기
+
+-----------------
+데이타베이스에서 레코드 삭제하기
+
+1) 레코드 삭제 버튼이나 텍스트필드가 있는 html 생성
+   - delete_country.html
+
+   삭제할 레코드 번호는?
+   레코드 목록은 하단에 표시
+
+2) 시작페이지 index.html => 1번으로 이동하는 버튼 생성
+                           목록삭제
+3) app.py
+   레코드 삭제 문서로 이동하는 라우터로 등록
+   delete_country
+
+4) app.py
+   레코드삭제 문서에서 텍스트필드의 값을 저장하는
+   라우터가 필요
+
+5) db.py
+   레코드를 삭제하는 sql 처리를 담당하는 함수
+
+6) 목록 전체를 볼수 있는 페이지로 이동
+
+-----------------------------
+1) 레코드 버튼이 있는 레코드 삭제 페이지
+country_list => country_delete.html
+
+하이퍼링크 버튼에 연결할 하이퍼링크 주소 형태
+/deleteDb?c_id={{country_list[i][0]}}
+
+2) 시작페이지 index.html => 1번으로 이동하는 버튼 생성
+   목록삭제
+<a href="/delete_country" class="btn btn-warning">목록 삭제</a>
+
+3) app.py
+/delete_country 라우터 등록
+
+
+4) app.py
+/delete_db
+
+
+-----------------------------
+레코드 수정
+목록 수정 => update => 내용수정페이지 submit
+ => 레코드 목록보기 페이지
+
+1) update 버튼이 있는 레코드 목록 페이지
+country_delete.html => country_update.html
+
+하이퍼링크 버튼에 연결할 하이퍼링크 주소 형태
+/updateDb?c_id={{country_list[i][0]}}&c_code={{country_list[i][1}}...
+
+2)
+
+3) add_country.html => update_form.html
+
+
+
+
+---------------------
+템플릿 상속 => 다른 웹언어(php, jsp, asp)의 include
+
+웹페이지에서 공통 레이아웃 파일을 생성하고
+내용교체되는 부분만 별도의 구역으로 설정
+
+업데이트 용이하다는 장점
+
+
+내용교체되는 부분은 블록영역으로 지정
+{% block 블록이름 %}
+...
+{% endblock %}
+
+레이아웃 상속시 사용되는 문법
+{% extends '레이아웃파일경로' '%}
+
+1) 공통 레이아웃 파일 만들기
+  templats/layout.html
+
+# 내용교체되는 부분은 블록영역으로 지정
+{% block 블록이름 %}
+...
+{% endblock %}
+
+
+2) 레이아웃파일을 상속받은 실제 페이지 생성
+   home.html
+   about.html
+   bbs.html
+   news.html
+
+3) 라우터 등록
+   app.py
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+------------------------
+이전 수업 내용
+---------
+// 가상 환경이란?
+
+flask 관련 모듈 
+=> 파이썬에 필요한 모듈만 별도로 저장하여 사용하는 기능 
+
+// 플라스크 가상환경 생성하기 - 파이참 
+0) 작업폴더 생성 
+  예) workspaceFlask 
+
+1) 파이참에서 [File]-[New Project]
+2)  작업폴더 지정 
+  c:/workspaceFlask
+3) Project Interpretre 에서 가상환경 설정 
+ 하단 화살표버튼   
+
+4) [Open New Window] 클릭해서 프로젝트 생성 
+5) 파이참의 [Project] 윈도우에서 생성 목록 확인 
+
+// 가상환경 활성화 
+1) 파이참 터미널창 실행 
+2) activate.exe 파일이 있는 폴더로 이동 
+   cd venv/Scripts 
+3) 가상환경 활성화  
+   activate
+4) 프롬프트 확인 => 괄호안에 글자가 표시 
+   (prompt)
+5) 가상환경 비활성화 
+   deactivate 
+
+// 파이썬의 웹서버 모듈 
+ 장고 : MVC 
+ 플라스크 : 마이크로 프레임워크 
+
+https://palletsprojects.com/p/flask
+
+// 관련 모듈 설치하기 => 가상환경에 
+
+pip install flask 
+pip install pymysql
+
+---------------
+
+hello world  문자열 출력하기 
+
+
+//주소를 입력하면 특정 html 페이지로 연결하기 
+ => Jinsa2의 render_template() 
+
+연결될 html 문서 만들기 
+  templates 폴더에 저장해야한다. 
+
+
+// 라우터란?
+ 주소 생성기능으로 특정 문자열이나 웹페이지를 웹브라우저에 출력하는 기능 
+
+@app.route('주소명')
+def 함수명():
+   return 문자열 또는 render_template(연결되는html페이지명)
+   
+
+ http://127.0.0.1:5000 => index.html
+ http://127.0.0.1:5000/first => first.html 
+ http://127.0.0.1:5000/second  => second.html 
+ http://127.0.0.1:5000/third => third.html 
+
+
+
+// 요청(request) 
+ get : 작은용량의 데이타 전송시 사용. 주소줄에 데이타가 표시된다. 
+       검색어, 로그인등 
+ post : 대용량의 데이타 전송시 사용
+        회원가입, 주문서... 
+
+<form action='버튼클릭시실행경로' method='get/post'>
+...
+</form> 
+
+// request 객체 
+from flask import request 
+
+request.method => 메소드방식출력 
+ 
+1)폼문서가 있는 html 문서 생성 
+  form.html 
+2) 결과페이지 result.html 
+3) app.py 수정 
+
+
+// GET 방식인지 POST 방식인지 결과값에 따라 서로 다른 페이지로 분기하기 
+
+request.method => 메소드방식출력 
+if.. else 문 사용 
+
+1) 2개의 페이지 생성 
+  get.html 
+  post.html 
+2) app.py 수정 
+
+--------------
+// GET 방식으로 값 전달하기 - 하이퍼링크 
+
+# 하이퍼링크 주소로 변수와 값 전달형식 
+URL?변수1=값1&변수2=값2...
+
+<a href="/result?data1=111&data2=222">result1</a>
+<a href="/result?data1=문자열1&data2=문자열2">result1</a>
+
+# 폼문서로 변수와 값 전달하기 
+텍스트필드에 name 지정 => 변수 
+
+1) form.html 파일 생성이나 수정 
+
+2) app.py 수정 
+
+// GET 방식의 전달받은 값 호출
+# request.args['변수']
+# request.args.get('변수')
+# request.values.get('변수')
+-----------------
+// POST 방식으로 값 전달하기
+
+1) form.html 파일 생성이나 수정 
+post 방식으로 전송 
+2) app.py
+
+변수명1 = request.form['변수명2']
+
+변수명1 : app.py에서 저장하는 변수 
+변수명2: html문서의 form 양식의 텍스트필드 name 값 
+-----------------
+// 쿼리스트링(Query String) 을 이용한 데이타전달 
+웹프로그램에서 입력데이터를 전달하는 방식 
+주소URL 이용 
+
+주소 URL 형식: 입력 
+/주소/<데이타1>/<데이타2>... 
+
+값을 전달받을 때에는?
+@app.route('/주소/<데이타1>')
+define 함수(데이타1):
+   return 문자열, 변수, render_template()
+
+-----------------
+ 리스트, 튜플, 딕셔너리 생성 => html 파일 전달 
+ 변수 생성 => html 파일 전달 
+
+
+1) app.py 
+  리스트, 튜플, 딕셔너리,변수 생성 
+ 
+return render_template('html파일경로',데이타변수1=데이타변수2...)
+
+데이타변수1 => html로 전달하는 데이타변수명 
+데이타변수2 => py 파일에서 생성한 데이타변수명 
+
+2) index.html 
+  리스트, 튜플, 딕셔너리 전달받아서 출력 
+  // 리스트, 튜플 
+  {{데이타변수1[인덱스번호]}}
+  {{데이타변수1[인덱스번호]}}
+
+  // 딕셔너리
+  {{데이타변수1.키값}}
+
+-----------------
+템플릿 주석 
+{%# 주석... %}
+
+템플릿 for 익히기 => html 페이지 
+
+{% for 변수 in range(start,end,step) %}
+
+.... {{ 변수 }}
+
+{% endfor %}
+
+
+{% for 변수1 in range(start,end,step) %}
+	{% for 변수2 in range(start,end,step) %}
+		.... 
+	{% endfor %}
+{% endfor %}
+
+
+
+
+1) templates/forRange.html
+  for 템플릿언어 이용 
+
+ 1~10 
+ 특정 숫자의 구구단 출력 
+
+2) app.py 
+
+
+---------------------
+템플릿언어 for .. in 리스트/딕셔너리/튜플
+  데이타값 출력 
+
+app.py
+- 리스트, 튜플, 딕셔너리 생성 
+- html 파일 전달 =>return문이용 
+
+forIn.html 
+  전달받은데이타변수이용 
+  {% for 변수 in 리스트/튜플/딕셔너리 %}
+    {{...}}
+  {% endfor%}
+
+
+---------------------
+템플릿언어 if
+{% if 조건식 %}
+...
+{% elif 조건식 %} 
+..
+
+{% else %} 
+..
+
+{% endif %}
+
+1) app.py 에서 변수 생성 => 전달( ifElse.html)
+
+2) ifElse.html
+   전달받은 변수값에 따라서
+   조건문을 이용해서 메세지 출력 
+
+// ifElse.html에  짝수인지 홀수인지 출력하기 
+
+1) app.py 에서 변수 생성 
+2) 변수가 짝수, 홀수인지에  따라 
+    메세지를 출력하여라 
+ 
+12 => 짝수 
+5 => 홀수 
+  
+
+---------------------
+
+1) index.html 
+   POST 방식으로 텍스트필드에서 2개의 값을 전달한다. 
+   name 값 확인 => 데이타변수 
+
+2) app.py
+  => 전달받을 값 다시 재전송  => result.html 
+
+3) result.html 
+
+---------------------
+ 퀴즈1)
+1) forms1.html 
+ 텍스트필드에 값 받기 => myNum1
+2) app.py 
+   myNum1=int(myNum1) 
+3) resultGugu.html 
+    {{ myNum1 }} 단입니다. 
+    myNum 과 관련된 구구단 출력 
+
+퀴즈2)
+1) forms2.html 
+ 텍스트필드에 값 받기 => myNum2
+2) app.py 
+   myNum2=int(myNum2) 
+3) resultSum.html 
+    1부터 {{ myNum2 }}까지의 합은? 
+     ?
+
+---------------------
+GET 방식으로 데이타 넘긴 후 HTML 페이지에 표시하기 
+
+하이퍼링크 주소로 전달 
+ /주소?변수1=값1&변수2=값2
+
+index.html
+ /result?userAge=20 
+
+result.html 
+userAge : 20
+
+
+1) index.html 파일 생성이나 수정 
+ 데이터를 전달할 수 있는 하이퍼링크 추가 
+
+
+2) app.py 수정 
+
+// GET 방식의 전달받은 값 호출
+# request.args['변수']
+# request.args.get('변수')
+# request.values.get('변수')
+
+
+// static 폴더로 정적파일(css, js, png, jpg, svg, gif) 연결하기 
+html 문서에 연결하는 요소 
+  - css / js / image
+ 
+플라스크 서버와 구동하는 html 파일에서 이미지 삽입하기 
+1)  static 폴더 생성 
+2) images 폴더 생성 
+3)  이미지 파일 저장 
+    작업폴더를 기준해서 static/images
+
+4) app.py 에서 시작페이지 라우팅 등록 
+   index.html
+
+5) index.html 이미지 삽입태그 
+  <img src="static/images/이미지파일이름">
+
+// 부트스트랩과 같은 프레임웍스 파일 연동하기 
+
+1) static 폴더 생성 
+2) static 폴더안에 css, js 파일 복사붙이기 
+   static/css
+   static/js 
+   static/font
+3) html 문서의 head영역에 
+   link , script 소스로 연결 
+ 
