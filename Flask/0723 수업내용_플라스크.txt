@@ -1,0 +1,359 @@
+﻿// CSS 레이아웃 
+- float : 부유레이아웃
+- display : 모델형식 캐스팅 
+- position
+ : 좌표값을 지정해서 배치 
+ : absolute / fixed / relative 
+
+- columns : 다단 방식 
+column-count : 숫자
+column-rule :선의스타일 굵기 색상 
+column-gap:숫자px
+column-width:숫자px     (컬럼의 가로 크기)
+
+
+// 프레임웍스란?
+ 별도의 설치과정이 필요함 
+ 템플릿이 이미 등록이되어 있으므로 
+ 관련 레퍼런스를 참조하여 
+ 적용과정만 필요 
+
+- 부트스트랩(Bootstrap) 
+- Jquery Mobile 
+- 워드프레스 
+
+관련페이지:
+https://getbootstrap.com/
+http://bootstrapk.com/getting-started
+
+//부트스트랩 설치 
+1개의 css 파일, 2개의 js 파일 연결 
+
+// 소스 준비 
+
+ CDN 방식은?
+  웹상의 소스를 연결 
+
+ <!-- 부트스트랩 연결-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+ Local 방식으로 소스 연결하기 
+
+  1)CDN 으로 연결된 연결주소를 웹브라우저에 붙여넣기 
+  2)원본 파일이 나오면 [Ctrl]+[S]
+  3)작업폴더에 저장 
+     1개의 css 
+     2개의 js
+
+// 메인박스 만들기 
+   div.container
+
+// 버튼 디자인 
+- 슬라이드 48
+a / button / input:submit / imput:reset
+
+<태그명 class="btn btn-디자인명">
+
+디자인명은?
+  primary / info / default / warning / danger
+
+//그룹버튼 
+div.btn-group>a.btn{Menu$}*4
+div.btn-group-vertical>a.btn{Menu$}*4
+
+
+// 패널
+
+// 동적 패널 
+제목패널 또는 버튼 
+내용 패널 
+
+
+// 그리드 시스템 
+슬라이드 12
+- 기본규칙 : 한행에 12칸만 올수 있다. 
+- 행 : div.row
+- 셀(span) : div.col-xx-x
+  xx : xs/sm/md/lg
+  x : 1~12
+
+
+12개의 셀 구성 
+div.row>div.col-sm-1*12
+
+4개의 셀 구성 
+div.row>div.col-sm-4*3
+
+6개의 셀 구성 
+div.row>div.col-sm-6*2
+
+
+// 탭메뉴 
+
+ul.nav.nav-tabs>(li>a[href=#]{Menu$})*5
+
+ul.nav.nav-pills>(li>a[href=#]{Menu$})*5
+
+// 글리피콘이란?
+  그림문자 => UIUX 아이콘 문자 
+  벡터 
+
+  fonts 폴더를 복사해서 작업폴더에 붙이기 
+  
+  Glyphicon 문자 이용하기 
+
+  <span class="glyphicon glyphicon-name"></span>
+  name 값은 pdf 참조 : 슬라이드 64
+
+  span.glyphicon.glyphicon-
+  
+  크기변경 : style="font-size:5em"
+  색상변경 : style="color:red"
+
+
+// 캐로즐 갤러리 구현 
+
+슬라이드 : 138
+이미지는 images 폴더의 course1~8 이용 
+
+---------------------
+// 가상 환경이란?
+
+flask 관련 모듈 
+=> 파이썬에 필요한 모듈만 별도로 저장하여 사용하는 기능 
+
+// 플라스크 가상환경 생성하기 - 파이참 
+0) 작업폴더 생성 
+  예) workspaceFlask 
+
+1) 파이참에서 [File]-[New Project]
+2)  작업폴더 지정 
+  c:/workspaceFlask
+3) Project Interpretre 에서 가상환경 설정 
+ 하단 화살표버튼   
+
+4) [Open New Window] 클릭해서 프로젝트 생성 
+5) 파이참의 [Project] 윈도우에서 생성 목록 확인 
+
+// 가상환경 활성화 
+1) 파이참 터미널창 실행 
+2) activate.exe 파일이 있는 폴더로 이동 
+   cd venv/Scripts 
+3) 가상환경 활성화  
+   activate
+4) 프롬프트 확인 => 괄호안에 글자가 표시 
+   (prompt)
+5) 가상환경 비활성화 
+   deactivate 
+
+// 파이썬의 웹서버 모듈 
+ 장고 : MVC 
+ 플라스크 : 마이크로 프레임워크 
+
+https://palletsprojects.com/p/flask
+
+// 관련 모듈 설치하기 => 가상환경에 
+
+pip install flask 
+pip install pymysql
+
+---------------
+
+hello world  문자열 출력하기 
+
+
+//주소를 입력하면 특정 html 페이지로 연결하기 
+ => Jinsa2의 render_template() 
+
+연결될 html 문서 만들기 
+  templates 폴더에 저장해야한다. 
+
+
+// 라우터란?
+ 주소 생성기능으로 특정 문자열이나 웹페이지를 웹브라우저에 출력하는 기능 
+
+@app.route('주소명')
+def 함수명():
+   return 문자열 또는 render_template(연결되는html페이지명)
+   
+
+ http://127.0.0.1:5000 => index.html
+ http://127.0.0.1:5000/first => first.html 
+ http://127.0.0.1:5000/second  => second.html 
+ http://127.0.0.1:5000/third => third.html 
+
+
+
+// 요청(request) 
+ get : 작은용량의 데이타 전송시 사용. 주소줄에 데이타가 표시된다. 
+       검색어, 로그인등 
+ post : 대용량의 데이타 전송시 사용
+        회원가입, 주문서... 
+
+<form action='버튼클릭시실행경로' method='get/post'>
+...
+</form> 
+
+// request 객체 
+from flask import request 
+
+request.method => 메소드방식출력 
+ 
+1)폼문서가 있는 html 문서 생성 
+  form.html 
+2) 결과페이지 result.html 
+3) app.py 수정 
+
+
+// GET 방식인지 POST 방식인지 결과값에 따라 서로 다른 페이지로 분기하기 
+
+request.method => 메소드방식출력 
+if.. else 문 사용 
+
+1) 2개의 페이지 생성 
+  get.html 
+  post.html 
+2) app.py 수정 
+
+--------------
+// GET 방식으로 값 전달하기 - 하이퍼링크 
+
+# 하이퍼링크 주소로 변수와 값 전달형식 
+URL?변수1=값1&변수2=값2...
+
+<a href="/result?data1=111&data2=222">result1</a>
+<a href="/result?data1=문자열1&data2=문자열2">result1</a>
+
+# 폼문서로 변수와 값 전달하기 
+텍스트필드에 name 지정 => 변수 
+
+1) form.html 파일 생성이나 수정 
+
+2) app.py 수정 
+
+// GET 방식의 전달받은 값 호출
+# request.args['변수']
+# request.args.get('변수')
+# request.values.get('변수')
+
+// 가상 환경이란?
+
+flask 관련 모듈 
+=> 파이썬에 필요한 모듈만 별도로 저장하여 사용하는 기능 
+
+// 플라스크 가상환경 생성하기 - 파이참 
+0) 작업폴더 생성 
+  예) workspaceFlask 
+
+1) 파이참에서 [File]-[New Project]
+2)  작업폴더 지정 
+  c:/workspaceFlask
+3) Project Interpretre 에서 가상환경 설정 
+ 하단 화살표버튼   
+
+4) [Open New Window] 클릭해서 프로젝트 생성 
+5) 파이참의 [Project] 윈도우에서 생성 목록 확인 
+
+// 가상환경 활성화 
+1) 파이참 터미널창 실행 
+2) activate.exe 파일이 있는 폴더로 이동 
+   cd venv/Scripts 
+3) 가상환경 활성화  
+   activate
+4) 프롬프트 확인 => 괄호안에 글자가 표시 
+   (prompt)
+5) 가상환경 비활성화 
+   deactivate 
+
+// 파이썬의 웹서버 모듈 
+ 장고 : MVC 
+ 플라스크 : 마이크로 프레임워크 
+
+https://palletsprojects.com/p/flask
+
+// 관련 모듈 설치하기 => 가상환경에 
+
+pip install flask 
+pip install pymysql
+
+---------------
+
+hello world  문자열 출력하기 
+
+
+//주소를 입력하면 특정 html 페이지로 연결하기 
+ => Jinsa2의 render_template() 
+
+연결될 html 문서 만들기 
+  templates 폴더에 저장해야한다. 
+
+
+// 라우터란?
+ 주소 생성기능으로 특정 문자열이나 웹페이지를 웹브라우저에 출력하는 기능 
+
+@app.route('주소명')
+def 함수명():
+   return 문자열 또는 render_template(연결되는html페이지명)
+   
+
+ http://127.0.0.1:5000 => index.html
+ http://127.0.0.1:5000/first => first.html 
+ http://127.0.0.1:5000/second  => second.html 
+ http://127.0.0.1:5000/third => third.html 
+
+
+
+// 요청(request) 
+ get : 작은용량의 데이타 전송시 사용. 주소줄에 데이타가 표시된다. 
+       검색어, 로그인등 
+ post : 대용량의 데이타 전송시 사용
+        회원가입, 주문서... 
+
+<form action='버튼클릭시실행경로' method='get/post'>
+...
+</form> 
+
+// request 객체 
+from flask import request 
+
+request.method => 메소드방식출력 
+ 
+1)폼문서가 있는 html 문서 생성 
+  form.html 
+2) 결과페이지 result.html 
+3) app.py 수정 
+
+
+// GET 방식인지 POST 방식인지 결과값에 따라 서로 다른 페이지로 분기하기 
+
+request.method => 메소드방식출력 
+if.. else 문 사용 
+
+1) 2개의 페이지 생성 
+  get.html 
+  post.html 
+2) app.py 수정 
+
+--------------
+// GET 방식으로 값 전달하기 - 하이퍼링크 
+
+# 하이퍼링크 주소로 변수와 값 전달형식 
+URL?변수1=값1&변수2=값2...
+
+<a href="/result?data1=111&data2=222">result1</a>
+<a href="/result?data1=문자열1&data2=문자열2">result1</a>
+
+# 폼문서로 변수와 값 전달하기 
+텍스트필드에 name 지정 => 변수 
+
+1) form.html 파일 생성이나 수정 
+
+2) app.py 수정 
+
+// GET 방식의 전달받은 값 호출
+# request.args['변수']
+# request.args.get('변수')
+# request.values.get('변수')

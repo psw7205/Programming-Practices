@@ -1,0 +1,13 @@
+<!-- 레이아웃 상속 받기 -->
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+<h1>LOG OUT</h1>
+{% endblock %}
+
+{% block contents %}
+<div class="text-center" style="padding:10px 0 30px 0">
+    <p style="margin:10px">You're logged in already!!!</p>
+    <a href="/logout" class="btn btn-danger" style="width:50%">Log Out</a>
+</div>
+{% endblock %}

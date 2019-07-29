@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>ifElse</title>
+</head>
+
+<body>
+    <h1>ifElse</h1>
+    <hr />
+    <h2>{{ userName }} 님 ...</h2>
+    <p>
+        {% if 7 < userAge < 14 %}
+        초등학생 입니다.
+        {% elif 14 <= userAge < 20 %}
+        중고등 학생입니다.
+        {% elif userAge >= 20 %}
+        성인입니다.
+        {% else %}
+        유아입니다.
+        {% endif %}
+    </p>
+    <hr />
+    <h2>{{ myNum }}은 홀수일까 짝수일까?</h2>
+    <p>
+        {% if myNum%2 == 0 %} 짝수
+        {% else %} 홀수
+        {% endif%}
+    </p>
+</body>
+
+</html>

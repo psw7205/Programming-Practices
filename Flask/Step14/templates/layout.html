@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Flask Templates</title>
+</head>
+
+<body>
+    <!--div.container>(div.nav>ul>(li>a)*4)+div*2-->
+    <div class="container">
+        <!--  공통 메뉴    -->
+        <div class="nav">
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/bbs">BBS</a></li>
+                <li><a href="/news">News</a></li>
+            </ul>
+        </div>
+        <!--   실제 내용 -->
+        <div>
+            {% block pageTitle %}{% endblock %}
+            <hr>
+            {% block contents %}{% endblock %}
+        </div>
+
+        <div>
+            <p>copyrights&copy;FlaskWorld</p>
+        </div>
+    </div>
+</body>
+
+</html>
