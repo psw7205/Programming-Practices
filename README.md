@@ -1,2 +1,0 @@
-# Flask-Practices
-python flask
