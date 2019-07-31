@@ -1,2 +1,4 @@
 # Data Practices
-sample data
+
+- numpy
+- pandas
