@@ -1,4 +1,0 @@
-# Data Practices
-
-- numpy
-- pandas
